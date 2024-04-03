@@ -2,6 +2,7 @@ import psycopg2
 
 usuarito = input("Introduce el nombre de usuario: ")
 contrasenya = input("Introduce la contraseña: ")
+tablaAfectada = input("Introduce la tabla a la cual quiere efectuar un comando: ")
 
 
 def loginito(usuarito, contrasenya):
@@ -24,9 +25,9 @@ def mainQueryta():
     print("Conexión establecida con éxito")
     print("+----------------------------+")
     print("______¿Que desea hacer?_______")
-    mainPermisitos(permisitos())
+    permisitos(usuarito, tablaAfectada)
 
-def permisitos(usuarito):
+def permisitos(usuarito, tablaAfectada):
     
     connexio = psycopg2.connect(
         dbname="hospitalito",
@@ -37,26 +38,21 @@ def permisitos(usuarito):
         )
     
     listitaPermisitos = []
-    
-    SQLita = f"SELECT table_schema, table_name, privilege_type, is_grantablee FROM information_schema.table_privileges WHERE grantee = {usuarito} AND is_grantablee = 'YES';"
+    SQLita = f"SELECT privilege_type FROM information_schema.table_privileges WHERE grantee = '{usuarito}' AND is_grantable = 'YES' AND table_catalog = 'hospitalito' AND table_name = '{tablaAfectada}';"
     cur = connexio.cursor()
     cur.execute(SQLita)
     rows = cur.fetchall()
     
     for row in rows:
-        listitaPermisitos.append(row[2])
+        listitaPermisitos.append(row)
         
     cur.close()
     connexio.close()
-    
-    return listitaPermisitos
-
-def mainPermisitos(listitaPermisitos:list):
-    if listitaPermisitos(usuarito) == []:
+     
+    if listitaPermisitos == []:
         print("No tiene permisos")
     else:
         for permisito in listitaPermisitos:
-            print(permisito)
             if permisito == "SELECT":
                 print("1. ¿Que quiere consultar?")
             elif permisito == "INSERT":
@@ -69,13 +65,10 @@ def mainPermisitos(listitaPermisitos:list):
                 print("5. ¿Que quiere truncar?")
                 
 def main():
-    loginito(usuarito, contrasenya)
-    
     if loginito(usuarito, contrasenya) == True:
-        permisitos()
         mainQueryta()
     else:
-        pass
+        print("Error en la conexión")
         
 main()
     
