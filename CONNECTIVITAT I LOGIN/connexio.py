@@ -10,43 +10,72 @@ def loginito(usuarito, contrasenya):
             dbname="hospitalito",
             user=usuarito,
             password=contrasenya,
-            host="192.168.56.120",
+            host="10.94.255.109",
             port="5432"
         )
-        return connexio
+        if connexio:
+            return True
     except psycopg2.Error as e:
         print(f"Error en la conexión: {e}")
-        return None
+        return False
     
-def queryta():
+def mainQueryta():
     print("+----------------------------+")
     print("Conexión establecida con éxito")
     print("+----------------------------+")
-    print("______Que desea hacer?________")
-    pass
+    print("______¿Que desea hacer?_______")
+    mainPermisitos(permisitos())
 
 def permisitos(usuarito):
+    
     connexio = psycopg2.connect(
         dbname="hospitalito",
         user="postgres",
         password="P@ssw0rd",
-        host="192.168.56.120",
+        host="10.94.255.109",
         port="5432"
         )
-    SQLita = f"SELECT * FROM information_schema.table_privileges WHERE grantee = {usuarito}"
+    
+    listitaPermisitos = []
+    
+    SQLita = f"SELECT table_schema, table_name, privilege_type, is_grantablee FROM information_schema.table_privileges WHERE grantee = {usuarito} AND is_grantablee = 'YES';"
     cur = connexio.cursor()
     cur.execute(SQLita)
-    listitaPermisitos = []
     rows = cur.fetchall()
+    
     for row in rows:
-        listitaPermisitos.append(row)
+        listitaPermisitos.append(row[2])
+        
     cur.close()
     connexio.close()
+    
     return listitaPermisitos
 
-if loginito(usuarito, contrasenya) == True:
-    permisitos()
-    queryta()
-else:
-    print("Error en la conexión")
+def mainPermisitos(listitaPermisitos:list):
+    if listitaPermisitos(usuarito) == []:
+        print("No tiene permisos")
+    else:
+        for permisito in listitaPermisitos:
+            print(permisito)
+            if permisito == "SELECT":
+                print("1. ¿Que quiere consultar?")
+            elif permisito == "INSERT":
+                print("2. ¿Que quiere insertar?")
+            elif permisito == "UPDATE":
+                print("3. ¿Que quiere actualizar?")
+            elif permisito == "DELETE":
+                print("4. ¿Que quiere borrar?")
+            elif permisito == "TRUNCATE":
+                print("5. ¿Que quiere truncar?")
+                
+def main():
+    loginito(usuarito, contrasenya)
+    
+    if loginito(usuarito, contrasenya) == True:
+        permisitos()
+        mainQueryta()
+    else:
+        pass
+        
+main()
     
