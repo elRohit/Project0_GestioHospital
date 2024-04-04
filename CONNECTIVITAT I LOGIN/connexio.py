@@ -1,16 +1,18 @@
 import psycopg2
 
 usuarito = input("Introduce el nombre de usuario: ")
-contrasenya = input("Introduce la contraseña: ")
-tablaAfectada = input("Introduce la tabla a la cual quiere efectuar un comando: ")
+contrasenyita = input("Introduce la contraseña: ")
+tablitaAfectadita = input("Introduce la tabla a la cual quiere efectuar un comando: ")
+print("+----------------------------+")
+print("Conexión establecida con éxito")
 
 
-def loginito(usuarito, contrasenya):
+def loginito(usuarito, contrasenyita):
     try:
         connexio = psycopg2.connect(
             dbname="hospitalito",
             user=usuarito,
-            password=contrasenya,
+            password=contrasenyita,
             host="10.94.255.109",
             port="5432"
         )
@@ -21,13 +23,14 @@ def loginito(usuarito, contrasenya):
         return False
     
 def mainQueryta():
+    
     print("+----------------------------+")
-    print("Conexión establecida con éxito")
+    print("|      ¿Que desea hacer?     |")
     print("+----------------------------+")
-    print("______¿Que desea hacer?_______")
-    permisitos(usuarito, tablaAfectada)
+    permisitos(usuarito, tablitaAfectadita)
+    print("+----------------------------+")
 
-def permisitos(usuarito, tablaAfectada):
+def permisitos(usuarito, tablitaAfectadita):
     
     connexio = psycopg2.connect(
         dbname="hospitalito",
@@ -37,38 +40,77 @@ def permisitos(usuarito, tablaAfectada):
         port="5432"
         )
     
-    listitaPermisitos = []
-    SQLita = f"SELECT privilege_type FROM information_schema.table_privileges WHERE grantee = '{usuarito}' AND is_grantable = 'YES' AND table_catalog = 'hospitalito' AND table_name = '{tablaAfectada}';"
+    SQLita = f"SELECT privilege_type FROM information_schema.table_privileges WHERE grantee = '{usuarito}' AND is_grantable = 'YES' AND table_catalog = 'hospitalito' AND table_name = '{tablitaAfectadita}';"
     cur = connexio.cursor()
     cur.execute(SQLita)
     rows = cur.fetchall()
-    
-    for row in rows:
-        listitaPermisitos.append(row)
-        
     cur.close()
     connexio.close()
      
-    if listitaPermisitos == []:
-        print("No tiene permisos")
-    else:
-        for permisito in listitaPermisitos:
-            if permisito == "SELECT":
-                print("1. ¿Que quiere consultar?")
-            elif permisito == "INSERT":
-                print("2. ¿Que quiere insertar?")
-            elif permisito == "UPDATE":
-                print("3. ¿Que quiere actualizar?")
-            elif permisito == "DELETE":
-                print("4. ¿Que quiere borrar?")
-            elif permisito == "TRUNCATE":
-                print("5. ¿Que quiere truncar?")
-                
+    for row in rows:
+        if row == ('INSERT',):
+            print(f"{"1.- Insertar datos":<29}|")
+        elif row == ('SELECT',):
+            print(f"{"2.- Consultar datos":<29}|")
+        elif row == ('UPDATE',):
+            print(f"{"3.- Actualizar datos":<29}|")
+        elif row == ('DELETE',):
+            print(f"{"4.- Borrar datos":<29}|")
+        elif row == ('REFERENCES',):
+            print(f"{"5.- Referenciar datos":<29}|")
+        elif row == ('TRIGGER',):
+            print(f"{"6.- Crear triggers":<29}|")
+
+def queQuiereHacerito(usuarito,contrasenyita, eleccionita, tablitaAfectadita):
+    
+    if eleccionita == 1:
+        connexio = psycopg2.connect(
+            dbname="hospitalito",
+            user=usuarito,
+            password=contrasenyita,
+            host="10.94.255.109",
+            port="5432"
+        )
+        cur = connexio.cursor()
+        cur.execute(f"SELECT column_name FROM information_schema.columns WHERE table_name = '{tablitaAfectadita}';")
+        
+        listitaAnyaditos = []
+        rows = cur.fetchall()
+        for row in rows:
+            listitaAnyaditos.append(input(f"Introduce el valor de {row[0]}: "))
+            
+        cur.execute(f"INSERT INTO {tablitaAfectadita} VALUES {tuple(listitaAnyaditos)};")
+        print("Datos insertados correctamente")
+        print(f"Has insertado los siguientes datos: {listitaAnyaditos}")
+        connexio.commit()
+        
+        cur.close()
+        connexio.close()
+            
+    elif eleccionita == 2:
+        pass
+    elif eleccionita == 3:
+        pass
+    elif eleccionita == 4:
+        pass
+    elif eleccionita == 5:
+        pass
+    elif eleccionita == 6:
+        pass
+
+
 def main():
-    if loginito(usuarito, contrasenya) == True:
-        mainQueryta()
-    else:
-        print("Error en la conexión")
+    prosigamitos = True
+    while prosigamitos == True:
+        if loginito(usuarito, contrasenyita) == True:
+            mainQueryta()
+            eleccionita = int(input("Introduce el número de la acción: "))
+            queQuiereHacerito(usuarito, contrasenyita, eleccionita, tablitaAfectadita)
+            quiereContinuaarito = input("¿Desea continuar? (s/n): ")
+            if quiereContinuaarito.lower() == "n":
+                prosigamitos = False
+        else:
+            pass
         
 main()
     
