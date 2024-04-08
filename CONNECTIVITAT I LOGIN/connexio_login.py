@@ -196,4 +196,3 @@ def main_connexio():
             if quiereContinuaarito.lower() == "n":
                 prosigamitos = False
     
-main_connexio()
