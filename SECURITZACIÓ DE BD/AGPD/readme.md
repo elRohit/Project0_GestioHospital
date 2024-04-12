@@ -8,4 +8,4 @@
 
 ## Documents necessaris per registrar la informació a l’AGPD. 
 
-Farem servir l'eina Facilita RGPD. Aquesta eina està destinada a aquelles empreses que realitzen tractaments de dades personals que, a priori, implicarien escàs nivell de riscos com per exemple: tractaments de dades de contacte i facturació dels clients o proveïdors d'una petita empresa, o el tractament de les dades dels seus empleats amb la finalitat del manteniment d'una relació laboral.
+
