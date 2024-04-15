@@ -98,7 +98,7 @@ CREATE TABLE reservas	(
     h_id INTEGER REFERENCES habitaciones(h_id),
     diaEntrada TIMESTAMP NOT NULL,
     diaPrevistoSalida TIMESTAMP NOT NULL,
-	PRIMARY KEY (id_tarjeta_sanitaria, h_id, diaPrevistoEntrada)
+	PRIMARY KEY (id_tarjeta_sanitaria, h_id, diaEntrada)
 );
 
 CREATE TABLE operacion (
@@ -106,14 +106,14 @@ CREATE TABLE operacion (
     p_id INTEGER REFERENCES medicos(p_id),
     fecha_entrada TIMESTAMP NOT NULL,
     fecha_salida TIMESTAMP,
-	ha_sido_operado VARCHAR(2) NOT NULL CHECK (ha_estado_operado IN ('Si', 'No')),
+	ha_sido_operado VARCHAR(2) NOT NULL CHECK (ha_sido_operado IN ('Si', 'No')),
 	PRIMARY KEY (id_tarjeta_sanitaria, p_id, fecha_entrada)
 );
-
 CREATE TABLE operacion_enfermeria (
-    id_tarjeta_sanitaria VARCHAR(20) REFERENCES operacion(id_tarjeta_sanitaria),
-    p_id INTEGER REFERENCES operacion(p_id),
-    fecha_entrada TIMESTAMP REFERENCES operacion(fecha_entrada),
-    cantidadEnfermeres INTEGER NOT NULL
-	PRIMARY KEY (id_tarjeta_sanitaria, p_id, fecha_entrada)
+    id_tarjeta_sanitaria VARCHAR(20),
+    p_id INTEGER,
+    fecha_entrada TIMESTAMP,
+    cantidadEnfermeras INTEGER NOT NULL,
+    PRIMARY KEY (id_tarjeta_sanitaria, p_id, fecha_entrada, cantidadEnfermeras),
+    FOREIGN KEY (id_tarjeta_sanitaria, p_id, fecha_entrada) REFERENCES operacion(id_tarjeta_sanitaria, p_id, fecha_entrada)
 );
