@@ -106,6 +106,7 @@ CREATE TABLE operacion (
     p_id INTEGER REFERENCES medicos(p_id),
     fecha_entrada TIMESTAMP NOT NULL,
     fecha_salida TIMESTAMP,
+	ha_sido_operado VARCHAR(2) NOT NULL CHECK (ha_estado_operado IN ('Si', 'No')),
 	PRIMARY KEY (id_tarjeta_sanitaria, p_id, fecha_entrada)
 );
 
