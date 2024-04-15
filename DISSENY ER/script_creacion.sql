@@ -18,7 +18,7 @@ CREATE TABLE pacientes (
     id_tarjeta_sanitaria VARCHAR(20) PRIMARY KEY NOT NULL,
     nombre VARCHAR(20) NOT NULL,
     apellidos VARCHAR(50),
-    fecha_nacimiento DATE NOT NULL,
+    fecha_nacimiento TIMESTAMP NOT NULL,
     direccion VARCHAR(50),
     num_telefono VARCHAR(50),
     contacto_emergencia VARCHAR(50),
@@ -43,23 +43,24 @@ CREATE TABLE enfermeros (
 
 CREATE TABLE especialidad_estudios_medicos (
     e_id INTEGER REFERENCES especialidad(e_id) PRIMARY KEY,
-    p_id INTEGER REFERENCES personal(p_id),
+    p_id INTEGER REFERENCES medicos(p_id),
     estudios_medicos TEXT,
     zona_estudios_realizados VARCHAR(50)
 );
 
 CREATE TABLE medico_enfermeria (
-    p_id INTEGER REFERENCES personal(p_id) PRIMARY KEY,
+    p_id INTEGER REFERENCES medicos(p_id) PRIMARY KEY,
     cantidad INTEGER NOT NULL
 );
 
 CREATE TABLE diagnosticos (
-    p_id INTEGER REFERENCES personal(p_id) PRIMARY KEY,
+    p_id INTEGER REFERENCES medicos(p_id),
     id_tarjeta_sanitaria VARCHAR(20) REFERENCES pacientes(id_tarjeta_sanitaria),
-    fecha_entrada DATE NOT NULL,
-    fecha_salida DATE,
+    fecha_entrada TIMESTAMP NOT NULL,
+    fecha_salida TIMESTAMP,
     tiene_receta VARCHAR(2) NOT NULL CHECK (tiene_receta IN ('Si', 'No')),
-    medicamentos TEXT CHECK ((tiene_receta = 'Si' AND medicamentos IS NOT NULL) OR tiene_receta = 'No')
+    medicamentos TEXT CHECK ((tiene_receta = 'Si' AND medicamentos IS NOT NULL) OR tiene_receta = 'No'),
+	PRIMARY KEY (p_id, id_tarjeta_sanitaria, fecha_entrada)
 );
 
 CREATE TABLE plantas (
@@ -93,21 +94,26 @@ CREATE TABLE quirofano_aparatos_medicos (
 );
 
 CREATE TABLE reservas	(
-    id_tarjeta_sanitaria VARCHAR(20) REFERENCES pacientes(id_tarjeta_sanitaria) PRIMARY KEY,
-    p_id INTEGER REFERENCES personal(p_id),
-    diaPrevistoEntrada DATE NOT NULL,
-    diaPrevistoSalida DATE NOT NULL
+    id_tarjeta_sanitaria VARCHAR(20) REFERENCES pacientes(id_tarjeta_sanitaria),
+    h_id INTEGER REFERENCES habitaciones(h_id),
+    diaEntrada TIMESTAMP NOT NULL,
+    diaPrevistoSalida TIMESTAMP NOT NULL,
+	PRIMARY KEY (id_tarjeta_sanitaria, h_id, diaEntrada)
 );
 
 CREATE TABLE operacion (
-    id_tarjeta_sanitaria VARCHAR(20) REFERENCES pacientes(id_tarjeta_sanitaria) PRIMARY KEY,
-    p_id INTEGER REFERENCES personal(p_id),
-    fecha_entrada DATE NOT NULL,
-    fecha_salida DATE
+    id_tarjeta_sanitaria VARCHAR(20) REFERENCES pacientes(id_tarjeta_sanitaria),
+    p_id INTEGER REFERENCES medicos(p_id),
+    fecha_entrada TIMESTAMP NOT NULL,
+    fecha_salida TIMESTAMP,
+	ha_sido_operado VARCHAR(2) NOT NULL CHECK (ha_sido_operado IN ('Si', 'No')),
+	PRIMARY KEY (id_tarjeta_sanitaria, p_id, fecha_entrada)
 );
-
 CREATE TABLE operacion_enfermeria (
-    id_tarjeta_sanitaria VARCHAR(20) REFERENCES pacientes(id_tarjeta_sanitaria) PRIMARY KEY,
-    p_id INTEGER REFERENCES personal(p_id),
-    cantidad INTEGER NOT NULL
+    id_tarjeta_sanitaria VARCHAR(20),
+    p_id INTEGER,
+    fecha_entrada TIMESTAMP,
+    cantidadEnfermeras INTEGER NOT NULL,
+    PRIMARY KEY (id_tarjeta_sanitaria, p_id, fecha_entrada, cantidadEnfermeras),
+    FOREIGN KEY (id_tarjeta_sanitaria, p_id, fecha_entrada) REFERENCES operacion(id_tarjeta_sanitaria, p_id, fecha_entrada)
 );
