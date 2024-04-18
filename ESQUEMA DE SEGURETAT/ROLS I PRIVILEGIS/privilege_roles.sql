@@ -1,4 +1,4 @@
--- Active: 1712759496762@@10.94.255.109@5432@hospitalito@public
+-- Active: 1712759496762@@10.94.255.109@5432@hospitalito@
 
 CREATE ROLE medico;
 CREATE ROLE enfermero;
@@ -16,36 +16,36 @@ GRANT CONNECT ON DATABASE hospitalito TO administrador_informatico;
 GRANT CONNECT ON DATABASE hospitalito TO administrador_hospital;
 GRANT CONNECT ON DATABASE hospitalito TO conductor_ambulancia;
 
-GRANT USAGE ON SCHEMA public TO medico;
-GRANT USAGE ON SCHEMA public TO enfermero;
-GRANT USAGE ON SCHEMA public TO celador;
-GRANT USAGE ON SCHEMA public TO administradorcito;
-GRANT USAGE ON SCHEMA public TO conductor_ambulancia;
+GRANT USAGE ON SCHEMA  TO medico;
+GRANT USAGE ON SCHEMA  TO enfermero;
+GRANT USAGE ON SCHEMA  TO celador;
+GRANT USAGE ON SCHEMA  TO administradorcito;
+GRANT USAGE ON SCHEMA  TO conductor_ambulancia;
 
-GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE diagnosticos public TO medico;
-GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE operaciones public TO medico;
-GRANT SELECT ON TABLE quirofanos public TO medico;
-GRANT SELECT ON TABLE habitaciones public TO medico;
-GRANT SELECT ON TABLE reserva_habitacion public TO medico;
-GRANT SELECT ON TABLE enfermeros_asignados_medico public TO medico;
-GRANT SELECT nombre, apellidos, condiciones_paciente ON TABLE pacientes public TO medico;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE diagnosticos  TO medico;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE operaciones  TO medico;
+GRANT SELECT ON TABLE quirofanos  TO medico;
+GRANT SELECT ON TABLE habitaciones  TO medico;
+GRANT SELECT ON TABLE reserva_habitacion  TO medico;
+GRANT SELECT ON TABLE enfermeros_asignados_medico  TO medico;
+GRANT SELECT nombre, apellidos, condiciones_paciente ON TABLE pacientes  TO medico;
 
-GRANT SELECT ON TABLE diagnosticos public TO enfermero;
-GRANT SELECT ON TABLE operaciones public TO enfermero;
-GRANT SELECT ON TABLE quirofanos public TO enfermero;
-GRANT SELECT ON TABLE habitaciones public TO enfermero;
-GRANT SELECT ON TABLE reserva_habitacion  public TO enfermero;
-GRANT SELECT ON TABLE enfermeros_asignados_medico  public TO enfermero;
-GRANT SELECT nombre, apellidos, condiciones_paciente ON TABLE pacientes  public TO enfermero;
+GRANT SELECT ON TABLE diagnosticos  TO enfermero;
+GRANT SELECT ON TABLE operaciones  TO enfermero;
+GRANT SELECT ON TABLE quirofanos  TO enfermero;
+GRANT SELECT ON TABLE habitaciones  TO enfermero;
+GRANT SELECT ON TABLE reserva_habitacion   TO enfermero;
+GRANT SELECT ON TABLE enfermeros_asignados_medico   TO enfermero;
+GRANT SELECT nombre, apellidos, condiciones_paciente ON TABLE pacientes   TO enfermero;
 
-GRANT SELECT ON TABLE reserva_habitacion  public TO celador;
-GRANT SELECT ON TABLE habitaciones  public TO celador;
-GRANT SELECT nombre, apellidos, condiciones_paciente ON TABLE pacientes  public TO celador;
+GRANT SELECT ON TABLE reserva_habitacion   TO celador;
+GRANT SELECT ON TABLE habitaciones   TO celador;
+GRANT SELECT nombre, apellidos, condiciones_paciente ON TABLE pacientes   TO celador;
 
-GRANT SELECT ON TABLE pacientes  public TO recepcionista;
-GRANT SELECT ON TABLE habitaciones  public TO recepcionista;
-GRANT SELECT ON TABLE reserva_habitacion  public TO recepcionista;
+GRANT SELECT ON TABLE pacientes   TO recepcionista;
+GRANT SELECT ON TABLE habitaciones   TO recepcionista;
+GRANT SELECT ON TABLE reserva_habitacion   TO recepcionista;
 
-GRANT ALL PRIVILEGES ON ALL TABLES  public TO administrador_informatico;
+GRANT ALL PRIVILEGES ON ALL TABLES   TO administrador_informatico;
 
-GRANT ALL PRIVILEGES ON TABLE personal  public TO administrador_hospital;
+GRANT ALL PRIVILEGES ON TABLE personal   TO administrador_hospital;
