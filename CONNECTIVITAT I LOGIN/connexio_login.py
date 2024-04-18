@@ -42,7 +42,7 @@ def enQueRolsitoEsta(usuarito):
     return rol
     
 def menuPorRol(rol):
-    if rol == "administrador":
+    if rol == "administrador_informatico":
         print("+----------------------------------------+")
         print("| 1. Dar de alta un nuevo usuario        |")   
         print("| 2. Dar de baja un usuario existente    |")
@@ -58,8 +58,9 @@ def main_connexio():
     usuarito = input("Introduce el nombre de usuario: ")
     contrasenyita = input("Introduce la contraseña: ")
     if loginito(usuarito, contrasenyita) == True:
-        print("+----------------------------+")
-        print("Conexión establecida con éxito")
+        print("+--------------------------------+")
+        print("| Conexión establecida con éxito |")
+        print("+--------------------------------+")
         rolecitos = enQueRolsitoEsta(usuarito)
         menuPorRol(rolecitos)
         
