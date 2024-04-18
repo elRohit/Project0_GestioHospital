@@ -42,24 +42,46 @@ def enQueRolsitoEsta(usuarito):
     return rol
     
 def menuPorRol(rol):
-    if rol == "administrador":
-        print("+----------------------------------------+")
+    print("+----------------------------------------+")
+    print("| 0. Salir                               |")
+    if rol == "administrador_informatico":
         print("| 1. Dar de alta un nuevo usuario        |")   
         print("| 2. Dar de baja un usuario existente    |")
         print("| 3. Dar de alta un nuevo paciente       |")
         print("| 4. Dar de baja un paciente existente   |")
         print("| 5. Consultar usuarios existentes       |")
-        print("+----------------------------------------+")
     if rol == "medico":
         print("| 1. Consultar historial de un paciente  |")
-
+        print("| 2. Consultar medicación de un paciente |")
+        print("| 3. Consultar habitación de un paciente |")
+    if rol == "enfermero":
+        print("| 1. A que medic@ estas enlazad@         |")
+        print("| 2. En que habitación está el paciente  |")
+        print("| 3. Que medicación tiene el paciente    |")
+    if rol == "celador":
+        print("| 1. En que habitación está el paciente  |")
+    if rol == "conductor_ambulancia":
+        print("| 1. En que habitación está el paciente  |")
+        print("| 2. Que habitaciones están libres       |")
+        print("| 3. Que habitaciones están ocupadas     |")
+    if rol == "administrador_hospital":
+        print("| 1. Consultar el personal del hospital  |")
+        print("| 2. Dar de alta a un nuevo usuario      |")
+        print("| 3. Dar de baja a un usuario existente  |")
+    if rol == "recepcionista":
+        print("| 1. Dar de alta a un nuevo paciente     |")
+        print("| 2. Consultar pacientes ingresados      |")
+        print("| 3. Consultar habitaciones sin reserva  |")
+        print("| 4. Consultar habitaciones reservadas   |")
+    print("+----------------------------------------+")
 
 def main_connexio():
     usuarito = input("Introduce el nombre de usuario: ")
     contrasenyita = input("Introduce la contraseña: ")
     if loginito(usuarito, contrasenyita) == True:
-        print("+----------------------------+")
-        print("Conexión establecida con éxito")
+        print("+----------------------------------------+")
+        print("|     Conexión establecida con éxito     |")
+        print("+----------------------------------------+")
         rolecitos = enQueRolsitoEsta(usuarito)
         menuPorRol(rolecitos)
         
