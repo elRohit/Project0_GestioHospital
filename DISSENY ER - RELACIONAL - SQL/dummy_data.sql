@@ -1,16 +1,17 @@
--- Tabla Personal
-INSERT INTO personal (id, nombre, apellidos, dni, fecha_nacimiento, fecha_contratacion, salario, cargo, id_departamento) VALUES 
-(1, 'Juan', 'Garcia', '12345678A', '1980-01-01', '2000-01-01', 1000, 'Programador', 1),
-(2,)
-(2, 'Maria', 'Lopez', '87654321B', '1985-02-02', '2005-02-02', 1500, 'Analista', 2),
-(3, 'Pedro', 'Martinez', '98765432C', '1990-03-03', '2010-03-03', 2000, 'Gerente', 3),
-(4, 'Laura', 'Gonzalez', '23456789D', '1995-04-04', '2015-04-04', 2500, 'Consultor', 1),
-(5, 'Carlos', 'Sanchez', '34567890E', '2000-05-05', '2020-05-05', 3000, 'Desarrollador', 2),
-(6, 'Ana', 'Rodriguez', '45678901F', '2005-06-06', '2025-06-06', 3500, 'Analista', 3),
-(7, 'David', 'Perez', '56789012G', '2010-07-07', '2030-07-07', 4000, 'Desarrollador', 2),
-(8, 'Laura', 'Hernandez', '67890123H', '2015-08-08', '2035-08-08', 4500, 'Analista', 3),
-(9, 'Carlos', 'Gomez', '78901234I', '2020-09-09', '2040-09-09', 5000, 'Consultor', 1),
-(10, 'Ana', 'Lopez', '89012345J', '2025-10-10', '2045-10-10', 5500, 'Programador', 2),
+INSERT INTO personal (p_id, nombre, apellidos, dni,  correo, num_telefono, direccion) VALUES 
+(1, 'Juan', 'Garcia', '12345678A', 'jgarcia@gmail.com', '200001010', 'Calle Traquea 4120'),
+(2, 'Maria', 'Lopez', '87654321B', 'mlopez@gmail.com', '200502021','Calle Traquea 4120'),
+(3, 'Pedro', 'Martinez', '98765432C', 'pmartinez@gmail.com', '201003032','Calle Traquea 4120'),
+(4, 'Laura', 'Gonzalez', '23456789D', 'lgonzalez@gmail.com', '201504043','Calle Traquea 4120'),
+(5, 'Carlos', 'Sanchez', '34567890E', 'csanchez@gmail.com', '202005054', 'DeCalle Traquea 4120'),
+(6, 'Ana', 'Rodriguez', '45678901F', 'arodriguez@gmail.com', '202506065','Calle Traquea 4120'),
+(7, 'David', 'Perez', '56789012G', 'dperez@gmail.com', '203007076', 'De Calle Traquea 4120'),
+(8, 'Laura', 'Hernandez', '67890123H', 'lhernandez@gmail.com', '203508087','Calle Traquea 4120'),
+(9, 'Carlos', 'Gomez', '78901234I', 'cgomez@gmail.com', '204009098','Calle Traquea 4120'),
+(10, 'Ana', 'Lopez', '89012345J', 'alopez@gmail.com', '204510109', 'Calle Traquea 4120');
+
+
+/*
 (11, 'David', 'Martinez', '90123456K', '2030-11-11', '2050-11-11', 6000, 'Analista', 3),
 (12, 'Laura', 'Sanchez', '01234567L', '2035-12-12', '2055-12-12', 6500, 'Gerente', 1),
 (13, 'Carlos', 'Rodriguez', '12345678M', '2040-01-01', '2060-01-01', 7000, 'Desarrollador', 2),
@@ -40,4 +41,4 @@ INSERT INTO personal (id, nombre, apellidos, dni, fecha_nacimiento, fecha_contra
 (37, 'Carlos', 'Rodriguez', '56789012K', '2160-01-01', '2180-01-01', 19000, 'Desarrollador', 2),
 (38, 'Ana', 'Gonzalez', '67890123L', '2165-02-02', '2185-02-02', 19500, 'Analista', 3),
 (39, 'David', 'Sanchez', '78901234M', '2170-03-03', '2190-03-03', 20000, 'Consultor', 1),
-(40, 'Laura', 'Rodriguez', '89012345N', '2175-04-04', '2195-04-04', 20500, 'Programador', 2);
+(40, 'Laura', 'Rodriguez', '89012345N', '2175-04-04', '2195-04-04', 20500, 'Programador', 2);*/
