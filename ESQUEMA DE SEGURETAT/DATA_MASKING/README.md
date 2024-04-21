@@ -1,0 +1,1 @@
+El enmascaramiento de datos es una técnica utilizada para proteger la información sensible al reemplazarla con datos ficticios o alterados. En el código que proporcionaste, se muestra un ejemplo de cómo enmascarar el campo de correo electrónico en una consulta SQL.
