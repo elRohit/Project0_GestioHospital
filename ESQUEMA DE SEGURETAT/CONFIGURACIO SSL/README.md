@@ -70,3 +70,6 @@ sudo /etc/init.d/postgresql restart
 
 ![alt text](../../images/ssl/renew/3.png)
 
+## Webgarfia 
+- [Link](https://demirhuseyinn-94.medium.com/postgresql-ssl-configuration-to-connect-database-114f867d96e0)
+
