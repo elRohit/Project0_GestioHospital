@@ -8,4 +8,6 @@
 
 ## Documents necessaris per registrar la informació a l’AGPD. 
 
+[Polítiques i Privacitat de les dades](politicaPrivacidadDatos.pdf)
+
 
