@@ -90,15 +90,14 @@ def menuPorRol(rol):
     
 def menuAdminInformatico(usuarito, contrasenyita, opcion):
     if opcion == 1:
+        usuaritoCreado = input("Introduce el nombre de usuario: ")
+        contrasenyitaCreada = input("Introduce la contraseña: ")
+        print("Ahora debera elegir el rol del usuario. ")
+        print("Tiene estas opciones: ")
+        print("administrador_informatico, medico, enfermero, celador,")
+        print("conductor_ambulancia, administrador_hospital, recepcionista, invitado.")
+        rolcitoCrear = input("Introduce su rama profesional (rol): ")
         try:
-            usuaritoCreado = input("Introduce el nombre de usuario: ")
-            contrasenyitaCreada = input("Introduce la contraseña: ")
-            print("Ahora debera elegir el rol del usuario. ")
-            print("Tiene estas opciones: ")
-            print("administrador_informatico, medico, enfermero, celador,")
-            print("conductor_ambulancia, administrador_hospital, recepcionista, invitado.")
-            rolcitoCrear = input("Introduce su rama profesional (rol): ")
-            SQLita = f"CREATE ROLE {usuaritoCreado} LOGIN PASSWORD '{contrasenyitaCreada}' IN ROLE {rolcitoCrear};"
             connexio = psycopg2.connect(
                 dbname="hospital",
                 user=usuarito,
@@ -107,50 +106,25 @@ def menuAdminInformatico(usuarito, contrasenyita, opcion):
                 port="5432",
                 sslmode="require"
             )
+            
+            SQLita = f"CREATE ROLE {usuaritoCreado} LOGIN PASSWORD '{contrasenyitaCreada}' IN ROLE {rolcitoCrear};"
+            
             cur = connexio.cursor()
             cur.execute(SQLita)
             connexio.commit()
             cur.close()
             connexio.close()
-        
+            
             print(" Su usuario ha sido creado con éxito. ")  
+            
         except psycopg2.Error as e:
             
             print("El usuario no ha podido ser creado. Puede ser que exista un usuario con el mismo nombre.")
-        
-    if opcion == 2:
-            
-            usuaritoBorrado = input("Introduce el nombre de usuario a borrar: ")
-            estaSeguro = input("¿Estás seguro de que quieres borrar el usuario? (s/n): ")
-            SQLita = f"DROP ROLE {usuaritoBorrado};"
-                        
-            if estaSeguro == "s":
-                try:
-                    connexio = psycopg2.connect(
-                    dbname="hospital",
-                    user=usuarito,
-                    password=contrasenyita,
-                    host="10.94.255.129",
-                    port="5432",
-                    sslmode="require"
-                    )
-                    cur = connexio.cursor()
-                    cur.execute(SQLita)
-                    connexio.commit()
-                    cur.close()
-                    connexio.close()    
-                    print("El usuario ha sido borrado con éxito.")
-                
-                except psycopg2.Error as e:
-                    print("Error al borrar el usuario.")          
-            else:
-                print("El usuario no ha sido borrado.")
-            
+    
     if opcion == 3:
         pass
+    
     if opcion == 4:
-        pass
-    if opcion == 5:
         pass
     
 def menuMedico(usuarito, contrasenyita, opcion):
@@ -169,9 +143,10 @@ def main_connexio():
         print("|     Conexión establecida con éxito     |")
         print("+----------------------------------------+")
         rolecitos = enQueRolsitoEsta(usuarito)
-        opcion = menuPorRol(rolecitos)
-        if rolecitos == "administrador_informatico":
+        opcion = int(menuPorRol(rolecitos))
+        if rolecitos == 'administrador_informatico':
             menuAdminInformatico(usuarito, contrasenyita, opcion)
+            
         
         
 main_connexio()
