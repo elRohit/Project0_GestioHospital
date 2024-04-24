@@ -1,7 +1,8 @@
 # En mantenimiento
 
 import psycopg2
-    
+import main_por_rol
+
 def loginito(usuarito, contrasenyita):
     
     try:
@@ -86,55 +87,6 @@ def menuPorRol(rol):
     
     return opcion
     
-    
-    
-def menuAdminInformatico(usuarito, contrasenyita, opcion):
-    if opcion == 1:
-        usuaritoCreado = input("Introduce el nombre de usuario: ")
-        contrasenyitaCreada = input("Introduce la contraseña: ")
-        print("Ahora debera elegir el rol del usuario. ")
-        print("Tiene estas opciones: ")
-        print("administrador_informatico, medico, enfermero, celador,")
-        print("conductor_ambulancia, administrador_hospital, recepcionista, invitado.")
-        rolcitoCrear = input("Introduce su rama profesional (rol): ")
-        try:
-            connexio = psycopg2.connect(
-                dbname="hospital",
-                user=usuarito,
-                password=contrasenyita,
-                host="10.94.255.129",
-                port="5432",
-                sslmode="require"
-            )
-            
-            SQLita = f"CREATE ROLE {usuaritoCreado} LOGIN PASSWORD '{contrasenyitaCreada}' IN ROLE {rolcitoCrear};"
-            
-            cur = connexio.cursor()
-            cur.execute(SQLita)
-            connexio.commit()
-            cur.close()
-            connexio.close()
-            
-            print(" Su usuario ha sido creado con éxito. ")  
-            
-        except psycopg2.Error as e:
-            
-            print("El usuario no ha podido ser creado. Puede ser que exista un usuario con el mismo nombre.")
-    
-    if opcion == 3:
-        pass
-    
-    if opcion == 4:
-        pass
-    
-def menuMedico(usuarito, contrasenyita, opcion):
-    if opcion == 1:
-        pass
-    if opcion == 2:
-        pass
-    if opcion == 3:
-        pass
-    
 def main_connexio():
     usuarito = input("Introduce el nombre de usuario: ")
     contrasenyita = input("Introduce la contraseña: ")
@@ -145,7 +97,9 @@ def main_connexio():
         rolecitos = enQueRolsitoEsta(usuarito)
         opcion = int(menuPorRol(rolecitos))
         if rolecitos == 'administrador_informatico':
-            menuAdminInformatico(usuarito, contrasenyita, opcion)
+            main_por_rol.menuAdminInformatico(usuarito, contrasenyita, opcion)
+        if rolecitos == 'medico':
+            main_por_rol.menuMedico(usuarito, contrasenyita, opcion)
             
         
         

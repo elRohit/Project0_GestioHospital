@@ -2,7 +2,7 @@ CREATE ROLE medico;
 CREATE ROLE enfermero;
 CREATE ROLE celador;
 CREATE ROLE recepcionista;
-CREATE ROLE administrador_informatico CREATEROLE NO INHERIT;
+CREATE ROLE administrador_informatico CREATEROLE;
 CREATE ROLE administrador_hospital;
 CREATE ROLE conductor_ambulancia;
 CREATE ROLE paciente;
