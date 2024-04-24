@@ -219,7 +219,7 @@ def menuEnfermero(usuarito, contrasenyita, opcion):
                 port="5432",
                 sslmode="require"
             )
-            SQLita = f"SELECT m.nombre FROM medico_enfermeria me JOIN medicos m ON m.m_id = me.m_id JOIN personal p ON p.p_id = m.p_id WHERE p.nombre = '{medicitoDNI}';" 
+            SQLita = f"SELECT pe.nombre, pe.apellidos FROM medico_enfermeria me JOIN enfermeros e ON e.p_id = me.e_id JOIN medicos m ON m.p_id = me.m_id JOIN personal p ON p.p_id = e.p_id JOIN personal pe ON pe.p_id = m.p_id WHERE p.dni = '{medicitoDNI}';" 
             cur = connexio.cursor()
             cur.execute(SQLita)
             resultadito = cur.fetchall()
