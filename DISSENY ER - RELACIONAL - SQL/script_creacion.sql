@@ -49,8 +49,8 @@ CREATE TABLE especialidad_estudios_medicos (
 );
 
 CREATE TABLE medico_enfermeria (
-    p_id INTEGER REFERENCES medicos(p_id) PRIMARY KEY,
-    cantidad INTEGER NOT NULL
+    m_id INTEGER REFERENCES medicos(p_id) PRIMARY KEY,
+    e_id INTEGER REFERENCES enfermeros(p_id)
 );
 
 CREATE TABLE diagnosticos (

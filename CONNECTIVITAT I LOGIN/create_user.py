@@ -5,8 +5,6 @@ import hashlib
 def registrar_usuarito():
     nombrecito_usuarito = input("Introduce el nombre del usuario: ")
     contrasenya_usuarito = input("Introduce la contraseña: ")
-    print("Pon tu profesión, tienes estas elecciones:")
-    print("Doctor/a, medico/a, enfermero/a, celador/a, administrador/a, cond_amb (conductor/a de ambulancia)")
     encriptar_datitos(nombrecito_usuarito, contrasenya_usuarito)
     insertar_usuarito_a_la_bd(nombrecito_usuarito, contrasenya_usuarito)
     
@@ -22,8 +20,6 @@ def insertar_usuarito_en_csv(usuarito_encriptado, contrasenya_encriptada):
         
 def insertar_usuarito_a_la_bd(nombrecito_usuarito, contrasenya_usuarito):
     
-    profesionita_usuarito = input("Introduce la profesión (tanto en m/f): ")
-    
     connexio = psycopg2.connect(
         dbname="hospitalito",
         user="postgres",
@@ -32,29 +28,8 @@ def insertar_usuarito_a_la_bd(nombrecito_usuarito, contrasenya_usuarito):
     )
     cur = connexio.cursor()
     
-    if profesionita_usuarito.lower() == "doctor" or profesionita_usuarito.lower() == "doctora":
-        cur.execute(f"CREATE ROLE {nombrecito_usuarito} LOGIN PASSWORD '{contrasenya_usuarito}' IN ROLE doctorcitos;")
-        connexio.commit()
-        
-    if profesionita_usuarito.lower == "medico" or profesionita_usuarito.lower == "medica":
-        cur.execute(f"CREATE ROLE {nombrecito_usuarito} LOGIN PASSWORD '{contrasenya_usuarito}' IN ROLE mediquitos;")
-        connexio.commit()
-        
-    if profesionita_usuarito.lower == "enfermero" or profesionita_usuarito.lower == "enfermera":
-        cur.execute(f"CREATE ROLE {nombrecito_usuarito} LOGIN PASSWORD '{contrasenya_usuarito}' IN ROLE enfermeritos;")
-        connexio.commit()
-        
-    if profesionita_usuarito.lower == "celador" or profesionita_usuarito.lower == "celadora":
-        cur.execute(f"CREATE ROLE {nombrecito_usuarito} LOGIN PASSWORD '{contrasenya_usuarito}' IN ROLE celadorcitos;")
-        connexio.commit()
-        
-    if profesionita_usuarito.lower == "administrador" or profesionita_usuarito.lower == "administradora":
-        cur.execute(f"CREATE ROLE {nombrecito_usuarito} LOGIN PASSWORD '{contrasenya_usuarito}' IN ROLE administradorcitos;")
-        connexio.commit()
-        
-    if profesionita_usuarito.lower == "cond_amb":
-        cur.execute(f"CREATE ROLE {nombrecito_usuarito} LOGIN PASSWORD '{contrasenya_usuarito}' IN ROLE cond_ambulancitas;")
-        connexio.commit()   
+    cur.execute(f"CREATE ROLE {nombrecito_usuarito} WITH LOGIN PASSWORD '{contrasenya_usuarito}';")
+    connexio.commit()   
 
 def main_inserir_usuarito():
     registrar_usuarito()

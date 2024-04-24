@@ -199,14 +199,40 @@ def menuMedico(usuarito, contrasenyita, opcion):
             print("+----------------------------------------+")
             print("|           Habitación del paciente      |")
             print("+----------------------------------------+")
-            print("El paciente está en la planta:          |")
-            print(resultadito[0][0])
-            print("El paciente está en la habitación:      |")
-            print(resultadito[0][1])
+            print(f"El paciente está en la planta: {resultadito[0][0]}         |")
+            print(f"El paciente está en la habitación: {resultadito[0][1]}     |")
             print("+----------------------------------------+")
             
         except psycopg2.Error as e:
             
             print("No se ha podido mostrar la habitación del paciente.")
             
+def menuEnfermero(usuarito, contrasenyita, opcion):
+    if opcion == 1:
+        medicitoDNI = input("Introduce tu DNI: ")
+        try:
+            connexio = psycopg2.connect(
+                dbname="hospital",
+                user="postgres",
+                password="P@ssw0rd",
+                host="10.94.255.129",
+                port="5432",
+                sslmode="require"
+            )
+            SQLita = f"SELECT m.nombre FROM medico_enfermeria me JOIN medicos m ON m.m_id = me.m_id JOIN personal p ON p.p_id = m.p_id WHERE p.nombre = '{medicitoDNI}';" 
+            cur = connexio.cursor()
+            cur.execute(SQLita)
+            resultadito = cur.fetchall()
+            cur.close()
+            connexio.close()
+            print("+----------------------------------------+")
+            print("|           Médico enlazado              |")
+            print("+----------------------------------------+")
+            print(f"El médico al que está enlazado es:      |")
+            print(resultadito[0][0])
+            print("+----------------------------------------+")
+        
+        except psycopg2.Error as e:
+            
+            print("No se ha podido mostrar el médico enlazado.")
             

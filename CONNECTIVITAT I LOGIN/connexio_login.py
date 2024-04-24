@@ -100,6 +100,8 @@ def main_connexio():
             main_por_rol.menuAdminInformatico(usuarito, contrasenyita, opcion)
         if rolecitos == 'medico':
             main_por_rol.menuMedico(usuarito, contrasenyita, opcion)
+        if rolecitos == 'enfermero':
+            main_por_rol.menuEnfermero(usuarito, contrasenyita, opcion)
             
         
         
