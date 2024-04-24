@@ -46,11 +46,10 @@ def menuPorRol(rol):
     print("| 0. Salir                               |")
     
     if rol == "administrador_informatico":
-        print("| 1. Dar de alta un nuevo usuario        |")   
-        print("| 2. Dar de baja un usuario existente    |")
-        print("| 3. Dar de alta un nuevo paciente       |")
-        print("| 4. Dar de baja un paciente existente   |")
-        print("| 5. Consultar usuarios existentes       |")
+        print("| 1. Dar de alta un nuevo usuario        |")  
+        print("| 2. Dar de alta un nuevo paciente       |") 
+        print("| 3. Dar de baja un usuario existente    |")
+        print("| 4. Consultar usuarios existentes       |")
     
     if rol == "medico":
         print("| 1. Consultar historial de un paciente  |")

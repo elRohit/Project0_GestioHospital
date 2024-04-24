@@ -5,6 +5,7 @@ CREATE ROLE recepcionista;
 CREATE ROLE administrador_informatico;
 CREATE ROLE administrador_hospital;
 CREATE ROLE conductor_ambulancia;
+CREATE ROLE paciente;
 
 GRANT CONNECT ON DATABASE hospital TO medico;
 GRANT CONNECT ON DATABASE hospital TO enfermero;
@@ -13,6 +14,7 @@ GRANT CONNECT ON DATABASE hospital TO recepcionista;
 GRANT CONNECT ON DATABASE hospital TO administrador_informatico;
 GRANT CONNECT ON DATABASE hospital TO administrador_hospital;
 GRANT CONNECT ON DATABASE hospital TO conductor_ambulancia;
+GRANT CONNECT ON DATABASE hospital TO paciente;
 
 GRANT USAGE ON SCHEMA public TO medico;
 GRANT USAGE ON SCHEMA public TO enfermero;
@@ -21,6 +23,7 @@ GRANT USAGE ON SCHEMA public TO recepcionista;
 GRANT USAGE ON SCHEMA public TO administrador_informatico;
 GRANT USAGE ON SCHEMA public TO administrador_hospital;
 GRANT USAGE ON SCHEMA public TO conductor_ambulancia;
+
 
 GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE diagnosticos TO medico;
 GRANT SELECT, INSERT, UPDATE,DELETE ON TABLE operacion TO medico;
