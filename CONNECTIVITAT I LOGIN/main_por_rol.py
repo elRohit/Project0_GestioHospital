@@ -229,7 +229,8 @@ def menuEnfermero(usuarito, contrasenyita, opcion):
             print("|           Médico enlazado              |")
             print("+----------------------------------------+")
             print(f"El médico al que está enlazado es:      |")
-            print(resultadito[0][0])
+            print(f"Nombre: {resultadito[0][0]}            ")
+            print(f"Apellidos: {resultadito[0][1]}         ")
             print("+----------------------------------------+")
         
         except psycopg2.Error as e:
