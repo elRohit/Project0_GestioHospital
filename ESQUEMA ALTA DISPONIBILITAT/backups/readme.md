@@ -23,6 +23,8 @@ pg_dump -h $server -U $user $database > $BACKUP_PATH/$current_date.sql;
 gzip $BACKUP_PATH/$current_date.sql
 
 ```
+# Per què hem decidit fer còpies de seguretat a nivell lògic?
+Aquest tipus de backup exporta l' estructura de les taules i les dades sense copiar els arxius de dades reals de la base de dades. Per exemple, la comanda pg_dump realitza un backup lògic, perquè exporta les taules i les dades mitjançant les sentències SQL CREATE TABLE i INSERT.
 
 # Com automatizar les còpies de seguretat?
 També ens haurem d'assegurar que el nostre codi ens permeti automatizar aquest script mitjançant crontab, si per exemple, volem realitzar una còpia de seguretat de la base de dades cada dia a les 0:00, hauria de
