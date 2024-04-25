@@ -58,12 +58,14 @@ def menuPorRol(rol):
         print("| 3. Consultar habitación de un paciente |")
         print("| 4. Operacions previstes                |")
         print("| 5. Consultar visitas planificadas      |")
+        print("| 6. Aparatos medicos por quirofano      |")
    
     if rol == "enfermero":
         print("| 1. A que medic@ estas enlazad@         |")
         print("| 2. En que habitación está el paciente  |")
         print("| 3. Que medicación tiene el paciente    |")
         print("| 4. Operacions previstes                |")
+        print("| 6. Aparatos medicos por quirofano      |")
     
     if rol == "celador":
         print("| 1. En que habitación está el paciente  |")
@@ -79,8 +81,9 @@ def menuPorRol(rol):
     if rol == "recepcionista":
         print("| 1. Dar de alta a un nuevo paciente     |")
         print("| 2. Consultar pacientes ingresados      |")
-        print("| 3. Consultar habitaciones sin reserva  |")
-        print("| 4. Consultar habitaciones reservadas   |")
+        print("| 3. Consultar habitaciones libres       |")
+        print("| 4. Consultar habitaciones ocupadas     |")
+        print("| 5. Consultar reservas de habitaciones  |")
     
     print("+----------------------------------------+")
     
@@ -96,23 +99,22 @@ def main_connexio():
         print("|     Conexión establecida con éxito     |")
         print("+----------------------------------------+")
         rolecitos = enQueRolsitoEsta(usuarito)
-        opcion = int(menuPorRol(rolecitos))
-        if rolecitos == 'administrador_informatico':
-            main_por_rol.menuAdminInformatico(usuarito, contrasenyita, opcion)
-        if rolecitos == 'medico':
-            main_por_rol.menuMedico(usuarito, contrasenyita, opcion)
-        if rolecitos == 'enfermero':
-            main_por_rol.menuEnfermero(usuarito, contrasenyita, opcion)
-        if rolecitos == 'celador':
-            main_por_rol.menuCelador(usuarito, contrasenyita, opcion)
-        if rolecitos == 'conductor_ambulancia':
-            main_por_rol.menuConductorAmbulancia(usuarito, contrasenyita, opcion)
-        if rolecitos == 'administrador_hospital':
-            main_por_rol.menuAdminHospital(usuarito, contrasenyita, opcion)
-        if rolecitos == 'recepcionista':
-            main_por_rol.menuRecepcionista(usuarito, contrasenyita, opcion)
-        
-            
-        
-        
-main_connexio()
+        seguimos = True 
+        while seguimos:
+            opcion = int(menuPorRol(rolecitos))
+            if rolecitos == 'administrador_informatico':
+                main_por_rol.menuAdminInformatico(usuarito, contrasenyita, opcion)
+            if rolecitos == 'medico':
+                main_por_rol.menuMedico(usuarito, contrasenyita, opcion)
+            if rolecitos == 'enfermero':
+                main_por_rol.menuEnfermero(usuarito, contrasenyita, opcion)
+            if rolecitos == 'celador':
+                main_por_rol.menuCelador(usuarito, contrasenyita, opcion)
+            if rolecitos == 'conductor_ambulancia':
+                main_por_rol.menuConductorAmbulancia(usuarito, contrasenyita, opcion)
+            if rolecitos == 'administrador_hospital':
+                main_por_rol.menuAdminHospital(usuarito, contrasenyita, opcion)
+            if rolecitos == 'recepcionista':
+                main_por_rol.menuRecepcionista(usuarito, contrasenyita, opcion)
+            if opcion == 0:
+                seguimos = False     

@@ -281,6 +281,40 @@ def menuMedico(usuarito, contrasenyita, opcion):
 
             print("No hay visitas planificadas.")
             
+    if opcion == 6:
+        try:
+            connexio = psycopg2.connect(
+                    dbname="hospital",
+                    user=usuarito,
+                    password=contrasenyita,
+                    host="10.94.255.129",
+                    port="5432",
+                    sslmode="require"
+                )
+            SQLita = f"SELECT q.q_id, am.am_id, qam.cantidad FROM quirofano q JOIN quirofano_aparatos_medicos qam ON qam.q_id = q.q_id JOIN aparatos_medicos am ON am.am_id = qam.am_id WHERE qam.cantidad < am.cantidad;"
+            cur = connexio.cursor()
+            cur.execute(SQLita)
+            resultadito = cur.fetchall()
+            cur.close()
+            connexio.close()
+            print("+----------------------------------------+")
+            print("|    Aparatos medicos por quirofano      |")
+            print("+----------------------------------------+")
+            contador = 0
+            for i in resultadito:
+                print(f"ID del aparato: {resultadito[contador][1]}            ")
+                print(f"ID del quirofano: {resultadito[contador][0]}         ")
+                print(f"Cantidad: {resultadito[contador][2]}         ")
+                print("+--------------------------------------- +")
+                contador += 1
+            contador = 0
+            
+        except psycopg2.Error as e:
+                
+                print("No hay aparatos medicos en los quirofanos.")
+            
+            
+            
 
            
 def menuEnfermero(usuarito, contrasenyita, opcion):
@@ -689,4 +723,34 @@ def menuRecepcionista(usuarito, contrasenyita, opcion):
                 
             except psycopg2.Error as e:
                     
-                    print("No se hay habitaciones ocupadas.")              
+                    print("No se hay habitaciones ocupadas.")
+                    
+        if opcion == 5:
+            habitacionID = int(input("Introduce el número de habitación: "))
+            try:
+                connexio = psycopg2.connect(
+                    dbname="hospital",
+                    user=usuarito,
+                    password=contrasenyita,
+                    host="10.94.255.129",
+                    port="5432",
+                    sslmode="require"
+                )
+                SQLita = f"SELECT r.diaentrada, r.diaprevistosalida, pa.id_tarjeta_sanitaria, pa.nombre, pa.apellidos FROM reservas r JOIN pacientes pa ON r.id_tarjeta_sanitaria = pa.id_tarjeta_sanitaria WHERE r.h_id = {habitacionID} AND diaentrada > current_timestamp;"
+                cur = connexio.cursor()
+                cur.execute(SQLita)
+                resultadito = cur.fetchall()
+                cur.close()
+                connexio.close()
+                print("+----------------------------------------+")
+                print("|           Visitas planificadas         |")
+                print("+----------------------------------------+")
+                print("| Fecha entrada | Fecha salida | Tarjeta | Nombre | Apellidos |")
+                print("+----------------------------------------+")
+                for i in resultadito:
+                    print(f"| {i[0]} | {i[1]} | {i[2]} | {i[3]} | {i[4]} |")
+                print("+----------------------------------------+")
+                
+            except psycopg2.Error as e:
+                    
+                    print("No se hay visitas planificadas.")

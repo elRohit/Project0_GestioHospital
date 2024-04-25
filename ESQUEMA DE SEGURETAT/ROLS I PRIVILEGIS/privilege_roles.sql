@@ -33,6 +33,9 @@ GRANT SELECT ON TABLE reservas TO medico;
 GRANT SELECT ON TABLE medico_enfermeria TO medico;
 GRANT SELECT ON TABLE pacientes TO medico;
 GRANT SELECT ON TABLE enfermeros TO medico;
+GRANT SELECT ON TABLE quirofano_aparatos_medicos TO medico;
+GRANT SELECT ON TABLE aparatos_medicos TO medico;
+
 
 GRANT SELECT ON TABLE diagnosticos TO enfermero;
 GRANT SELECT ON TABLE operacion TO enfermero;
