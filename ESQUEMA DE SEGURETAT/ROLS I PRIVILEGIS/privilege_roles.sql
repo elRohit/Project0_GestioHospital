@@ -51,6 +51,8 @@ GRANT SELECT ON TABLE reservas TO recepcionista;
 
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO administrador_informatico;
 
-GRANT SELECT ON TABLE personal TO administrador_hospital;
+GRANT SELECT, INSERT ON TABLE personal TO administrador_hospital;
+GRANT ALL PRIVILEGIES ON SEQUENCE personal_p_id_seq TO administrador_hospital;
 
 GRANT SELECT, INSERT ON TABLE reservas TO conductor_ambulancia;
+GRANT SELECT (nombre, apellidos) ON TABLE pacientes TO conductor_ambulancia;
