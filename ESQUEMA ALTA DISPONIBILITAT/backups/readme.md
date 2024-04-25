@@ -22,12 +22,14 @@ pg_dump -h $server -U $user $database > $BACKUP_PATH/$current_date.sql;
 # Comprimim l'arxiu de backup
 gzip $BACKUP_PATH/$current_date.sql
 
+```
+
 # Com automatizar els backups
 També ens haurem d'assegurar que el nostre codi ens permeti automatizar aquest script mitjançant crontab, si per exemple, volem realitzar una còpia de seguretat de la base de dades cada dia a les 0:00, hauria de
 afegir el següent al crontab:
 
 ![crontab_img](images/crontab.png)
 
-```
+
 
 
