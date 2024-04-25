@@ -1,8 +1,8 @@
 # Codi Python
 
-# Com fer els backups
+# Com fer còpies de seguretat?
 Per fer els backups a la nostra base de dades haurem de fer un codi python que ens permeti crear un script per fer el script i que també ens permeti automatitzar-lo.
-El script que s'haurá de crear dins de la nostra màquina será el següent:
+El script que s'haurá de crear dins de la nostra màquina será en el nostre cas, un script que ens permeti fer una còpia de seguretat a nivell lògic, com el següent:
 
 ```
 #!/bin/bash
@@ -24,11 +24,15 @@ gzip $BACKUP_PATH/$current_date.sql
 
 ```
 
-# Com automatizar els backups
+# Com automatizar les còpies de seguretat?
 També ens haurem d'assegurar que el nostre codi ens permeti automatizar aquest script mitjançant crontab, si per exemple, volem realitzar una còpia de seguretat de la base de dades cada dia a les 0:00, hauria de
 afegir el següent al crontab:
 
 ![crontab_img](images/crontab.png)
+
+# Com restaurar una còpia de seguretat?
+Per restaurar una còpia de seguretat, haurem de fer un codi python que ens permeti executar la següent comanda a la màquina que conté la nostra base de dades
+`psql -d hr -f 2024-04-17.sql`
 
 
 
