@@ -56,24 +56,25 @@ def menuPorRol(rol):
         print("| 1. Consultar historial de un paciente  |")
         print("| 2. Consultar medicación de un paciente |")
         print("| 3. Consultar habitación de un paciente |")
+        print("| 4. Operacions previstes                |")
+        print("| 5. Consultar visitas planificadas      |")
    
     if rol == "enfermero":
         print("| 1. A que medic@ estas enlazad@         |")
         print("| 2. En que habitación está el paciente  |")
         print("| 3. Que medicación tiene el paciente    |")
+        print("| 4. Operacions previstes                |")
     
     if rol == "celador":
         print("| 1. En que habitación está el paciente  |")
     
     if rol == "conductor_ambulancia":
-        print("| 1. En que habitación está el paciente  |")
-        print("| 2. Que habitaciones están libres       |")
-        print("| 3. Que habitaciones están ocupadas     |")
+        print("| 1. Consulta la habitación de salida    |")
     
     if rol == "administrador_hospital":
         print("| 1. Consultar el personal del hospital  |")
-        print("| 2. Dar de alta a un nuevo usuario      |")
-        print("| 3. Dar de baja a un usuario existente  |")
+        print("| 2. Dar de alta a un nuevo trabajador   |")
+        print("| 3. Dar de baja a un trabajador         |")
     
     if rol == "recepcionista":
         print("| 1. Dar de alta a un nuevo paciente     |")
@@ -102,6 +103,15 @@ def main_connexio():
             main_por_rol.menuMedico(usuarito, contrasenyita, opcion)
         if rolecitos == 'enfermero':
             main_por_rol.menuEnfermero(usuarito, contrasenyita, opcion)
+        if rolecitos == 'celador':
+            main_por_rol.menuCelador(usuarito, contrasenyita, opcion)
+        if rolecitos == 'conductor_ambulancia':
+            main_por_rol.menuConductorAmbulancia(usuarito, contrasenyita, opcion)
+        if rolecitos == 'administrador_hospital':
+            main_por_rol.menuAdminHospital(usuarito, contrasenyita, opcion)
+        if rolecitos == 'recepcionista':
+            main_por_rol.menuRecepcionista(usuarito, contrasenyita, opcion)
+        
             
         
         

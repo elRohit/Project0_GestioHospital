@@ -31,7 +31,8 @@ GRANT SELECT ON TABLE quirofano TO medico;
 GRANT SELECT ON TABLE habitaciones TO medico;
 GRANT SELECT ON TABLE reservas TO medico;
 GRANT SELECT ON TABLE medico_enfermeria TO medico;
-GRANT SELECT(nombre, apellidos, condiciones_paciente) ON TABLE pacientes TO medico;
+GRANT SELECT ON TABLE pacientes TO medico;
+GRANT SELECT ON TABLE enfermeros TO medico;
 
 GRANT SELECT ON TABLE diagnosticos TO enfermero;
 GRANT SELECT ON TABLE operacion TO enfermero;
@@ -48,9 +49,12 @@ GRANT SELECT(nombre, apellidos, condiciones_paciente) ON TABLE pacientes TO cela
 GRANT SELECT ON TABLE pacientes TO recepcionista;
 GRANT SELECT ON TABLE habitaciones TO recepcionista;
 GRANT SELECT ON TABLE reservas TO recepcionista;
+GRANT SELECT ON TABLE plantas_habitaciones TO recepcionista;
 
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO administrador_informatico;
 
-GRANT SELECT ON TABLE personal TO administrador_hospital;
+GRANT SELECT, INSERT ON TABLE personal TO administrador_hospital;
+GRANT ALL PRIVILEGIES ON SEQUENCE personal_p_id_seq TO administrador_hospital;
 
 GRANT SELECT, INSERT ON TABLE reservas TO conductor_ambulancia;
+GRANT SELECT (nombre, apellidos) ON TABLE pacientes TO conductor_ambulancia;
