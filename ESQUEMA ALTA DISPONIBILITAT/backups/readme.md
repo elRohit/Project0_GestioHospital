@@ -28,4 +28,4 @@ afegir el següent al crontab:
 
 ```
 
-![crontab_img](images/crontab.png)
+![crontab_img](images/backups/crontab.png)
