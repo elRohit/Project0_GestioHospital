@@ -206,7 +206,83 @@ def menuMedico(usuarito, contrasenyita, opcion):
         except psycopg2.Error as e:
             
             print("No se ha podido mostrar la habitación del paciente.")
+    
+    if opcion == 4:
+        try:
+            connexio = psycopg2.connect(
+                dbname="hospital",
+                user=usuarito,
+                password=contrasenyita,
+                host="10.94.255.129",
+                port="5432",
+                sslmode="require"
+            )
+            SQLita = f"SELECT pa.nombre, pa.apellidos, p.nombre, p.apellidos, pe.nombre, pe.apellidos FROM operacion o JOIN pacientes pa ON o.id_tarjeta_sanitaria = pa.id_tarjeta_sanitaria JOIN medicos m ON o.p_id = m.p_id JOIN personal p ON p.p_id = m.p_id JOIN enfermeros en ON en.p_id = o.en_id JOIN personal pe ON pe.p_id = en.p_id;"
+            cur = connexio.cursor()
+            cur.execute(SQLita)
+            resultadito = cur.fetchall()
+            cur.close()
+            connexio.close()
+            print("+----------------------------------------+")
+            print("|           Operaciones previstas        |")
+            print("+----------------------------------------+")
+            print(f"El paciente que se va a operar es:      |")
+            print(f"Nombre: {resultadito[0][0]}            ")
+            print(f"Apellidos: {resultadito[0][1]}         ")
+            print(f"El médico que le va a operar es:        |")
+            print(f"Nombre: {resultadito[0][2]}            ")
+            print(f"Apellidos: {resultadito[0][3]}         ")
+            print(f"La enfermeras que asisten son:          |")
+            contador = 0
+            for i in resultadito:
+                print(f"Nombre: {resultadito[contador][4]}            ")
+                print(f"Apellidos: {resultadito[contador][5]}    ")    
+                contador += 1    
+            contador = 0
+            print("+--------------------------------------- +")
             
+        except psycopg2.Error as e:
+                
+                print("No hay operaciones previstas.")
+                
+    if opcion == 5:
+        try:
+            connexio = psycopg2.connect(
+                    dbname="hospital",
+                    user=usuarito,
+                    password=contrasenyita,
+                    host="10.94.255.129",
+                    port="5432",
+                    sslmode="require"
+                )
+            SQLita = f"SELECT pa.nombre, pa.apellidos, p.nombre, p.apellidos, d.fecha_entrada FROM diagnosticos d JOIN pacientes pa ON d.id_tarjeta_sanitaria = pa.id_tarjeta_sanitaria JOIN medicos m ON d.p_id = m.p_id JOIN personal p ON p.p_id = m.p_id WHERE fecha_entrada > current_timestamp;"
+            cur = connexio.cursor()
+            cur.execute(SQLita)
+            resultadito = cur.fetchall()
+            cur.close()
+            connexio.close()
+            print("+----------------------------------------+")
+            print("|           Visitas planificadas         |")
+            print("+----------------------------------------+")
+            contador = 0
+            for i in resultadito:
+                print(f"El paciente con visita prevista es:     |")
+                print(f"Nombre: {resultadito[contador][0]}            ")
+                print(f"Apellidos: {resultadito[contador][1]}         ")
+                print(f"El médico asignado a la visita:         |")
+                print(f"Nombre: {resultadito[contador][2]}            ")
+                print(f"Apellidos: {resultadito[contador][3]}         ")
+                print(f"La fecha de la visita es:               |")
+                print(resultadito[contador][4])
+                print("+--------------------------------------- +")
+                contador += 1
+            
+        except psycopg2.Error as e:
+
+            print("No hay visitas planificadas.")
+            
+
+           
 def menuEnfermero(usuarito, contrasenyita, opcion):
     if opcion == 1:
         medicitoDNI = input("Introduce tu DNI: ")
@@ -292,6 +368,44 @@ def menuEnfermero(usuarito, contrasenyita, opcion):
         except psycopg2.Error as e:
             
             print("No se ha podido mostrar la medicación del paciente.")
+            
+    if opcion == 4:
+        try:
+            connexio = psycopg2.connect(
+                dbname="hospital",
+                user="postgres",
+                password="P@ssw0rd",
+                host="10.94.255.129",
+                port="5432",
+                sslmode="require"
+            )
+            SQLita = f"SELECT pa.nombre, pa.apellidos, p.nombre, p.apellidos, pe.nombre, pe.apellidos FROM operacion o JOIN pacientes pa ON o.id_tarjeta_sanitaria = pa.id_tarjeta_sanitaria JOIN medicos m ON o.p_id = m.p_id JOIN personal p ON p.p_id = m.p_id JOIN enfermeros en ON en.p_id = o.en_id JOIN personal pe ON pe.p_id = en.p_id;"
+            cur = connexio.cursor()
+            cur.execute(SQLita)
+            resultadito = cur.fetchall()
+            cur.close()
+            connexio.close()
+            print("+----------------------------------------+")
+            print("|           Operaciones previstas        |")
+            print("+----------------------------------------+")
+            print(f"El paciente que se va a operar es:      |")
+            print(f"Nombre: {resultadito[0][0]}            ")
+            print(f"Apellidos: {resultadito[0][1]}         ")
+            print(f"El médico que le va a operar es:        |")
+            print(f"Nombre: {resultadito[0][2]}            ")
+            print(f"Apellidos: {resultadito[0][3]}         ")
+            print(f"La enfermeras que asisten son:          |")
+            contador = 0
+            for i in resultadito:
+                print(f"Nombre: {resultadito[contador][4]}            ")
+                print(f"Apellidos: {resultadito[contador][5]}    ")    
+                contador += 1    
+            contador = 0
+            print("+--------------------------------------- +")
+            
+        except psycopg2.Error as e:
+                
+                print("No hay operaciones previstas.")
             
 def menuCelador(usuarito, contrasenyita, opcion):
     
@@ -518,8 +632,61 @@ def menuRecepcionista(usuarito, contrasenyita, opcion):
             except psycopg2.Error as e:
                     
                     print("No se ha podido mostrar la lista de pacientes.")
+                         
+        if opcion == 3:
+            try:
+                connexio = psycopg2.connect(
+                    dbname="hospital",
+                    user=usuarito,
+                    password=contrasenyita,
+                    host="10.94.255.129",
+                    port="5432",
+                    sslmode="require"
+                )
+                SQLita = f"SELECT h.h_id, ph.pl_id FROM habitaciones h LEFT JOIN reservas r ON h.h_id = r.h_id LEFT JOIN plantas_habitaciones ph ON h.h_id = ph.h_id WHERE r.h_id IS NULL;"
+                cur = connexio.cursor()
+                cur.execute(SQLita)
+                resultadito = cur.fetchall()
+                cur.close()
+                connexio.close()
+                print("+----------------------------------------+")
+                print("|           Habitaciones libres          |")
+                print("+----------------------------------------+")
+                print("| Habitación | Planta                    |")
+                print("+----------------------------------------+")
+                for i in resultadito:
+                    print(f"| {i[0]} | {i[1]} |")
+                print("+----------------------------------------+")
                 
+            except psycopg2.Error as e:
                     
-            
-            
+                    print("No se hay habitaciones libres.")
+    
+        if opcion == 4:
+            try:
+                connexio = psycopg2.connect(
+                    dbname="hospital",
+                    user=usuarito,
+                    password=contrasenyita,
+                    host="10.94.255.129",
+                    port="5432",
+                    sslmode="require"
+                )
+                SQLita = f"SELECT h.h_id, ph.pl_id FROM habitaciones h JOIN reservas r ON h.h_id = r.h_id JOIN plantas_habitaciones ph ON h.h_id = ph.h_id;"
+                cur = connexio.cursor()
+                cur.execute(SQLita)
+                resultadito = cur.fetchall()
+                cur.close()
+                connexio.close()
+                print("+----------------------------------------+")
+                print("|           Habitaciones ocupadas        |")
+                print("+----------------------------------------+")
+                print("| Habitación | Planta                    |")
+                print("+----------------------------------------+")
+                for i in resultadito:
+                    print(f"| {i[0]} | {i[1]} |")
+                print("+----------------------------------------+")
                 
+            except psycopg2.Error as e:
+                    
+                    print("No se hay habitaciones ocupadas.")              

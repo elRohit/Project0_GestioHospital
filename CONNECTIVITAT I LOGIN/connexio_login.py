@@ -56,11 +56,14 @@ def menuPorRol(rol):
         print("| 1. Consultar historial de un paciente  |")
         print("| 2. Consultar medicación de un paciente |")
         print("| 3. Consultar habitación de un paciente |")
+        print("| 4. Operacions previstes                |")
+        print("| 5. Consultar visitas planificadas      |")
    
     if rol == "enfermero":
         print("| 1. A que medic@ estas enlazad@         |")
         print("| 2. En que habitación está el paciente  |")
         print("| 3. Que medicación tiene el paciente    |")
+        print("| 4. Operacions previstes                |")
     
     if rol == "celador":
         print("| 1. En que habitación está el paciente  |")
