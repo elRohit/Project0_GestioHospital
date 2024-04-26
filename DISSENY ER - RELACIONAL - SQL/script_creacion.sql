@@ -60,6 +60,7 @@ CREATE TABLE diagnosticos (
     fecha_salida TIMESTAMP,
     tiene_receta VARCHAR(2) NOT NULL CHECK (tiene_receta IN ('Si', 'No')),
     medicamentos TEXT CHECK ((tiene_receta = 'Si' AND medicamentos IS NOT NULL) OR tiene_receta = 'No'),
+    enfermedad VARCHAR(20) NOT NULL,
 	PRIMARY KEY (p_id, id_tarjeta_sanitaria, fecha_entrada)
 );
 
@@ -93,7 +94,7 @@ CREATE TABLE quirofano_aparatos_medicos (
     q_id INTEGER REFERENCES quirofano(q_id)
 );
 
-CREATE TABLE reservas	(
+CREATE TABLE reservas (
     id_tarjeta_sanitaria VARCHAR(20) REFERENCES pacientes(id_tarjeta_sanitaria),
     h_id INTEGER REFERENCES habitaciones(h_id),
     diaEntrada TIMESTAMP NOT NULL,
@@ -105,6 +106,7 @@ CREATE TABLE operacion (
     id_tarjeta_sanitaria VARCHAR(20) REFERENCES pacientes(id_tarjeta_sanitaria),
     p_id INTEGER REFERENCES medicos(p_id),
     en_id INTEGER REFERENCES enfermeros(en_id),
+    q_id INTEGER REFERENCES quirofano(q_id) NOT NULL,
     fecha_entrada TIMESTAMP NOT NULL,
     fecha_salida TIMESTAMP,
 	ha_sido_operado VARCHAR(2) NOT NULL CHECK (ha_sido_operado IN ('Si', 'No')),
