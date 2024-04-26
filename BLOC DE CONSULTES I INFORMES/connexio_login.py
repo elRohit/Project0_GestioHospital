@@ -77,6 +77,8 @@ def menuPorRol(rol):
         print("| 1. Consultar el personal del hospital  |")
         print("| 2. Dar de alta a un nuevo trabajador   |")
         print("| 3. Dar de baja a un trabajador         |")
+        print("| 4. Consultar nombre de visites per dia |")
+        print("| 5. Consultar medico más activo         |")
     
     if rol == "recepcionista":
         print("| 1. Dar de alta a un nuevo paciente     |")
@@ -84,6 +86,7 @@ def menuPorRol(rol):
         print("| 3. Consultar habitaciones libres       |")
         print("| 4. Consultar habitaciones ocupadas     |")
         print("| 5. Consultar reservas de habitaciones  |")
+        print("| 6. Consultar contenido de la planta    |")
     
     print("+----------------------------------------+")
     

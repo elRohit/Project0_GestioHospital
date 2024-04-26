@@ -609,6 +609,78 @@ def menuAdminHospital(usuarito, contrasenyita, opcion):
                     
                     print("Intento de borrado cancelado.")
                     
+        if opcion == 4:
+            fechaVisitas = input("Introduce la fecha de la visita (YYYY-MM-DD): ")
+            try:
+                connexio = psycopg2.connect(
+                    dbname="hospital",
+                    user=usuarito,
+                    password=contrasenyita,
+                    host="10.94.255.129",
+                    port="5432",
+                    sslmode="require"
+                )
+                SQLita = f"SELECT COUNT(*) FROM diagnosticos WHERE fecha_entrada BETWEEN '{fechaVisitas} 00:00:00.000000' AND '{fechaVisitas} 23:59:59.999999';"
+                SQLita2 = f"SELECT pa.nombre, pa.apellidos, p.nombre, p.apellidos, d.fecha_entrada FROM diagnosticos d JOIN pacientes pa ON d.id_tarjeta_sanitaria = pa.id_tarjeta_sanitaria JOIN medicos m ON d.p_id = m.p_id JOIN personal p ON p.p_id = m.p_id WHERE fecha_entrada BETWEEN '{fechaVisitas} 00:00:00.000000' AND '{fechaVisitas} 23:59:59.999999';"
+                cur = connexio.cursor()
+                cur.execute(SQLita)
+                resultadito = cur.fetchall()
+                cur.execute(SQLita2)
+                resultadito2 = cur.fetchall()
+                cur.close()
+                connexio.close()
+                print("+----------------------------------------+")
+                print("|             Visites del dia            |")
+                print("+----------------------------------------+")
+                for i in resultadito2:
+                    print(f"El paciente que ha sido visitado es:     |")
+                    print(f"Nombre: {i[0]}            ")
+                    print(f"Apellidos: {i[1]}         ")
+                    print(f"El médico que le ha visitado es:         |")
+                    print(f"Nombre: {i[2]}            ")
+                    print(f"Apellidos: {i[3]}         ")
+                    print(f"La fecha de la visita es:                |")
+                    print(i[4])
+                    print("+--------------------------------------- +")
+                print(f"El número de visitas del día es: {resultadito[0][0]}")  
+                print("+----------------------------------------+")
+                
+            except psycopg2.Error as e:
+                
+                print("No hay o hubo visitas en ese día.")
+                
+        if opcion == 5:
+            try:
+                connexio = psycopg2.connect(
+                    dbname="hospital",
+                    user=usuarito,
+                    password=contrasenyita,
+                    host="10.94.255.129",
+                    port="5432",
+                    sslmode="require"
+                )
+                SQLita = f"SELECT p.dni, p.nombre, p.apellidos, COUNT(*) FROM diagnosticos d JOIN medicos m ON d.p_id = m.p_id JOIN personal p ON p.p_id = m.p_id GROUP BY p.dni, p.nombre, p.apellidos ORDER BY COUNT(*) DESC;"
+                cur = connexio.cursor()
+                cur.execute(SQLita)
+                resultadito = cur.fetchall()
+                cur.close()
+                connexio.close()
+                print("+----------------------------------------+")
+                print("|           Médicos más activos          |")
+                print("+----------------------------------------+")
+                print("| DNI      |   Nombre     | Apellidos    | Más visitas atendidas     |")
+                print("+----------------------------------------+")
+                for i in resultadito:
+                    print(f"| {i[0]} | {i[1]} | {i[2]} | {i[3]} |")
+                print("+----------------------------------------+")
+                
+            except psycopg2.Error as e:
+                    
+                    print("No se ha podido mostrar los médicos más activos.")
+                    
+                    
+            
+                    
 def menuRecepcionista(usuarito, contrasenyita, opcion):
         
         if opcion == 1:
@@ -744,9 +816,9 @@ def menuRecepcionista(usuarito, contrasenyita, opcion):
                 connexio.close()
                 print("+----------------------------------------+")
                 print("|           Visitas planificadas         |")
-                print("+----------------------------------------+")
+                print("+----------------------------------------+--------------------+")
                 print("| Fecha entrada | Fecha salida | Tarjeta | Nombre | Apellidos |")
-                print("+----------------------------------------+")
+                print("+----------------------------------------+--------------------+")
                 for i in resultadito:
                     print(f"| {i[0]} | {i[1]} | {i[2]} | {i[3]} | {i[4]} |")
                 print("+----------------------------------------+")
@@ -754,3 +826,39 @@ def menuRecepcionista(usuarito, contrasenyita, opcion):
             except psycopg2.Error as e:
                     
                     print("No se hay visitas planificadas.")
+                    
+        if opcion == 6:
+            numeroPlanta = int(input("Introduce el número de planta: "))
+            try:
+                connexio = psycopg2.connect(
+                    dbname="hospital",
+                    user="postgres",
+                    password="P@ssw0rd",
+                    host="10.94.255.129",
+                    port="5432",
+                    sslmode="require"
+                )
+                SQLita = f"SELECT COUNT(h.h_id) FROM habitaciones h JOIN plantas_habitaciones ph ON h.h_id = ph.h_id WHERE ph.pl_id = {numeroPlanta};"
+                SQLita2 = f"SELECT COUNT(q.q_id) FROM quirofano q WHERE pl_id = {numeroPlanta};"
+                SQLita3 = f"SELECT COUNT(e.p_id) FROM enfermeros e FULL JOIN medico_enfermeria me ON me.e_id = e.p_id FULL JOIN medicos m ON m.p_id = me.m_id FULL JOIN operacion op ON op.en_id = e.p_id FULL JOIN quirofano q ON q.q_id = op.q_id WHERE me.e_id IS NULL AND q.pl_id = {numeroPlanta};"
+                cur = connexio.cursor()
+                cur.execute(SQLita)
+                resultadito = cur.fetchall()
+                cur.execute(SQLita2)
+                resultadito2 = cur.fetchall()
+                cur.execute(SQLita3)
+                resultadito3 = cur.fetchall()
+                cur.close()
+                connexio.close()
+                print("+----------------------------------------+")
+                print("|           Estado de la planta          |")
+                print("+----------------------------------------+")
+                print(f"Las habitaciones que hay en esta planta: {resultadito[0][0]}")
+                print(f"El número de quirofanos en la planta es: {resultadito2[0][0]}")
+                print(f"El número de enfermeros en la planta es: {resultadito3[0][0]}")
+                print("+----------------------------------------+")
+                
+            except psycopg2.Error as e:
+                    
+                    print("No se ha podido mostrar el estado de la planta.")
+                    
