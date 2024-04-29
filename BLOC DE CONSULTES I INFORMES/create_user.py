@@ -28,7 +28,7 @@ def insertar_usuarito_a_la_bd(nombrecito_usuarito, contrasenya_usuarito):
     )
     cur = connexio.cursor()
     
-    cur.execute(f"CREATE ROLE {nombrecito_usuarito} WITH LOGIN PASSWORD '{contrasenya_usuarito}';")
+    cur.execute(f"CREATE ROLE {nombrecito_usuarito} LOGIN PASSWORD '{contrasenya_usuarito}';")
     connexio.commit()   
 
 def main_inserir_usuarito():
