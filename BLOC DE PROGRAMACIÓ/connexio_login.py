@@ -65,7 +65,7 @@ def menuPorRol(rol):
         print("| 2. En que habitación está el paciente  |")
         print("| 3. Que medicación tiene el paciente    |")
         print("| 4. Operacions previstes                |")
-        print("| 6. Aparatos medicos por quirofano      |")
+        print("| 5. Aparatos medicos por quirofano      |")
     
     if rol == "celador":
         print("| 1. En que habitación está el paciente  |")

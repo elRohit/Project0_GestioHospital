@@ -323,8 +323,8 @@ def menuEnfermero(usuarito, contrasenyita, opcion):
         try:
             connexio = psycopg2.connect(
                 dbname="hospital",
-                user=usuarito,
-                password=contrasenyita,
+                user="postgres",
+                password="P@ssw0rd",
                 host="10.94.255.129",
                 port="5432",
                 sslmode="require"
@@ -403,6 +403,7 @@ def menuEnfermero(usuarito, contrasenyita, opcion):
             
             print("No se ha podido mostrar la medicación del paciente.")
             
+            
     if opcion == 4:
         try:
             connexio = psycopg2.connect(
@@ -440,6 +441,39 @@ def menuEnfermero(usuarito, contrasenyita, opcion):
         except psycopg2.Error as e:
                 
                 print("No hay operaciones previstas.")
+                
+    if opcion == 5:
+        numQuirofano = int(input("Introduce el número de quirofano: "))
+        try:
+            connexio = psycopg2.connect(
+                dbname="hospital",
+                user="postgres",
+                password="P@ssw0rd",
+                host="10.94.255.129",
+                port="5432",
+                sslmode="require"
+            )
+            SQLita = f"SELECT am.am_id, am.nombre, qam.cantidad FROM aparatos_medicos am JOIN quirofano_aparatos_medicos qam ON qam.am_id = am.am_id WHERE qam.q_id = {numQuirofano};"
+            cur = connexio.cursor()
+            cur.execute(SQLita)
+            resultadito = cur.fetchall()
+            cur.close()
+            connexio.close()
+            print("+----------------------------------------+")
+            print("|    Aparatos medicos por quirofano      |")
+            print("+----------------------------------------+")
+            contador = 0
+            for i in resultadito:
+                print(f"ID del aparato: {resultadito[contador][0]}            ")
+                print(f"Nombre del aparato: {resultadito[contador][1]}         ")
+                print(f"Cantidad: {resultadito[contador][2]}         ")
+                print("+--------------------------------------- +")
+                contador += 1
+            contador = 0
+            
+        except psycopg2.Error as e:
+
+            print("No hay aparatos medicos en los quirofanos.")
             
 def menuCelador(usuarito, contrasenyita, opcion):
     
