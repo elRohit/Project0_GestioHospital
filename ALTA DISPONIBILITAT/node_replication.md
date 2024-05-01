@@ -23,23 +23,9 @@ sudo rsync -av /var/lib/postgresql/15/main/ /var/lib/postgresql/15/main/
 
 `sudo nano /etc/postgresql/15/main/postgresql.conf`
 
-![1714141394336](image/node_replication/1714141394336.png)
+![alt text](../images/bdr/image.png)
 
-`sudo nano /etc/postgresql/15/main/pg_hba.conf`
 
-![1714141605956](image/node_replication/1714141605956.png)
-
-![1714141764688](image/node_replication/1714141764688.png)
-
-![1714141932942](image/node_replication/1714141932942.png)
-
-![1714142133726](image/node_replication/1714142133726.png)
-
-A l'altre servidor fem lo altre:
-
-![1714142522857](image/node_replication/1714142522857.png)
-
-![1714142903739](image/node_replication/1714142903739.png)
 
 
 
