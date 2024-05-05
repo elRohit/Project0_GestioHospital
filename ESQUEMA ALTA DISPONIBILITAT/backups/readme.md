@@ -47,9 +47,23 @@ En aquest cas s'executará cada dia a les 0:00.
 ![crontab_img](images/crontab.png)
 
 # Com restaurar una còpia de seguretat?
-Per restaurar una còpia de seguretat, haurem de fer un codi python que ens permeti executar la següent comanda a la màquina que conté la nostra base de dades
-`psql -d hr -f 2024-04-17.sql`
+Per restaurar una còpia de seguretat, haurem de crear un script que ens permeti identificar la còpia de seguretat més recent, descomprimir-la i seguidament restaurar-la.
 
+```
+#!/bin/bash
+
+# Busquem la còpia de seguretat més recent i la desem a una variable
+archivo_mas_reciente=$(find /etc/postgresql/backup/hospital -type f -mtime -5 | sort -n | tail -n 1)
+
+# Descomprimim la còpia de seguretat més recent
+sudo gzip -d "$archivo_mas_reciente"
+
+# Actualitzem la variable del arxiu més recent perquè agafi el .sql
+archivo_mas_reciente=$(find /etc/postgresql/backup/hospital -type f -mtime -5 | sort -n | tail -n 1)
+
+# Restaurem la còpia de seguretat més recent
+psql -d hospital -f "$archivo_mas_reciente"
+```
 
 
 
