@@ -75,22 +75,11 @@ apt-get dist-upgrade -y
 apt-get autoremove -y
 apt-get autoclean -y``
 
-Step 1: Add the OpenSuSE Build Service repository release key
-Add the OpenSuSE Build Service repository release key using the following command:
-
-`wget -qO - https://download.opensuse.org/repositories/home:/npreining:/debian-ubuntu-onedrive/Debian_12/Release.key | gpg --dearmor | sudo tee /usr/share/keyrings/obs-onedrive.gpg > /dev/null`
-Step 2: Add the OpenSuSE Build Service repository
-Add the OpenSuSE Build Service repository using the following command:
-
-`echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/obs-onedrive.gpg] https://download.opensuse.org/repositories/home:/npreining:/debian-ubuntu-onedrive/Debian_12/ ./" | sudo tee /etc/apt/sources.list.d/onedrive.list `
-Step 3: Update your apt package cache
-`sudo apt-get update`
-
-Step 4: Install 'onedrive'
-`sudo apt install --no-install-recommends --no-install-suggests onedrive`
-
-Step 5: Read 'Known Issues' with these packages
-Read and understand the known issues with these packages below, taking any action that is needed.
+Seguidament executarem les següents comandes
+`wget -qO - https://download.opensuse.org/repositories/home:/npreining:/debian-ubuntu-onedrive/Debian_12/Release.key | gpg --dearmor | sudo tee /usr/share/keyrings/obs-onedrive.gpg > /dev/null
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/obs-onedrive.gpg] https://download.opensuse.org/repositories/home:/npreining:/debian-ubuntu-onedrive/Debian_12/ ./" | sudo tee /etc/apt/sources.list.d/onedrive.list 
+sudo apt-get update
+sudo apt install --no-install-recommends --no-install-suggests onedrive`
 
 Seguidament executem la comanda onedrive
 
