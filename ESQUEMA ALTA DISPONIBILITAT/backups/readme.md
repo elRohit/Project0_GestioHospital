@@ -65,6 +65,35 @@ archivo_mas_reciente=$(find /etc/postgresql/backup/hospital -type f -mtime -5 | 
 psql -d hospital -f "$archivo_mas_reciente"
 ```
 # Com pujar les còpies de seguretat al núvol?
+Per fer les còpies de seguretat farem servir OneDrive, primer l'haurem d'instal·lar. Per fer-ho, començarem executant el següent script que ens assegurarà que el nostre sistema està al dia.
+``#!/bin/bash
+rm -rf /var/lib/dpkg/lock-frontend
+rm -rf /var/lib/dpkg/lock
+apt-get update
+apt-get upgrade -y
+apt-get dist-upgrade -y
+apt-get autoremove -y
+apt-get autoclean -y``
+
+Step 1: Add the OpenSuSE Build Service repository release key
+Add the OpenSuSE Build Service repository release key using the following command:
+
+`wget -qO - https://download.opensuse.org/repositories/home:/npreining:/debian-ubuntu-onedrive/Debian_12/Release.key | gpg --dearmor | sudo tee /usr/share/keyrings/obs-onedrive.gpg > /dev/null`
+Step 2: Add the OpenSuSE Build Service repository
+Add the OpenSuSE Build Service repository using the following command:
+
+`echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/obs-onedrive.gpg] https://download.opensuse.org/repositories/home:/npreining:/debian-ubuntu-onedrive/Debian_12/ ./" | sudo tee /etc/apt/sources.list.d/onedrive.list `
+Step 3: Update your apt package cache
+`sudo apt-get update`
+
+Step 4: Install 'onedrive'
+`sudo apt install --no-install-recommends --no-install-suggests onedrive`
+
+Step 5: Read 'Known Issues' with these packages
+Read and understand the known issues with these packages below, taking any action that is needed.
+
+Seguidament executem la comanda onedrive
+
 
 
 
