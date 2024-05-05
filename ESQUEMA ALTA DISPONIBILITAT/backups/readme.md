@@ -64,6 +64,7 @@ archivo_mas_reciente=$(find /etc/postgresql/backup/hospital -type f -mtime -5 | 
 # Restaurem la còpia de seguretat més recent
 psql -d hospital -f "$archivo_mas_reciente"
 ```
+# Com pujar les còpies de seguretat al núvol?
 
 
 
