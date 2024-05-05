@@ -36,7 +36,13 @@ Ens hem decidit per aquest tipus de backup degut que ofereix més flexibilitat q
 
 # Com automatizar les còpies de seguretat?
 També ens haurem d'assegurar que el nostre codi ens permeti automatizar aquest script mitjançant crontab, si per exemple, volem realitzar una còpia de seguretat de la base de dades cada dia a les 0:00, hauriem de
-afegir el següent al crontab:
+afegir la següent línia al crontab:
+Els primers dos dígits corresponen als minuts i l'hora respectivament.
+Seguidament tenim el dia del mes, el mes, y el dia de la setmana.
+En aquest cas s'executará cada dia a les 0:00.
+```
+0 0 * * * sh /home/hospital/script_backup.sh
+```
 
 ![crontab_img](images/crontab.png)
 
