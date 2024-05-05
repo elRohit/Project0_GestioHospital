@@ -1,4 +1,4 @@
-# Codi Python
+# CREACIÓ I RESTAURACIÓ DE CÒPIES DE SEGURETAT
 
 # Com fer còpies de seguretat?
 Per fer els backups a la nostra base de dades haurem de fer un codi al sistema que ens permeti fer les còpies de seguretat juntament amb la seva automatització.
