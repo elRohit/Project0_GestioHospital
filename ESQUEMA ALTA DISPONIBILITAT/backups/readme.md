@@ -90,6 +90,9 @@ sudo apt install --no-install-recommends --no-install-suggests onedrive
 
 Finalment executem la comanda onedrive
 
-
+![onedrive1](images/onedrive1.png)
+![onedrive2](images/onedrive2.png)
+![onedrive3](images/onedrive3.png)
+![onedrive4](images/onedrive4.png)
 
 
