@@ -88,7 +88,7 @@ sudo apt-get update
 sudo apt install --no-install-recommends --no-install-suggests onedrive
 ```
 
-Seguidament executem la comanda onedrive
+Finalment executem la comanda onedrive
 
 
 
