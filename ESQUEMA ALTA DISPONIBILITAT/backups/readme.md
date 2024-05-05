@@ -88,11 +88,13 @@ sudo apt-get update
 sudo apt install --no-install-recommends --no-install-suggests onedrive
 ```
 
-Finalment executem la comanda onedrive
+Finalment executarem la comanda onedrive, ens donarà una adreça on haurem de loguejar amb el nostre compta
 
 ![onedrive1](images/onedrive1.png)
 ![onedrive2](images/onedrive2.png)
+Una vegada introduida la compta, ens retornarà un link que haurem de posar a la terminal.
 ![onedrive3](images/onedrive3.png)
+Una vegada fet, sincronitzem onedrive amb la nostra màquina amb la comanda onedrive --synchronize
 ![onedrive4](images/onedrive4.png)
 
 
