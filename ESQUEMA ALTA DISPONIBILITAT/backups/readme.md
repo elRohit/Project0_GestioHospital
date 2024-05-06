@@ -24,7 +24,7 @@ pg_dump -h $server -U $user $database > $BACKUP_PATH/$current_date.sql;
 gzip $BACKUP_PATH/$current_date.sql
 
 # Eliminem els arxius de backup creats fa més de 5 dies
-DAYS = 5
+DAYS=5
 find $BACKUP_PATH/* -mtime +$DAYS -exec rm {} \;
 
 
