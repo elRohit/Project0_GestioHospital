@@ -109,4 +109,5 @@ onedrive --synchronize --upload-only
 ```
 Una vegada executat el script podrem comprovar com es puja la còpia de seguretat al núvol
 ![onedrive5](images/onedrive5.png)
+![onedrive6](images/onedrive6.png)
 
