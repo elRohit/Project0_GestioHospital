@@ -97,5 +97,14 @@ Una vegada introduida la compta, ens retornarà un link que haurem de posar a la
 Una vegada fet, sincronitzem onedrive amb la nostra màquina amb la comanda onedrive --synchronize
 ![onedrive4](images/onedrive4.png)
 
-Una vegada hem fet la sincronització, tindrem creada una carpeta OneDrive en el següent directori `~/OneDrive/` aqui crearem una carpeta anomenada backups. A continuació, modificarem el script per fer afegir les còpies al núvol.
+Una vegada hem fet la sincronització, tindrem creada una carpeta OneDrive en el següent directori `/root/OneDrive/` aqui crearem una carpeta anomenada backups. A continuació, modificarem el script per fer afegir les còpies al núvol, afegirem les següents línies al nostre codi:
+```
+# Guardem una còpia al onedrive
+cp "$BACKUP_PATH/$current_date.sql.gz" "/root/OneDrive/backups/$current_date.sql.gz"
+
+# Sincronitzem amb el núvol per desar els canvis
+onedrive --synchronize --upload-only
+```
+Una vegada executat el script podrem comprovar com es puja la còpia de seguretat al núvol
+![onedrive5](images/onedrive5.png)
 
