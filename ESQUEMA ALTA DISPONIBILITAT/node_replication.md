@@ -3,22 +3,7 @@
 https://www.servermania.com/kb/articles/setup-postgresql-cluster
 
 
-
-# PROCES
-
-`sudo nano /etc/postgresql/15/main/postgresql.conf`
-
-![alt text](../images/bdr/image.png)
-
->>>>>>> 3338fa389aa067eaa6ffd2ba4597d9d178a744fb
->>>>>>>
->>>>>>
->>>>>
->>>>
->>>
->>
-
-# FINAL VERS
+# REPLICACIO ENTRE MASTER I SLAVE
 
 MASTER
 
