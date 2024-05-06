@@ -29,7 +29,7 @@ find $BACKUP_PATH/* -mtime +$DAYS -exec rm {} \;
 
 
 ```
-![backups](images/backupEntero.png)
+![backups](images/backupFinal.png)
 
 # Per què hem decidit fer còpies de seguretat a nivell lògic?
 Aquest tipus de backup exporta l' estructura de les taules i les dades sense copiar els arxius de dades reals de la base de dades. Per exemple, la comanda pg_dump realitza un backup lògic, perquè exporta les taules i les dades mitjançant les sentències SQL CREATE TABLE i INSERT.
