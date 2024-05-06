@@ -1,14 +1,14 @@
 # Webgrafia
+
 https://www.servermania.com/kb/articles/setup-postgresql-cluster
 
-<<<<<<< HEAD
-=======
 # Comandes
 
 ```
 sudo apt-update
 sudo nano /etc/postgresql/15/main/postgresql.conf
 ```
+
 ![1714139307851](image/node_replication/1714139307851.png)
 
 ```
@@ -27,9 +27,13 @@ sudo rsync -av /var/lib/postgresql/15/main/ /var/lib/postgresql/15/main/
 
 ![alt text](../images/bdr/image.png)
 
-
 >>>>>>> 3338fa389aa067eaa6ffd2ba4597d9d178a744fb
-
+>>>>>>>
+>>>>>>
+>>>>>
+>>>>
+>>>
+>>
 
 # FINAL VERS
 
@@ -59,7 +63,7 @@ Configurem els següents paràmetres de configuració al postgres.conf
 
 MASTER
 
-creem un rol per a fer les repliques 
+creem un rol per a fer les repliques
 ![1715028119002](image/node_replication/1715028119002.png)
 
 Creació d'un slot per a replicacions
