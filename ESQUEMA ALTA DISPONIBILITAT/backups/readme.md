@@ -97,4 +97,5 @@ Una vegada introduida la compta, ens retornarà un link que haurem de posar a la
 Una vegada fet, sincronitzem onedrive amb la nostra màquina amb la comanda onedrive --synchronize
 ![onedrive4](images/onedrive4.png)
 
+Una vegada hem fet la sincronització, tindrem creada una carpeta OneDrive en el següent directori `~/OneDrive/` aqui crearem una carpeta anomenada backups. A continuació, modificarem el script per fer afegir les còpies al núvol.
 
