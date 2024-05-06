@@ -66,6 +66,8 @@ archivo_mas_reciente=$(find /etc/postgresql/backup/hospital -type f -mtime -5 | 
 # Restaurem la còpia de seguretat més recent
 psql -d hospital -f "$archivo_mas_reciente"
 ```
+![restauracion](images/restauracion.png)
+
 # Com pujar les còpies de seguretat al núvol?
 Per fer les còpies de seguretat farem servir OneDrive, primer l'haurem d'instal·lar. Per fer-ho, començarem executant el següent script que ens assegurarà que el nostre sistema està al dia.
 ```
