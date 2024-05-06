@@ -29,6 +29,8 @@ find $BACKUP_PATH/* -mtime +$DAYS -exec rm {} \;
 
 
 ```
+![backups](images/backups1.png)
+
 # Per què hem decidit fer còpies de seguretat a nivell lògic?
 Aquest tipus de backup exporta l' estructura de les taules i les dades sense copiar els arxius de dades reals de la base de dades. Per exemple, la comanda pg_dump realitza un backup lògic, perquè exporta les taules i les dades mitjançant les sentències SQL CREATE TABLE i INSERT.
 
@@ -97,7 +99,7 @@ Una vegada introduida la compta, ens retornarà un link que haurem de posar a la
 Una vegada fet, sincronitzem onedrive amb la nostra màquina amb la comanda onedrive --synchronize
 ![onedrive4](images/onedrive4.png)
 
-Una vegada hem fet la sincronització, tindrem creada una carpeta OneDrive en el següent directori `/root/OneDrive/` aqui crearem una carpeta anomenada backups. A continuació, modificarem el script per fer afegir les còpies al núvol, afegirem les següents línies al nostre codi:
+Una vegada hem fet la sincronització, tindrem creada una carpeta OneDrive en el següent directori `/root/OneDrive/` aqui crearem una carpeta anomenada backups. A continuació, modificarem el script per afegir les còpies al núvol, afegirem les següents línies al nostre codi:
 ```
 # Guardem una còpia al onedrive
 cp "$BACKUP_PATH/$current_date.sql.gz" "/root/OneDrive/backups/$current_date.sql.gz"
@@ -107,4 +109,5 @@ onedrive --synchronize --upload-only
 ```
 Una vegada executat el script podrem comprovar com es puja la còpia de seguretat al núvol
 ![onedrive5](images/onedrive5.png)
+![onedrive6](images/onedrive6.png)
 
