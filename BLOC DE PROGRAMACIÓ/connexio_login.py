@@ -47,10 +47,8 @@ def menuPorRol(rol):
     print("| 0. Salir                               |")
     
     if rol == "administrador_informatico":
-        print("| 1. Dar de alta un nuevo usuario        |")  
-        print("| 2. Dar de alta un nuevo paciente       |") 
-        print("| 3. Dar de baja un usuario existente    |")
-        print("| 4. Consultar usuarios existentes       |")
+        print("| 1. Dar de baja un usuario existente    |")
+        print("| 2. Consultar usuarios existentes       |")
     
     if rol == "medico":
         print("| 1. Consultar historial de un paciente  |")
@@ -59,6 +57,7 @@ def menuPorRol(rol):
         print("| 4. Operacions previstes                |")
         print("| 5. Consultar visitas planificadas      |")
         print("| 6. Aparatos medicos por quirofano      |")
+        print("| 7. Consultar enfermedades más comunes  |")
    
     if rol == "enfermero":
         print("| 1. A que medic@ estas enlazad@         |")
@@ -79,6 +78,7 @@ def menuPorRol(rol):
         print("| 3. Dar de baja a un trabajador         |")
         print("| 4. Consultar nombre de visites per dia |")
         print("| 5. Consultar medico más activo         |")
+        print("| 6. Consultar enfermedades más comunes  |")
     
     if rol == "recepcionista":
         print("| 1. Dar de alta a un nuevo paciente     |")
