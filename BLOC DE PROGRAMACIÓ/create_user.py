@@ -21,10 +21,10 @@ def insertar_usuarito_en_csv(usuarito_encriptado, contrasenya_encriptada):
 def insertar_usuarito_a_la_bd(nombrecito_usuarito, contrasenya_usuarito):
     
     connexio = psycopg2.connect(
-        dbname="hospitalito",
+        dbname="hospital",
         user="postgres",
         password="P@ssw0rd",
-        host="10.94.255.109"
+        host="10.94.255.129"
     )
     cur = connexio.cursor()
     
