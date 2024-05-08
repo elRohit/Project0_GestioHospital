@@ -1,66 +1,8 @@
 import psycopg2
 
-def menuAdminInformatico(usuarito, contrasenyita, opcion):
+def menuAdminInformatico(usuarito, contrasenyita, opcion):  
+    
     if opcion == 1:
-        usuaritoCreado = input("Introduce el nombre de usuario: ")
-        contrasenyitaCreada = input("Introduce la contraseña: ")
-        print("Ahora debera elegir el rol del usuario. ")
-        print("Tiene estas opciones: ")
-        print("administrador_informatico, medico, enfermero, celador,")
-        print("conductor_ambulancia, administrador_hospital, recepcionista, invitado.")
-        rolcitoCrear = input("Introduce su rama profesional (rol): ")
-        try:
-            connexio = psycopg2.connect(
-                dbname="hospital",
-                user="postgres",
-                password="P@ssw0rd",
-                host="10.94.255.129",
-                port="5432",
-                sslmode="require"
-            )
-            
-            SQLita = f"CREATE ROLE {usuaritoCreado} LOGIN PASSWORD '{contrasenyitaCreada}' IN ROLE {rolcitoCrear};"
-            
-            cur = connexio.cursor()
-            cur.execute(SQLita)
-            connexio.commit()
-            cur.close()
-            connexio.close()
-            
-            print(" Su usuario ha sido creado con éxito. ")  
-            
-        except psycopg2.Error as e:
-            
-            print("El usuario no ha podido ser creado.")
-    
-    if opcion == 2:
-        pacienteCreado = input("Introduce el nombre de usuario: ")
-        contrasenyitaCreada = input("Introduce la contraseña: ")
-        try:
-            connexio = psycopg2.connect(
-                dbname="hospital",
-                user="postgres",
-                password="P@ssw0rd",
-                host="10.94.255.129",
-                port="5432",
-                sslmode="require"
-            )
-            
-            SQLita = f"CREATE ROLE {pacienteCreado} LOGIN PASSWORD '{contrasenyitaCreada}';"
-            
-            cur = connexio.cursor()
-            cur.execute(SQLita)
-            connexio.commit()
-            cur.close()
-            connexio.close()
-            
-            print("Su paciente ha sido creado con éxito. ")  
-            
-        except psycopg2.Error as e:
-            
-            print("El paciente no ha podido ser creado.")
-    
-    if opcion == 3:
         usuaritoBorrado = input("Introduce el nombre de usuario: ")
         quiereBorrar = input("¿Está seguro de que quiere borrar este usuario? (s/n): ")
         if quiereBorrar == "s":
@@ -92,7 +34,7 @@ def menuAdminInformatico(usuarito, contrasenyita, opcion):
             
             print("Intento de borrado cancelado.")
             
-    if opcion == 4:
+    if opcion == 2:
         try:
             connexio = psycopg2.connect(
                     dbname="hospital",
@@ -209,6 +151,7 @@ def menuMedico(usuarito, contrasenyita, opcion):
     
     if opcion == 4:
         try:
+            fecha = input("Introduce la fecha de la operación (YYYY-MM-DD): ")
             connexio = psycopg2.connect(
                 dbname="hospital",
                 user=usuarito,
@@ -217,7 +160,7 @@ def menuMedico(usuarito, contrasenyita, opcion):
                 port="5432",
                 sslmode="require"
             )
-            SQLita = f"SELECT pa.nombre, pa.apellidos, p.nombre, p.apellidos, pe.nombre, pe.apellidos FROM operacion o JOIN pacientes pa ON o.id_tarjeta_sanitaria = pa.id_tarjeta_sanitaria JOIN medicos m ON o.p_id = m.p_id JOIN personal p ON p.p_id = m.p_id JOIN enfermeros en ON en.p_id = o.en_id JOIN personal pe ON pe.p_id = en.p_id;"
+            SQLita = f"SELECT pa.nombre, pa.apellidos, p.nombre, p.apellidos, pe.nombre, pe.apellidos, o.q_id, o.fecha_entrada FROM operacion o JOIN pacientes pa ON o.id_tarjeta_sanitaria = pa.id_tarjeta_sanitaria JOIN medicos m ON o.p_id = m.p_id JOIN personal p ON p.p_id = m.p_id JOIN enfermeros en ON en.p_id = o.en_id JOIN personal pe ON pe.p_id = en.p_id WHERE o.fecha_entrada >= '{fecha} 00:00:00.000000';"
             cur = connexio.cursor()
             cur.execute(SQLita)
             resultadito = cur.fetchall()
@@ -226,20 +169,25 @@ def menuMedico(usuarito, contrasenyita, opcion):
             print("+----------------------------------------+")
             print("|           Operaciones previstas        |")
             print("+----------------------------------------+")
-            print(f"El paciente que se va a operar es:      |")
-            print(f"Nombre: {resultadito[0][0]}            ")
-            print(f"Apellidos: {resultadito[0][1]}         ")
-            print(f"El médico que le va a operar es:        |")
-            print(f"Nombre: {resultadito[0][2]}            ")
-            print(f"Apellidos: {resultadito[0][3]}         ")
-            print(f"La enfermeras que asisten son:          |")
             contador = 0
             for i in resultadito:
+                print(f"El quirofano asignado es: {resultadito[contador][6]}    |")
+                print(f"La hora de la operación es: {resultadito[contador][7]} |")
+                print("+----------------------------------------+")
+                print(f"El paciente que se va a operar es:      |")
+                print(f"Nombre: {resultadito[contador][0]}            ")
+                print(f"Apellidos: {resultadito[contador][1]}         ")
+                print("+----------------------------------------+")
+                print(f"El médico que le va a operar es:        |")
+                print(f"Nombre: {resultadito[contador][2]}            ")
+                print(f"Apellidos: {resultadito[contador][3]}         ")
+                print("+----------------------------------------+")
+                print(f"La enfermera que asiste es:             |")
                 print(f"Nombre: {resultadito[contador][4]}            ")
-                print(f"Apellidos: {resultadito[contador][5]}    ")    
-                contador += 1    
-            contador = 0
-            print("+--------------------------------------- +")
+                print(f"Apellidos: {resultadito[contador][5]}         ")
+                print("+--------------------------------------- +")
+                print("+--------------------------------------- +")
+                contador += 1
             
         except psycopg2.Error as e:
                 
@@ -312,15 +260,41 @@ def menuMedico(usuarito, contrasenyita, opcion):
         except psycopg2.Error as e:
                 
                 print("No hay aparatos medicos en los quirofanos.")
-            
-            
-            
-
-           
+    
+    if opcion == 7:
+            try:
+                connexio = psycopg2.connect(
+                    dbname="hospital",
+                    user="postgres",
+                    password="P@ssw0rd",
+                    host="10.94.255.129",
+                    port="5432",
+                    sslmode="require"
+                )
+                SQLita = f"SELECT COUNT(d.id_m), m.nombre_malaltia FROM diagnosticos d JOIN malalties m ON d.id_m = m.id_m GROUP BY m.nombre_malaltia ORDER BY COUNT(d.id_m) DESC;"
+                cur = connexio.cursor()
+                cur.execute(SQLita)
+                resultadito = cur.fetchall()
+                cur.close()
+                connexio.close()
+                print("+----------------------------------------+")
+                print("|           Enfermedades más comunes     |")
+                print("+----------------------------------------+")
+                print("| Número de casos | Enfermedad           |")
+                print("+----------------------------------------+")
+                for i in resultadito:
+                    print(f"| {i[0]} | {i[1]} |")
+                print("+----------------------------------------+")
+                
+            except psycopg2.Error as e:
+                        
+                        print("No se ha podido mostrar las enfermedades más comunes.")
+               
 def menuEnfermero(usuarito, contrasenyita, opcion):
+    
     if opcion == 1:
-        medicitoDNI = input("Introduce tu DNI: ")
-        try:
+        try: 
+            medicitoDNI = input("Introduce tu DNI: ")
             connexio = psycopg2.connect(
                 dbname="hospital",
                 user="postgres",
@@ -343,7 +317,7 @@ def menuEnfermero(usuarito, contrasenyita, opcion):
             print(f"Apellidos: {resultadito[0][1]}         ")
             print("+----------------------------------------+")
         
-        except psycopg2.Error as e:
+        except:
             
             print("No se ha podido mostrar el médico enlazado, eres enfermera de planta.")
             
@@ -558,28 +532,72 @@ def menuAdminHospital(usuarito, contrasenyita, opcion):
         
         if opcion == 1:
             try:
+                diccionarioEnfermeros = {}
+                diccionarioMedicos = {}
+                diccionarioVarios = {} 
                 connexio = psycopg2.connect(
                     dbname="hospital",
-                    user=usuarito,
-                    password=contrasenyita,
+                    user="postgres",
+                    password="P@ssw0rd",
                     host="10.94.255.129",
                     port="5432",
                     sslmode="require"
                 )
-                SQLita = f"SELECT dni, nombre, apellidos FROM personal;"
                 cur = connexio.cursor()
+                SQLita = f"SELECT p_id FROM personal;"
                 cur.execute(SQLita)
-                resultadito = cur.fetchall()
+                lista_id = cur.fetchall()
+                for p_id in lista_id:
+                    id_real = p_id[0]  
+                    try:
+                        cur.execute(f"SELECT p_id FROM medicos WHERE p_id = {id_real};")
+                        resultadito2 = cur.fetchall()
+                        if resultadito2:
+                            cur.execute(f"SELECT dni, nombre, apellidos FROM personal WHERE p_id = {id_real};")
+                            resultadito3 = cur.fetchall()
+                            diccionarioMedicos[id_real] = resultadito3[0]
+                    except psycopg2.Error as e:
+                        pass
+                    try:
+                        cur.execute(f"SELECT p_id FROM enfermeros WHERE p_id = {id_real};")
+                        resultadito2 = cur.fetchall()
+                        if resultadito2:
+                            cur.execute(f"SELECT dni, nombre, apellidos FROM personal WHERE p_id = {id_real};")
+                            resultadito3 = cur.fetchall()
+                            diccionarioEnfermeros[id_real] = resultadito3[0]
+                    except psycopg2.Error as e:
+                        pass
+                    try:
+                        cur.execute(f"SELECT p_id FROM varios WHERE p_id = {id_real};")
+                        resultadito2 = cur.fetchall()
+                        if resultadito2:
+                            cur.execute(f"SELECT p.dni, p.nombre, p.apellidos, v.tipo_de_trabajo FROM personal p JOIN varios v ON p.p_id = v.p_id WHERE v.p_id = {id_real};")
+                            resultadito3 = cur.fetchall()
+                            diccionarioVarios[id_real] = resultadito3[0]
+                    except psycopg2.Error as e:
+                        pass
+                    id_real = None
                 cur.close()
                 connexio.close()
                 print("+----------------------------------------+")
                 print("|           Lista de personal            |")
                 print("+----------------------------------------+")
-                print("| DNI      | Nombre    | Apellidos       |")
+                print("| Enfermeros |")
                 print("+----------------------------------------+")
-                for i in resultadito:
-                    print(f"| {i[0]} | {i[1]} | {i[2]} |")
-                
+                for i in diccionarioEnfermeros:
+                    print(f"| DNI: {diccionarioEnfermeros[i][0]} | Nombre: {diccionarioEnfermeros[i][1]} | Apellidos: {diccionarioEnfermeros[i][2]} |")
+                print("+----------------------------------------+")
+                print("| Médicos |")
+                print("+----------------------------------------+")
+                for i in diccionarioMedicos:
+                    print(f"| DNI: {diccionarioMedicos[i][0]} | Nombre: {diccionarioMedicos[i][1]} | Apellidos: {diccionarioMedicos[i][2]} |")
+                print("+----------------------------------------+")
+                print("| Varios |")
+                print("+----------------------------------------+")
+                for i in diccionarioVarios:
+                    print(f"| DNI: {diccionarioVarios[i][0]} | Nombre: {diccionarioVarios[i][1]} | Apellidos: {diccionarioVarios[i][2]} | Tipo de trabajo: {diccionarioVarios[i][3]} |")
+                print("+----------------------------------------+")
+       
             except psycopg2.Error as e:
                 
                 print("No se ha podido mostrar la lista de personal.")
@@ -604,10 +622,37 @@ def menuAdminHospital(usuarito, contrasenyita, opcion):
                 cur = connexio.cursor()
                 cur.execute(SQLita)
                 connexio.commit()
+                print("A que se dedica este trabajador? ")
+                print("Tiene estas opciones: ")
+                print("medico, enfermero, celador, recepcionista, conductor_ambulancia, administrador_hospital, administrador_informatico.")
+                rol = input("Introduce su rama profesional (rol): ")
+                SQLita2 = f"SELECT p_id FROM personal WHERE dni = '{dni}';"
+                cur.execute(SQLita2)
+                resultadito = cur.fetchall()
+                if rol == "medico":
+                    SQLita3 = f"INSERT INTO medicos (p_id) VALUES ({resultadito[0][0]});"
+                    cur.execute(SQLita3)
+                    connexio.commit()
+                    
+                if rol == "enfermero":
+                    SQLita3 = f"INSERT INTO enfermeros (p_id) VALUES ({resultadito[0][0]});"
+                    cur.execute(SQLita3)
+                    connexio.commit()
+
+                if rol == "celador" or rol == "recepcionista" or rol == "conductor_ambulancia" or rol == "administrador_hospital" or rol == "administrador_informatico":
+                    SQLita3 = f"INSERT INTO varios (p_id) VALUES ({resultadito[0][0]});"
+                    cur.execute(SQLita3)
+                    connexio.commit()
+                usuario = nombreTrabajador[0:1] + dni
+                SQLita4 = f"CREATE ROLE {usuario} LOGIN PASSWORD 'P@ssw0rd' IN ROLE {rol};"
+                cur.execute(SQLita4)
+                connexio.commit()
                 cur.close()
                 connexio.close()
                 
                 print("El trabajador ha sido dado de alta con éxito.")
+                print("El trabajador tiene el rol de: " + rol)
+                print(f"Tu usuario es: {usuario}" )
                 
             except psycopg2.Error as e:
                 
@@ -712,16 +757,8 @@ def menuAdminHospital(usuarito, contrasenyita, opcion):
                     
                     print("No se ha podido mostrar los médicos más activos.")
                     
-                    
-            
-                    
-def menuRecepcionista(usuarito, contrasenyita, opcion):
-        
-        if opcion == 1:
-            
+        if opcion == 6:
             try:
-                usuarito = input("Introduce el nombre de usuario: ")
-                contrasenyita = input("Introduce la contraseña: ")
                 connexio = psycopg2.connect(
                     dbname="hospital",
                     user="postgres",
@@ -730,14 +767,60 @@ def menuRecepcionista(usuarito, contrasenyita, opcion):
                     port="5432",
                     sslmode="require"
                 )
-                SQLita = f"CREATE ROLE {usuarito} LOGIN PASSWORD '{contrasenyita}' IN ROLE paciente;"
+                SQLita = f"SELECT COUNT(d.id_m), m.nombre_malaltia FROM diagnosticos d JOIN malalties m ON d.id_m = m.id_m GROUP BY m.nombre_malaltia ORDER BY COUNT(d.id_m) DESC;"
+                cur = connexio.cursor()
+                cur.execute(SQLita)
+                resultadito = cur.fetchall()
+                cur.close()
+                connexio.close()
+                print("+----------------------------------------+")
+                print("|           Enfermedades más comunes     |")
+                print("+----------------------------------------+")
+                print("| Número de casos | Enfermedad           |")
+                print("+----------------------------------------+")
+                for i in resultadito:
+                    print(f"| {i[0]} | {i[1]} |")
+                print("+----------------------------------------+")
+                
+            except psycopg2.Error as e:
+                        
+                        print("No se ha podido mostrar las enfermedades más comunes.")
+                            
+def menuRecepcionista(usuarito, contrasenyita, opcion):
+        
+        if opcion == 1:
+            
+            try:
+                id_tarjeta_sanitaria = input("Introduce el número de tarjeta sanitaria del paciente: ")
+                nombre = input("Introduce el nombre del paciente: ")
+                apellidos = input("Introduce los apellidos del paciente: ")
+                fecha_nacimiento = input("Introduce la fecha de nacimiento del paciente (YYYY-MM-DD HH:MM:SS): ")
+                direccion = input("Introduce la dirección del paciente: ")
+                telefono = input("Introduce el teléfono del paciente: ")
+                contacto_emergencia = input("Introduce el contacto de emergencia del paciente: ")
+                condiciones_medicas = input("Introduce las condiciones médicas del paciente: ")
+                
+                connexio = psycopg2.connect(
+                    dbname="hospital",
+                    user="postgres",
+                    password="P@ssw0rd",
+                    host="10.94.255.129",
+                    port="5432",
+                    sslmode="require"
+                )
+                SQLita = f"INSERT INTO pacientes (id_tarjeta_sanitaria, nombre, apellidos, fecha_nacimiento, direccion, num_telefono, contacto_emergencia, condiciones_paciente) VALUES ('{id_tarjeta_sanitaria}', '{nombre}', '{apellidos}', '{fecha_nacimiento}.000000', '{direccion}', '{telefono}', '{contacto_emergencia}', '{condiciones_medicas}');"
                 cur = connexio.cursor()
                 cur.execute(SQLita)
                 connexio.commit()
+                usuario = id_tarjeta_sanitaria[0:4] + id_tarjeta_sanitaria[5] + id_tarjeta_sanitaria[7:13] + id_tarjeta_sanitaria[14] + id_tarjeta_sanitaria[16:]
+                SQLita2 = f"CREATE ROLE {usuario} LOGIN PASSWORD 'P@ssw0rd' IN ROLE paciente;"
+                cur.execute(SQLita2)
+                connexio.commit()
                 cur.close()
                 connexio.close()
-                
-                print("Su usuario ha sido creado con éxito. ")
+                print("El paciente ha sido dado de alta con éxito.")
+                print(f"Tu usuario es: {usuario}")
+                print("Tu contraseña es: P@ssw0rd")
                 
             except psycopg2.Error as e: 
                     
