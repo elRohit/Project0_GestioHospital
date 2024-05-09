@@ -194,6 +194,7 @@ def menuMedico(usuarito, contrasenyita, opcion):
                 print("No hay operaciones previstas.")
                 
     if opcion == 5:
+        fecha_entrada = input("Introduce la fecha de la visita (YYYY-MM-DD): ")
         try:
             connexio = psycopg2.connect(
                     dbname="hospital",
@@ -203,7 +204,7 @@ def menuMedico(usuarito, contrasenyita, opcion):
                     port="5432",
                     sslmode="require"
                 )
-            SQLita = f"SELECT pa.nombre, pa.apellidos, p.nombre, p.apellidos, d.fecha_entrada FROM diagnosticos d JOIN pacientes pa ON d.id_tarjeta_sanitaria = pa.id_tarjeta_sanitaria JOIN medicos m ON d.p_id = m.p_id JOIN personal p ON p.p_id = m.p_id WHERE fecha_entrada > current_timestamp;"
+            SQLita = f"SELECT pa.nombre, pa.apellidos, p.nombre, p.apellidos, d.fecha_entrada FROM diagnosticos d JOIN pacientes pa ON d.id_tarjeta_sanitaria = pa.id_tarjeta_sanitaria JOIN medicos m ON d.p_id = m.p_id JOIN personal p ON p.p_id = m.p_id WHERE fecha_entrada BETWEEN '{fecha_entrada} 00:00:00.000000' AND '{fecha_entrada} 23:59:59.999999';"
             cur = connexio.cursor()
             cur.execute(SQLita)
             resultadito = cur.fetchall()
@@ -603,60 +604,83 @@ def menuAdminHospital(usuarito, contrasenyita, opcion):
                 print("No se ha podido mostrar la lista de personal.")
                 
         if opcion == 2:
-            dni = input("Introduce el DNI del trabajador: ")
-            nombreTrabajador = input("Introduce el nombre del trabajador: ")
-            apellidosTrabajador = input("Introduce el apellido/s del trabajador: ")
-            correo = input("Introduce el correo del trabajador: ")
-            telefono = input("Introduce el teléfono del trabajador: ")
-            direccion = input("Introduce la dirección del trabajador: ")
-            try:
+            validar_DNI = True
+            while validar_DNI:
+                dni = input("Introduce el DNI del trabajador: ")
                 connexio = psycopg2.connect(
-                        dbname="hospital",
-                        user="postgres",
-                        password="P@ssw0rd",
-                        host="10.94.255.129",
-                        port="5432",
-                        sslmode="require"
-                    )
-                SQLita = f"INSERT INTO personal (dni, nombre, apellidos, correo, num_telefono, direccion) VALUES ('{dni}', '{nombreTrabajador}', '{apellidosTrabajador}', '{correo}', '{telefono}', '{direccion}');"
+                    dbname="hospital",
+                    user="postgres",
+                    password="P@ssw0rd",
+                    host="10.94.255.129",
+                    port="5432",
+                    sslmode="require"
+                )
+                SQLita = f"SELECT public.validar_dni('{dni}');"
                 cur = connexio.cursor()
                 cur.execute(SQLita)
-                connexio.commit()
-                print("A que se dedica este trabajador? ")
-                print("Tiene estas opciones: ")
-                print("medico, enfermero, celador, recepcionista, conductor_ambulancia, administrador_hospital, administrador_informatico.")
-                rol = input("Introduce su rama profesional (rol): ")
-                SQLita2 = f"SELECT p_id FROM personal WHERE dni = '{dni}';"
-                cur.execute(SQLita2)
                 resultadito = cur.fetchall()
-                if rol == "medico":
-                    SQLita3 = f"INSERT INTO medicos (p_id) VALUES ({resultadito[0][0]});"
-                    cur.execute(SQLita3)
-                    connexio.commit()
-                    
-                if rol == "enfermero":
-                    SQLita3 = f"INSERT INTO enfermeros (p_id) VALUES ({resultadito[0][0]});"
-                    cur.execute(SQLita3)
-                    connexio.commit()
-
-                if rol == "celador" or rol == "recepcionista" or rol == "conductor_ambulancia" or rol == "administrador_hospital" or rol == "administrador_informatico":
-                    SQLita3 = f"INSERT INTO varios (p_id) VALUES ({resultadito[0][0]});"
-                    cur.execute(SQLita3)
-                    connexio.commit()
-                usuario = nombreTrabajador[0:1] + dni
-                SQLita4 = f"CREATE ROLE {usuario} LOGIN PASSWORD 'P@ssw0rd' IN ROLE {rol};"
-                cur.execute(SQLita4)
-                connexio.commit()
                 cur.close()
                 connexio.close()
+                if resultadito[0][0] == True:
+                    nombreTrabajador = input("Introduce el nombre del trabajador: ")
+                    apellidosTrabajador = input("Introduce el apellido/s del trabajador: ")
+                    correo = input("Introduce el correo del trabajador: ")
+                    telefono = input("Introduce el teléfono del trabajador: ")
+                    direccion = input("Introduce la dirección del trabajador: ")
+                    try:
+                        connexio = psycopg2.connect(
+                                dbname="hospital",
+                                user="postgres",
+                                password="P@ssw0rd",
+                                host="10.94.255.129",
+                                port="5432",
+                                sslmode="require"
+                            )
+                        SQLita = f"INSERT INTO personal (dni, nombre, apellidos, correo, num_telefono, direccion) VALUES ('{dni}', '{nombreTrabajador}', '{apellidosTrabajador}', '{correo}', '{telefono}', '{direccion}');"
+                        cur = connexio.cursor()
+                        cur.execute(SQLita)
+                        connexio.commit()
+                        print("A que se dedica este trabajador? ")
+                        print("Tiene estas opciones: ")
+                        print("medico, enfermero, celador, recepcionista, conductor_ambulancia, administrador_hospital, administrador_informatico.")
+                        rol = input("Introduce su rama profesional (rol): ")
+                        SQLita2 = f"SELECT p_id FROM personal WHERE dni = '{dni}';"
+                        cur.execute(SQLita2)
+                        resultadito = cur.fetchall()
+                        if rol == "medico":
+                            SQLita3 = f"INSERT INTO medicos (p_id) VALUES ({resultadito[0][0]});"
+                            cur.execute(SQLita3)
+                            connexio.commit()
+                            
+                        if rol == "enfermero":
+                            SQLita3 = f"INSERT INTO enfermeros (p_id) VALUES ({resultadito[0][0]});"
+                            cur.execute(SQLita3)
+                            connexio.commit()
+
+                        if rol == "celador" or rol == "recepcionista" or rol == "conductor_ambulancia" or rol == "administrador_hospital" or rol == "administrador_informatico":
+                            SQLita3 = f"INSERT INTO varios (p_id) VALUES ({resultadito[0][0]});"
+                            cur.execute(SQLita3)
+                            connexio.commit()
+                        usuario = nombreTrabajador[0:1] + dni
+                        SQLita4 = f"CREATE ROLE {usuario} LOGIN PASSWORD 'P@ssw0rd' IN ROLE {rol};"
+                        cur.execute(SQLita4)
+                        connexio.commit()
+                        cur.close()
+                        connexio.close()
+                        
+                        print("El trabajador ha sido dado de alta con éxito.")
+                        print("El trabajador tiene el rol de: " + rol)
+                        print(f"Tu usuario es: {usuario}" )
+                        
+                        validar_DNI = False
+                        
+                    except psycopg2.Error as e:
+                        
+                        print("No se ha podido dar de alta al trabajador o ya esta de alta.")
                 
-                print("El trabajador ha sido dado de alta con éxito.")
-                print("El trabajador tiene el rol de: " + rol)
-                print(f"Tu usuario es: {usuario}" )
-                
-            except psycopg2.Error as e:
-                
-                print("No se ha podido dar de alta al trabajador o ya esta de alta.")
+                if resultadito[0][0] == False:
+                    print("El DNI no es válido.")
+                    validar_DNI = False
         
         if opcion == 3:
             dni = input("Introduce el DNI del trabajador: ")
@@ -790,16 +814,7 @@ def menuRecepcionista(usuarito, contrasenyita, opcion):
         
         if opcion == 1:
             
-            try:
                 id_tarjeta_sanitaria = input("Introduce el número de tarjeta sanitaria del paciente: ")
-                nombre = input("Introduce el nombre del paciente: ")
-                apellidos = input("Introduce los apellidos del paciente: ")
-                fecha_nacimiento = input("Introduce la fecha de nacimiento del paciente (YYYY-MM-DD HH:MM:SS): ")
-                direccion = input("Introduce la dirección del paciente: ")
-                telefono = input("Introduce el teléfono del paciente: ")
-                contacto_emergencia = input("Introduce el contacto de emergencia del paciente: ")
-                condiciones_medicas = input("Introduce las condiciones médicas del paciente: ")
-                
                 connexio = psycopg2.connect(
                     dbname="hospital",
                     user="postgres",
@@ -808,23 +823,55 @@ def menuRecepcionista(usuarito, contrasenyita, opcion):
                     port="5432",
                     sslmode="require"
                 )
-                SQLita = f"INSERT INTO pacientes (id_tarjeta_sanitaria, nombre, apellidos, fecha_nacimiento, direccion, num_telefono, contacto_emergencia, condiciones_paciente) VALUES ('{id_tarjeta_sanitaria}', '{nombre}', '{apellidos}', '{fecha_nacimiento}.000000', '{direccion}', '{telefono}', '{contacto_emergencia}', '{condiciones_medicas}');"
+                SQLita = f"SELECT public.validar_tse('{id_tarjeta_sanitaria}');"
                 cur = connexio.cursor()
                 cur.execute(SQLita)
-                connexio.commit()
-                usuario = id_tarjeta_sanitaria[0:4] + id_tarjeta_sanitaria[5] + id_tarjeta_sanitaria[7:13] + id_tarjeta_sanitaria[14] + id_tarjeta_sanitaria[16:]
-                SQLita2 = f"CREATE ROLE {usuario} LOGIN PASSWORD 'P@ssw0rd' IN ROLE paciente;"
-                cur.execute(SQLita2)
-                connexio.commit()
+                resultadito = cur.fetchall()
                 cur.close()
-                connexio.close()
-                print("El paciente ha sido dado de alta con éxito.")
-                print(f"Tu usuario es: {usuario}")
-                print("Tu contraseña es: P@ssw0rd")
-                
-            except psycopg2.Error as e: 
-                    
-                    print("El usuario no ha podido ser creado.")
+                connexio.close() 
+                validar = True
+                while validar:
+                    if resultadito[0][0] == True:
+                        nombre = input("Introduce el nombre del paciente: ")
+                        apellidos = input("Introduce los apellidos del paciente: ")
+                        fecha_nacimiento = input("Introduce la fecha de nacimiento del paciente (YYYY-MM-DD HH:MM:SS): ")
+                        direccion = input("Introduce la dirección del paciente: ")
+                        telefono = input("Introduce el teléfono del paciente: ")
+                        contacto_emergencia = input("Introduce el contacto de emergencia del paciente: ")
+                        condiciones_medicas = input("Introduce las condiciones médicas del paciente: ")
+                        try:
+                            connexio = psycopg2.connect(
+                                dbname="hospital",
+                                user="postgres",
+                                password="P@ssw0rd",
+                                host="10.94.255.129",
+                                port="5432",
+                                sslmode="require"
+                            )
+                            SQLita = f"INSERT INTO pacientes (id_tarjeta_sanitaria, nombre, apellidos, fecha_nacimiento, direccion, num_telefono, contacto_emergencia, condiciones_paciente) VALUES ('{id_tarjeta_sanitaria}', '{nombre}', '{apellidos}', '{fecha_nacimiento}.000000', '{direccion}', '{telefono}', '{contacto_emergencia}', '{condiciones_medicas}');"
+                            cur = connexio.cursor()
+                            cur.execute(SQLita)
+                            connexio.commit()
+                            usuario = id_tarjeta_sanitaria[0:4] + id_tarjeta_sanitaria[5] + id_tarjeta_sanitaria[7:13] + id_tarjeta_sanitaria[14:16] + id_tarjeta_sanitaria[17]
+                            SQLita2 = f"CREATE ROLE {usuario} LOGIN PASSWORD 'P@ssw0rd' IN ROLE paciente;"
+                            cur.execute(SQLita2)
+                            connexio.commit()
+                            cur.close()
+                            connexio.close()
+                            print("El paciente ha sido dado de alta con éxito.")
+                            print(f"Tu usuario es: {usuario}")
+                            print("Tu contraseña es: P@ssw0rd")
+                            
+                            validar = False
+                        
+                        except psycopg2.Error as e: 
+                            
+                            print("El usuario no ha podido ser creado.")
+                            validar = False
+                            
+                    if resultadito[0][0] == False:
+                        print("El número de tarjeta sanitaria no es válido.")
+                        validar = False
                     
         if opcion == 2:
             
@@ -978,4 +1025,3 @@ def menuRecepcionista(usuarito, contrasenyita, opcion):
             except psycopg2.Error as e:
                     
                     print("No se ha podido mostrar el estado de la planta.")
-                    
