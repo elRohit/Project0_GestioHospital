@@ -2,7 +2,6 @@
 
 https://www.servermania.com/kb/articles/setup-postgresql-cluster
 
-
 # REPLICACIO ENTRE MASTER I SLAVE
 
 MASTER
@@ -72,13 +71,10 @@ Creació de base de dades exemple:
 
 ![1715031233955](image/node_replication/1715031233955.png)
 
-# CLUSTERITZACIÓ
+# BALANCEIJ
 
 Utlitzarem uan clusterització, i sigui crearem una IP Mestra per a que la aplicació ataqui a un sol servidor, o ben dit servei i ja el servei s'encarrega de dir el servidor que ataca i si un peta, la aplicació seguira sent utilitzada.
 
 Instal·lació:
 
 ![alt text](image/node_replication/image.png)
-
-
-
