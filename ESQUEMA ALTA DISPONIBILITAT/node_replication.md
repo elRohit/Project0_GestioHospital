@@ -71,10 +71,26 @@ Creació de base de dades exemple:
 
 ![1715031233955](image/node_replication/1715031233955.png)
 
-# BALANCEIJ
+# BALANCEIJ D'APLICACIO
 
-Utlitzarem uan clusterització, i sigui crearem una IP Mestra per a que la aplicació ataqui a un sol servidor, o ben dit servei i ja el servei s'encarrega de dir el servidor que ataca i si un peta, la aplicació seguira sent utilitzada.
+Utilitzarem un script per ablacejar el servidor i que continui funcionant la aplicació des d'on va deixa de funcionar.
 
-Instal·lació:
 
-![alt text](image/node_replication/image.png)
+```
+if ping -c 1 192.168.1.50 &>/dev/null; then
+    echo "Ping exitoso"
+else
+    echo "Ping fallido"
+    # Ejecutar el comando para redirigir el contenido
+    sudo cat /etc/network/interfaces2 > /etc/network/interfaces
+fi
+```
+Els fitxers, a dins tenen la ip canvaida, i el script , si no va el ping, sobrescriu i reinicia el adaptador de xarxa:
+
+![1715285534400](image/node_replication/1715285534400.png)
+
+Quan el servidor principal no esta actiu, executaem el script per simular:
+
+![1715285753951](image/node_replication/1715285753951.png)
+
+La següent vegada si que funciona ja que pot fer ping a si mateix.
