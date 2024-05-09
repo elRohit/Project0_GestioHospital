@@ -5,13 +5,17 @@ import random
 from faker import Faker
 # Aqui es guardaran totes les dades del fitxer csv
 host_conn = '192.168.1.50'
+faker = Faker()
 
 
 
-def faker():
+def personals():
+    conn = psycopg2.connect(database="hospital",user="postgres",password="P@ssw0rd",host=host_conn,port="5432")
+    conn.autocommit = True
+    cur = conn.cursor()
     fucker_data = Faker()
-    for fuck in range(100):
-        print(fucker_data.first_name())
+    for fuck in range(150450):
+        cur.execute(f"INSERT INTO personal VALUES ({len(fuck)},{fake.first_name()},{fake.last_name()})")
 '''filearray_ciutats = []
 
 
