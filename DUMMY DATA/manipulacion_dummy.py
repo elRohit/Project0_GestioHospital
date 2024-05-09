@@ -2,9 +2,19 @@
 import csv
 import psycopg2
 import random
+from faker import Faker
 # Aqui es guardaran totes les dades del fitxer csv
 host_conn = '192.168.1.50'
+
+
+
+def faker():
+    fucker_data = Faker()
+    for fuck in range(100):
+        print(fucker_data.first_name())
 '''filearray_ciutats = []
+
+
 
 def import_ciutats():
     #Postgres conn
@@ -74,6 +84,8 @@ def import_personal():
         cur.close()
         conn.close()
 
+
+faker()
 
     
     
