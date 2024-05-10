@@ -58,29 +58,19 @@ def import_personal():
     print(''.join(map(str, num_jn)) + ll)
 
 
-        
-
-
-
-
     #Postgres conn
     conn = psycopg2.connect(database="hospital",user="postgres",password="P@ssw0rd",host=host_conn,port="5432")
     conn.autocommit = True
     cur = conn.cursor()
+    for i in range(150450):
+        cur.execute(f"INSERT INTO personal VALUES ({len(i)},{faker.first_name()},{faker.last_name()},{faker.email()},{faker.phone_number()},{faker.address()})")
+    cur.close()
+    conn.close()
     ## Crear un fitxer csv amb dades dummy amb el nom personal.csv i amb modul random
-    with open('DUMMY DATA/personal.csv', 'r', newline='',encoding='utf-8') as file:
-        reader = csv.DictReader(file, delimiter=',')
-        count = 0
-        cur.execute(f"DELETE FROM audit.personal")
-        for row in reader:
-            count += 1
-            cur.execute(f"INSERT INTO public.personal VALUES ({row['Codi']},'{row['Nom']}', '{row['Cognom']}', '{row['CodiCiutat']}')")
-        print(f'total de registres: {count}')
-        cur.close()
-        conn.close()
+   
 
 
-faker()
+import_personal()
 
     
     
