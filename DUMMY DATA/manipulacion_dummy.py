@@ -45,6 +45,7 @@ def import_ciutats():
         return filearray_ciutats'''
 
 def import_personal():
+    #Faker
     #Gen Dades De peersoal
     # Id,dni.nom,cognoms,correu,num_telefon,adreça
     # Dni
@@ -57,16 +58,6 @@ def import_personal():
     print(''.join(map(str, num_jn)) + ll)
 
 
-    #Nom
-    llista_noms = ['Joan','Maria','Pau','Anna','Laura','Pere','Jordi','Marta','Julia','Miquel','Jordina','Jordi','Marc','Carla','Judit','Judith','Alex','Eric','Sara','Pol','Emma','Hector','Aina','Hugo','Ariadna',
-                   'Nil','Laia','Jan','Clara','Adrià','Berta','Arnau','Nora','Biel','Alba','Joel','Abril','Èric','Olivia','Èlia','Òscar','Aina','Izan','Lola','Àlex','Jana','Lluc','Ariadna','Pau','Mia','Nil','Ona']
-    nom = random.choice(llista_noms)
-
-    #Cognom
-    llista_cognoms = ['Garcia','Martinez','Lopez','Gomez','Hernandez','Perez','Gonzalez','Rodriguez','Fernandez','Lopez','Sanchez','Ramirez','Torres','Diaz','Vazquez','Castillo',
-                     'Romero','Serrano','Molina','Ortega','Delgado','Suarez','Cortes','Vargas','Rojas','Guerrero','Cruz','Navarro','Vega','Mendez','Rios','Reyes','Jimenez',
-                     'Morales','Silva','Ramos','Santos','Blanco','Salazar','Mora','Vargas','Valencia','Paredes','Cabrera','Villa','Peña','Quintero','Duarte','Franco']
-    cognom = random.choice(llista_cognoms)
         
 
 
