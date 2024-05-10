@@ -55,17 +55,18 @@ def import_personal():
     for i in range(8):
         i = random.randint(1, 9)
         num_jn.append(i)
-    print(''.join(map(str, num_jn)) + ll)
+    dni_final = ''.join(map(str, num_jn)) + ll
 
 
     #Postgres conn
-    conn = psycopg2.connect(database="hospital",user="postgres",password="P@ssw0rd",host=host_conn,port="5432")
-    conn.autocommit = True
-    cur = conn.cursor()
-    for i in range(150450):
-        cur.execute(f"INSERT INTO personal VALUES ({len(i)},{faker.first_name()},{faker.last_name()},{faker.email()},{faker.phone_number()},{faker.address()})")
-    cur.close()
-    conn.close()
+    #conn = psycopg2.connect(database="hospital",user="postgres",password="P@ssw0rd",host=host_conn,port="5432")
+    #conn.autocommit = True
+    #cur = conn.cursor()
+    for i in range(0,51):
+        #cur.execute(f"INSERT INTO personal VALUES ({len(i)},{faker.first_name()},{faker.last_name()},{faker.email()},{faker.phone_number()},{faker.address()})")
+        print(f"{(i)},{dni_final},{faker.first_name()},{faker.last_name()},{faker.email()},{faker.phone_number()},{faker.address()}")
+    #cur.close()
+    #conn.close()
     ## Crear un fitxer csv amb dades dummy amb el nom personal.csv i amb modul random
    
 
