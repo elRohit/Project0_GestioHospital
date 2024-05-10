@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="dateTimeOrNone">
+    <xs:union memberTypes="xs:dateTime">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="None"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:union>
+  </xs:simpleType>
+  <xs:simpleType name="dniType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="\d{8}[A-Za-z]"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="recetaType">
+  <xs:restriction base="xs:string">
+    <xs:enumeration value="Si"/>
+    <xs:enumeration value="No"/>
+  </xs:restriction>
+</xs:simpleType>
+  <xs:element name="visitas">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="visita" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="numero_diagnostico" type="xs:integer"/>
+              <xs:element name="dni_medico" type="dniType"/>
+              <xs:element name="nombre_medico" type="xs:string"/>
+              <xs:element name="apellidos_medico" type="xs:string"/>
+              <xs:element name="tarjeta_sanitaria_paciente" type="xs:string"/>
+              <xs:element name="nombre_paciente" type="xs:string"/>
+              <xs:element name="apellidos_paciente" type="xs:string"/>
+              <xs:element name="fecha_entrada" type="xs:dateTime"/>
+              <xs:element name="fecha_salida" type="dateTimeOrNone"/>
+              <xs:element name="tiene_receta" type="recetaType"/>
+              <xs:element name="medicamentos" type="xs:string"/>
+              <xs:element name="nombre_enfermedad" type="xs:string"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
