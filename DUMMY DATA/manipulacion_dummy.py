@@ -3,6 +3,8 @@ import csv
 import psycopg2
 import random
 from faker import Faker
+import string
+
 # Aqui es guardaran totes les dades del fitxer csv
 host_conn = '192.168.1.50'
 pswd = 'P@ssw0rd'
@@ -129,8 +131,32 @@ def personal_administracio(administracio):
 #enfermers(200)
 #personal_neteja(100)
 #personal_administracio(50)
-    '''
+    
 def pacients(pacients):
+
+    #tse
+    #'XXXX' 0 000000 0 00
+    inicial_nombre_2 = random.choice('ABCDEFGHIJKLMNOPQRSTUVWXYZ')
+    inicial_nombre_2_llista = list()
+    for i in range(4):
+        _i = inicial_nombre_2 
+        inicial_nombre_2_llista.append(_i)
+    inicial_nombre_2_final = ''.join(map(str, inicial_nombre_2_llista))
+    #XXXX '0' 000000 0 00
+    sexe_tse = list()
+    sexe_fin = sexe_tse.append(random.choice('01'))
+    sexe_final = ''.join(map(str, sexe_fin))
+    #XXXX 0 '000000' 0 00
+    num_tse_naix = list()
+    for i in range(6):
+        i = random.randint(1, 9)
+        num_tse_naix.append(i)
+    num_tse_naix_final = ''.join(map(str, num_tse_naix))
+    #XXXX 0 000000 '0 00'
+    sexe_tse_naix = list()
+    sexe_fin_naix = sexe_tse_naix.append(random.choice('01'))
+    
+
     # Volem crear pacients amb dades dummy, 100.000 pacients i per millorar rendiment crearem indexos.
     conn = psycopg2.connect(database="hospital",user="postgres", password=pswd,host=host_conn,port="5432")
     conn.autocommit = True
@@ -138,21 +164,21 @@ def pacients(pacients):
     count = 0
     for i in range(pacients):
         count += 1
-        cur.execute(f"INSERT INTO pacients VALUES ({count},'{faker.first_name()[:20]}','{faker.last_name()[:20]}','{faker.email()[:50]}','{faker.address()[:20]}')")
+        cur.execute(f"INSERT INTO pacientes VALUES ({count},'{faker.first_name()[:20]}','{faker.last_name()[:20]}','{faker.email()[:50]}','{faker.address()[:20]}')")
     print(f'total de registres dels pacients: {count}')
-    '''
+    
 
-def visites(visites):
+'''def visites(visites):
     conn = psycopg2.connect(database="hospital",user="postgres", password=pswd,host=host_conn,port="5432")
     conn.autocommit = True
     cur = conn.cursor()
     count = 0
     for i in range(visites):
         count += 1
-        cur.execute(f"INSERT INTO visites VALUES ({count},'{faker.date_between(start_date='-1y', end_date='today')}','{faker.time()}','{random.randint(1, 100)}','{random.randint(1, 100)}')")
+        cur.execute(f"INSERT INTO reserves VALUES ({count},'{faker.date_time_this_year()}','{faker.date_time_this_year()}'")
     print(f'total de registres de visites: {count}')
     cur.close()
-    conn.close()
+    conn.close()'''
 
 
     
