@@ -65,9 +65,10 @@ def import_personal(personal):
             num_tel_final = ''.join(map(str, num_tel))
             cur.execute(f"INSERT INTO personal VALUES ({count},'{dni_final}','{faker.first_name()[:20]}','{faker.last_name()[:20]}','{faker.email()[:50]}',{num_tel_final[:20]},'{faker.address()[:20]}')")
     print(f'total de registres dels personals: {count}')
-    #cur.close()
-    #conn.close()
-    ## Crear un fitxer csv amb dades dummy amb el nom personal.csv i amb modul random
+    cur.close()
+    conn.close()
+
+import_personal(450)
     
 def metges(metges):
     conn = psycopg2.connect(database="hospital",user="postgres", password=pswd,host=host_conn,port="5432")
