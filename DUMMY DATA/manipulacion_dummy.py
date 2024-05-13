@@ -39,8 +39,6 @@ faker = Faker('ru_RU')
 
 def import_personal(personal):
     
-
-
     #Postgres conn
     conn = psycopg2.connect(database="hospital",user="postgres",password=pswd,host=host_conn,port="5432")
     conn.autocommit = True
@@ -68,7 +66,6 @@ def import_personal(personal):
     cur.close()
     conn.close()
 
-import_personal(450)
     
 def metges(metges):
     conn = psycopg2.connect(database="hospital",user="postgres", password=pswd,host=host_conn,port="5432")
@@ -136,38 +133,43 @@ def personal_administracio(administracio):
 def pacients(pacients):
 
     #tse
-    #'XXXX' 0 000000 0 00
-    inicial_nombre_2 = random.choice('ABCDEFGHIJKLMNOPQRSTUVWXYZ')
-    inicial_nombre_2_llista = list()
-    for i in range(4):
-        _i = inicial_nombre_2 
-        inicial_nombre_2_llista.append(_i)
-    inicial_nombre_2_final = ''.join(map(str, inicial_nombre_2_llista))
-    #XXXX '0' 000000 0 00
-    sexe_tse = list()
-    sexe_fin = sexe_tse.append(random.choice('01'))
-    sexe_final = ''.join(map(str, sexe_fin))
-    #XXXX 0 '000000' 0 00
-    num_tse_naix = list()
-    for i in range(6):
-        i = random.randint(1, 9)
-        num_tse_naix.append(i)
-    num_tse_naix_final = ''.join(map(str, num_tse_naix))
-    #XXXX 0 000000 '0 00'
-    sexe_tse_naix = list()
-    sexe_fin_naix = sexe_tse_naix.append(random.choice('01'))
-    
+    for p in range(10):
+        inicials_nom = faker.first_name()
+        inicials_nom_tallat = inicials_nom[:2].upper()
+        inicials_cognom = faker.last_name()
+        inicials_cognom_tallat = inicials_cognom[:2].upper()
+        inicials = inicials_nom_tallat + inicials_cognom_tallat
 
-    # Volem crear pacients amb dades dummy, 100.000 pacients i per millorar rendiment crearem indexos.
-    conn = psycopg2.connect(database="hospital",user="postgres", password=pswd,host=host_conn,port="5432")
-    conn.autocommit = True
-    cur = conn.cursor()
-    count = 0
+        sexe_tse = random.choice('01')
+
+        num_tse_naix = ''.join(str(random.randint(1, 9)) for _ in range(6))
+        data_naix = faker.date_of_birth()
+
+        id_tses = list()
+        for _ in range(3):
+            id_tse = random.choice('0123456789')
+            id_tses.append(id_tse)
+        id_tse = ''.join(id_tses)
+        tse = inicials + ' ' + sexe_tse + ' ' + num_tse_naix + ' ' + id_tse
+
+        num_tel = list()
+        for i in range(9):
+            i = random.randint(1, 9)
+            num_tel.append(i)
+        num_tel_final = ''.join(map(str, num_tel))
+
+        # Volem crear pacients amb dades dummy, 100.000 pacients i per millorar rendiment crearem indexos.
+        
+        conn = psycopg2.connect(database="hospital",user="postgres", password=pswd,host=host_conn,port="5432")
+        conn.autocommit = True
+        cur = conn.cursor()
+        count = 0
     for i in range(pacients):
         count += 1
-        cur.execute(f"INSERT INTO pacientes VALUES ({count},'{faker.first_name()[:20]}','{faker.last_name()[:20]}','{faker.email()[:50]}','{faker.address()[:20]}')")
-    print(f'total de registres dels pacients: {count}')
-    
+        cur.execute(f"INSERT INTO pacientes (id_tarjeta_sanitaria, nombre, apellido, fecha_nacimiento, direccion, telefono, contacto_emergencia, activo) VALUES ('{tse}','{inicials_nom}','{inicials_cognom}','{data_naix}','{faker.address()}',{num_tel_final},NULL,True) ON CONFLICT DO NOTHING")
+
+
+pacients(100)
 
 '''def visites(visites):
     conn = psycopg2.connect(database="hospital",user="postgres", password=pswd,host=host_conn,port="5432")
@@ -182,7 +184,6 @@ def pacients(pacients):
     conn.close()'''
 
 
-    
     
 
 
