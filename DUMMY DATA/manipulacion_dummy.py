@@ -118,7 +118,7 @@ def show_loader():
                     print("\033[F\033[K", end="")  # Clear the previous line
                 print("Loading ==>> Completed!")
 
-def pacients(pacients):
+def pacientes(pacients):
 
     #tse
         count = 0
@@ -160,7 +160,8 @@ def pacients(pacients):
         cur.close()
         conn.close()
 
-def visites(visites):
+def visitas(visites):
+    # Consultar id de metges
     count = 0
     conn = psycopg2.connect(database="hospital",user="postgres", password=pswd,host=host_conn,port="5432")
     conn.autocommit = True
@@ -173,7 +174,7 @@ def visites(visites):
         pers_ids.append(row[0])
     
     cur.close()
-        
+    # Consultar tse de pacients
     cur = conn.cursor()
     pacients_tse = list()
     cur.execute(f"SELECT id_tarjeta_sanitaria FROM pacientes")
@@ -181,7 +182,7 @@ def visites(visites):
     for row1 in rows2:
         pacients_tse.append(row1[0])
 
-    
+
     for _ in range(visites):
         count += 1
         # Crear visites
@@ -211,6 +212,16 @@ def indexos():
     cur.close()
     conn.close()
     
+def creacion():
+    # Crear personal
+    clean_all()
+    personal(450)
+    medicos(100)
+    enfermeros(200)
+    personal_limpieza(100)
+    personal_administracio(50)
+    pacientes(400)
+    visitas(500)
     
     
     
@@ -218,9 +229,6 @@ def indexos():
 # Execs
 
 
-#medicos(100)
-#enfermeros(50)
-visites(50)
-
+creacion()
 
 

@@ -8,14 +8,14 @@ def main():
         print(" Bienvenido/a al Hospitalito IRA              |")
         print("+-------------------------------+")
         print("¿Qué desea hacer?                             |")
-        print("1.- Crear el Esquema de la base de datos      |")
-        print("2.- Eliminar el contenido de la base de datos |")
+        print("1.- Rellenar la base de datos                 |")
+        print("2.- vaciar la base de datos                   |")
         print("3.- Salir                                     |")
         print("+---------------------------------------------+")
         eleccionita = int(input("Introduce el número de la opción: "))
         
         if eleccionita == 1:
-            backend.crear_db_structure()
+            backend.creacion()
         elif eleccionita == 2:
             backend.eliminar_db_content()
         elif eleccionita == 3:
