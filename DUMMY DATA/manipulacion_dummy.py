@@ -4,6 +4,7 @@ import psycopg2
 import random
 from faker import Faker
 import string
+import time
 
 # Aqui es guardaran totes les dades del fitxer csv
 host_conn = '192.168.1.50'
@@ -129,44 +130,54 @@ def personal_administracio(administracio):
 #enfermers(200)
 #personal_neteja(100)
 #personal_administracio(50)
-    
+
+def show_loader():
+                for i in range(101):
+                    print(f"Loading: {i}%")
+                    time.sleep(0.1)
+                    print("\033[F\033[K", end="")  # Clear the previous line
+                print("Loading ==>> Completed!")
+
 def pacients(pacients):
 
     #tse
-    for p in range(10):
-        inicials_nom = faker.first_name()
-        inicials_nom_tallat = inicials_nom[:2].upper()
-        inicials_cognom = faker.last_name()
-        inicials_cognom_tallat = inicials_cognom[:2].upper()
-        inicials = inicials_nom_tallat + inicials_cognom_tallat
+        count = 0
+        for _ in range(pacients):
+            inicials_nom = faker.first_name()
+            inicials_nom_tallat = inicials_nom[:2].upper()
+            inicials_cognom = faker.last_name()
+            inicials_cognom_tallat = inicials_cognom[:2].upper()
+            inicials = inicials_nom_tallat + inicials_cognom_tallat
 
-        sexe_tse = random.choice('01')
+            sexe_tse = random.choice('01')
 
-        num_tse_naix = ''.join(str(random.randint(1, 9)) for _ in range(6))
-        data_naix = faker.date_of_birth()
+            num_tse_naix = ''.join(str(random.randint(1, 9)) for _ in range(6))
+            data_naix = faker.date_of_birth()
 
-        id_tses = list()
-        for _ in range(3):
-            id_tse = random.choice('0123456789')
-            id_tses.append(id_tse)
-        id_tse = ''.join(id_tses)
-        tse = inicials + ' ' + sexe_tse + ' ' + num_tse_naix + ' ' + id_tse
+            id_tses = list()
+            for _ in range(3):
+                id_tse = random.choice('0123456789')
+                id_tses.append(id_tse)
+            tse = inicials + ' ' + sexe_tse + ' ' + num_tse_naix + ' ' + id_tse
 
-        num_tel = list()
-        for i in range(9):
-            i = random.randint(1, 9)
-            num_tel.append(i)
-        num_tel_final = ''.join(map(str, num_tel))
+            num_tel = list()
+            for i in range(9):
+                i = random.randint(1, 9)
+                num_tel.append(i)
+            num_tel_final = ''.join(map(str, num_tel))
 
         # Volem crear pacients amb dades dummy, 100.000 pacients i per millorar rendiment crearem indexos.
         
-        conn = psycopg2.connect(database="hospital",user="postgres", password=pswd,host=host_conn,port="5432")
-        conn.autocommit = True
-        cur = conn.cursor()
-        count = 0
-    for i in range(pacients):
-        count += 1
-        cur.execute(f"INSERT INTO pacientes (id_tarjeta_sanitaria, nombre, apellido, fecha_nacimiento, direccion, telefono, contacto_emergencia, activo) VALUES ('{tse}','{inicials_nom}','{inicials_cognom}','{data_naix}','{faker.address()}',{num_tel_final},NULL,True) ON CONFLICT DO NOTHING")
+            conn = psycopg2.connect(database="hospital",user="postgres", password=pswd,host=host_conn,port="5432")
+            conn.autocommit = True
+            cur = conn.cursor()
+            
+            count += 1
+            cur.execute(f"INSERT INTO pacientes (id_tarjeta_sanitaria, nombre, apellidos, fecha_nacimiento, direccion, num_telefono, contacto_emergencia, condiciones_paciente) VALUES ('{tse}','{inicials_nom}','{inicials_cognom}','{data_naix}','{faker.address()}',{num_tel_final},NULL,True) ON CONFLICT DO NOTHING")
+        show_loader()
+            
+        cur.close()
+        conn.close()
 
 
 pacients(100)
