@@ -1,5 +1,3 @@
-
-import csv
 import psycopg2
 import random
 from faker import Faker
@@ -7,33 +5,35 @@ import string
 import time
 
 # Aqui es guardaran totes les dades del fitxer csv
-host_conn = '192.168.56.10'
+host_conn = '192.168.1.50'
 pswd = 'P@ssw0rd'
 faker = Faker('ru_RU')
 
 def clean_all():
-    conn = psycopg2.connect(database="hospital",user="postgres",password=pswd,host=host_conn,port="5432")
-    conn.autocommit = True
-    cur = conn.cursor()
-    cur.execute("DELETE FROM diagnosticos")
-    cur.execute("DELETE FROM enfermeros")
-    cur.execute("DELETE FROM medicos")
-    cur.execute("DELETE FROM varios")
-    cur.execute("DELETE FROM pacientes")
-    cur.execute("DELETE FROM personal")
-    
-    cur.close()
-    conn.close()
-    
+    try:
+        conn = psycopg2.connect(database="hospital",user="postgres",password=pswd,host=host_conn,port="5432")
+        conn.autocommit = True
+        cur = conn.cursor()
+        cur.execute("DELETE FROM diagnosticos")
+        cur.execute("DELETE FROM enfermeros")
+        cur.execute("DELETE FROM medicos")
+        cur.execute("DELETE FROM varios")
+        cur.execute("DELETE FROM pacientes")
+        cur.execute("DELETE FROM personal")
+        print("Datos eliminados de las tablas correctamente")
+        cur.close()
+        conn.close()
+    except psycopg2.Error as e:
+        print(f"Error cleaning data: {e}")
+
 def personal(personal):
-    
-    #Postgres conn
-    conn = psycopg2.connect(database="hospital",user="postgres",password=pswd,host=host_conn,port="5432")
-    conn.autocommit = True
-    cur = conn.cursor()
-    
-    count = 0
-    for i in range(personal):
+    try:
+        #Postgres conn
+        conn = psycopg2.connect(database="hospital",user="postgres",password=pswd,host=host_conn,port="5432")
+        conn.autocommit = True
+        cur = conn.cursor()
+        count = 0
+        for i in range(personal):
             count += 1
             random.seed()
             #dni
@@ -50,77 +50,84 @@ def personal(personal):
                 num_tel.append(i)
             num_tel_final = ''.join(map(str, num_tel))
             cur.execute(f"INSERT INTO personal VALUES ({count},'{dni_final}','{faker.first_name()[:20]}','{faker.last_name()[:20]}','{faker.email()[:50]}',{num_tel_final[:20]},'{faker.address()[:20]}')")
-    print(f'total de registres dels personals: {count}')
-    cur.close()
-    conn.close()
+        print("\033[F\033[K", end="")  # Clear the previous line
+        print(f"Cargando ==>> Completado! --> {count} registros insertados en la tabla personal")
+        cur.close()
+        conn.close()
+    except psycopg2.Error as e:
+        print(f"Error inserting personal data: {e}")
 
 def medicos(metges):
-    conn = psycopg2.connect(database="hospital",user="postgres", password=pswd,host=host_conn,port="5432")
-    conn.autocommit = True
-    cur = conn.cursor()
-    count = 0
-    
-    for i in range(metges):
-        count += 1
-        cur.execute(f"INSERT INTO medicos(p_id,curriculum) VALUES ({i+1},'{faker.job()}')")
-    print(f'total de registres dels metges: {count}')
-        
-    cur.close()
-    conn.close()
+    try:
+        conn = psycopg2.connect(database="hospital",user="postgres", password=pswd,host=host_conn,port="5432")
+        conn.autocommit = True
+        cur = conn.cursor()
+        count = 0
+        for i in range(metges):
+            count += 1
+            cur.execute(f"INSERT INTO medicos(p_id,curriculum) VALUES ({i+1},'{faker.job()}')")
+        print("\033[F\033[K", end="")  # Clear the previous line
+        print(f"Cargndo ==>> Completado! --> {count} registros insertados en la tabla medicos")
+        cur.close()
+        conn.close()
+    except psycopg2.Error as e:
+        print(f"Error inserting medicos data: {e}")
 
 def enfermeros(qty):
-    conn = psycopg2.connect(database="hospital",user="postgres", password=pswd,host=host_conn,port="5432")
-    conn.autocommit = True
-    cur = conn.cursor()
-    count = 0
-    
-    for i in range(qty):
-        count += 1
-        p_id = i + 101
-        cur.execute(f"INSERT INTO enfermeros(p_id,experiencia) VALUES ({p_id},'{faker.job()}')")
-    print(f'total de registres de enfermers: {count}')
-        
-    cur.close()
-    conn.close()
+    try:
+        conn = psycopg2.connect(database="hospital",user="postgres", password=pswd,host=host_conn,port="5432")
+        conn.autocommit = True
+        cur = conn.cursor()
+        count = 0
+        for i in range(qty):
+            count += 1
+            p_id = i + 101
+            cur.execute(f"INSERT INTO enfermeros(p_id,experiencia) VALUES ({p_id},'{faker.job()}')")
+        print("\033[F\033[K", end="")  # Clear the previous line
+        print(f"Cargando ==>> Completado! --> {count} registros insertados en la tabla enfermeros")
+        cur.close()
+        conn.close()
+    except psycopg2.Error as e:
+        print(f"Error inserting enfermeros data: {e}")
 
 def personal_limpieza(netejadors):
-    conn = psycopg2.connect(database="hospital",user="postgres", password=pswd,host=host_conn,port="5432")
-    conn.autocommit = True
-    cur = conn.cursor()
-    count = 0
-    for i in range(netejadors):
-        count += 1
-        p_id = i + 301
-        # Уборка номеров significa neteja 
-        cur.execute(f"INSERT INTO varios VALUES ({p_id},'{'Уборка номеров'}')")
-    print(f'total de registres de netejadors: {count}')
-    cur.close()
-    conn.close()
+    try:
+        conn = psycopg2.connect(database="hospital",user="postgres", password=pswd,host=host_conn,port="5432")
+        conn.autocommit = True
+        cur = conn.cursor()
+        count = 0
+        for i in range(netejadors):
+            count += 1
+            p_id = i + 301
+            # Уборка номеров significa neteja 
+            cur.execute(f"INSERT INTO varios VALUES ({p_id},'{'Уборка номеров'}')")
+        print("\033[F\033[K", end="")  # Clear the previous line
+        print(f"Cargando ==>> Completado! --> {count} registros insertados en la tabla personal_limpieza")
+        cur.close()
+        conn.close()
+    except psycopg2.Error as e:
+        print(f"Error inserting personal_limpieza data: {e}")
 
 def personal_administracio(administracio):
-    conn = psycopg2.connect(database="hospital",user="postgres", password=pswd,host=host_conn,port="5432")
-    conn.autocommit = True
-    cur = conn.cursor()
-    count = 0
-    for i in range(administracio):
-        count += 1
-        p_id = i + 401
-        # администрация significa administració
-        cur.execute(f"INSERT INTO varios VALUES ({p_id},'{'администрация'}')")
-    print(f'total de registres de administarció: {count}')
-    cur.close()
-    conn.close()
-
-def show_loader():
-                for i in range(101):
-                    print(f"Loading: {i}%")
-                    time.sleep(0.1)
-                    print("\033[F\033[K", end="")  # Clear the previous line
-                print("Loading ==>> Completed!")
+    try:
+        conn = psycopg2.connect(database="hospital",user="postgres", password=pswd,host=host_conn,port="5432")
+        conn.autocommit = True
+        cur = conn.cursor()
+        count = 0
+        for i in range(administracio):
+            count += 1
+            p_id = i + 401
+            # администрация significa administració
+            cur.execute(f"INSERT INTO varios VALUES ({p_id},'{'администрация'}')")
+        print("\033[F\033[K", end="")  # Clear the previous line
+        print(f"Cargando ==>> Completado! --> {count} registros insertados en la tabla personal_administracion")
+        cur.close()
+        conn.close()
+    except psycopg2.Error as e:
+        print(f"Error inserting personal_administracio data: {e}")
 
 def pacientes(pacients):
-
-    #tse
+    try:
         count = 0
         for _ in range(pacients):
             inicials_nom = faker.first_name()
@@ -146,89 +153,102 @@ def pacientes(pacients):
                 num_tel.append(i)
             num_tel_final = ''.join(map(str, num_tel))
 
-        # Volem crear pacients amb dades dummy, 100.000 pacients i per millorar rendiment crearem indexos.
-        
             conn = psycopg2.connect(database="hospital",user="postgres", password=pswd,host=host_conn,port="5432")
             conn.autocommit = True
             cur = conn.cursor()
-            
+
             count += 1
             cur.execute(f"INSERT INTO pacientes (id_tarjeta_sanitaria, nombre, apellidos, fecha_nacimiento, direccion, num_telefono, contacto_emergencia, condiciones_paciente) VALUES ('{tse}','{inicials_nom}','{inicials_cognom}','{data_naix}','{faker.address()}',{num_tel_final},NULL,True) ON CONFLICT DO NOTHING")
-            print(f'{count} pacient/s creats')
-        show_loader()
-            
+        print("\033[F\033[K", end="")  # Clear the previous line
+        print(f"Cargando ==>> Completado! --> {count} registros insertados en la tabla pacientes")
         cur.close()
         conn.close()
+    except psycopg2.Error as e:
+        print(f"Error inserting pacientes data: {e}")
 
 def visitas(visites):
-    # Consultar id de metges
-    count = 0
-    conn = psycopg2.connect(database="hospital",user="postgres", password=pswd,host=host_conn,port="5432")
-    conn.autocommit = True
-    cur = conn.cursor()
-    cur.execute(f"SELECT p_id FROM medicos")
-    rows = cur.fetchall()
-    pers_ids = list()
-    
-    for row in rows:
-        pers_ids.append(row[0])
-    
-    cur.close()
-    # Consultar tse de pacients
-    cur = conn.cursor()
-    pacients_tse = list()
-    cur.execute(f"SELECT id_tarjeta_sanitaria FROM pacientes")
-    rows2 = cur.fetchall()
-    for row1 in rows2:
-        pacients_tse.append(row1[0])
+    try:
+        count = 0
+        conn = psycopg2.connect(database="hospital",user="postgres", password=pswd,host=host_conn,port="5432")
+        conn.autocommit = True
+        cur = conn.cursor()
+        cur.execute(f"SELECT p_id FROM medicos")
+        rows = cur.fetchall()
+        pers_ids = list()
 
+        for row in rows:
+            pers_ids.append(row[0])
 
-    for _ in range(visites):
-        count += 1
-        # Crear visites
-        data = faker.date_of_birth()
-        ts_entrada = faker.date() + ' ' + faker.time()
-        ts_sortida = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.mktime(time.strptime(ts_entrada, '%Y-%m-%d %H:%M:%S')) + 1800))
-        p_id = random.choice(pers_ids)
-        tse = random.choice(pacients_tse)
-        medicamentos = ['Paracetamol', 'Ibuprofeno', 'Aspirina', 'Amoxicilina', 'Omeprazol', 'Diazepam', 'Lorazepam', 'Clonazepam', 'Alprazolam', 'Zolpidem', 'Zopiclona', 'Trankimazin', 'Rivotril', 'Lexatin', 'Valium', 'Xanax', 'Orfidal', 'Stilnox', 'Imovane', 'Alplax', 'Dormidina', 'Dormicum']
-        cur.execute(f"INSERT INTO diagnosticos (p_id, id_tarjeta_sanitaria,fecha_entrada,fecha_salida,tiene_receta,medicamentos) VALUES ('{p_id}','{tse}','{ts_entrada}','{ts_sortida}','Si','{random.choice(medicamentos)}')")
-    print(f'total de registres de visites: {count}')
-    
-    cur.close()
-    conn.close()
+        cur.close()
+        cur = conn.cursor()
+        pacients_tse = list()
+        cur.execute(f"SELECT id_tarjeta_sanitaria FROM pacientes")
+        rows2 = cur.fetchall()
+        for row1 in rows2:
+            pacients_tse.append(row1[0])
 
+        for _ in range(visites):
+            count += 1
+            data = faker.date_of_birth()
+            ts_entrada = faker.date() + ' ' + faker.time()
+            ts_sortida = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.mktime(time.strptime(ts_entrada, '%Y-%m-%d %H:%M:%S')) + 1800))
+            p_id = random.choice(pers_ids)
+            tse = random.choice(pacients_tse)
+            medicamentos = ['Paracetamol', 'Ibuprofeno', 'Aspirina', 'Amoxicilina', 'Omeprazol', 'Diazepam', 'Lorazepam', 'Clonazepam', 'Alprazolam', 'Zolpidem', 'Zopiclona', 'Trankimazin', 'Rivotril', 'Lexatin', 'Valium', 'Xanax', 'Orfidal', 'Stilnox', 'Imovane', 'Alplax', 'Dormidina', 'Dormicum']
+            cur.execute(f"INSERT INTO diagnosticos (p_id, id_tarjeta_sanitaria,fecha_entrada,fecha_salida,tiene_receta,medicamentos) VALUES ('{p_id}','{tse}','{ts_entrada}','{ts_sortida}','Si','{random.choice(medicamentos)}')")
+        print("\033[F\033[K", end="")  # Clear the previous line
+        print(f"Cargando ==>> Completado! --> {count} registros insertados en la tabla diagnosticos")
+        cur.close()
+        conn.close()
+    except psycopg2.Error as e:
+        print(f"Error inserting visitas data: {e}")
+
+def drop_indexos():
+    try:
+        conn = psycopg2.connect(database="hospital",user="postgres", password=pswd,host=host_conn,port="5432")
+        conn.autocommit = True
+        cur = conn.cursor()
+        cur.execute("DROP INDEX idx_pacientes")
+        cur.execute("DROP INDEX idx_diagnosticos")
+        cur.execute("DROP INDEX idx_personal")
+        cur.execute("DROP INDEX idx_medicos")
+        cur.execute("DROP INDEX idx_enfermeros")
+        cur.execute("DROP INDEX idx_varios")
+        print("Cargando ==>> Completado! --> Índices eliminados")
+        cur.close()
+        conn.close()
+    except psycopg2.Error as e:
+        print(f"Error dropping indexes: {e}")
 def indexos():
-    psycopg2.connect(database="hospital",user="postgres", password=pswd,host=host_conn,port="5432")
-    conn.autocommit = True
-    cur = conn.cursor()
-    cur.execute("CREATE INDEX idx_pacientes ON pacientes (id_tarjeta_sanitaria)")
-    cur.execute("CREATE INDEX idx_personal ON personal (dni)")
-    cur.execute("CREATE INDEX idx_medicos ON medicos (p_id)")
-    cur.execute("CREATE INDEX idx_enfermeros ON enfermeros (p_id)")
-    cur.execute("CREATE INDEX idx_personal_limpieza ON varios (p_id)")
-    cur.execute("CREATE INDEX idx_personal_administracion ON varios (p_id)")
-    cur.execute("CREATE INDEX idx_diagnosticos ON diagnosticos (p_id)")
-    cur.close()
-    conn.close()
-    
+    try:
+        conn = psycopg2.connect(database="hospital",user="postgres", password=pswd,host=host_conn,port="5432")
+        conn.autocommit = True
+        cur = conn.cursor()
+        drop_indexos()
+        cur.execute("CREATE INDEX idx_pacientes ON pacientes (id_tarjeta_sanitaria, nombre, apellidos, fecha_nacimiento, direccion, num_telefono, contacto_emergencia, condiciones_paciente)")
+        cur.execute("CREATE INDEX idx_diagnosticos ON diagnosticos (p_id, id_tarjeta_sanitaria,fecha_entrada,fecha_salida,tiene_receta,medicamentos)")
+        cur.execute("CREATE INDEX idx_personal ON personal (p_id,dni,nombre,apellidos,correo,num_telefono,direccion)")
+        cur.execute("CREATE INDEX idx_medicos ON medicos (p_id,curriculum)")
+        cur.execute("CREATE INDEX idx_enfermeros ON enfermeros (p_id,experiencia)")
+        cur.execute("CREATE INDEX idx_varios ON varios (p_id,tipo_de_trabajo)")
+
+        print("\033[F\033[K", end="")  # Clear the previous line
+        print("Cargando ==>> Completado! --> Índices creados")
+        cur.close()
+        conn.close()
+    except psycopg2.Error as e:
+        print(f"Error creating indexes: {e}")
+
 def creacion():
-    # Crear personal
-    clean_all()
-    personal(450)
-    medicos(100)
-    enfermeros(200)
-    personal_limpieza(100)
-    personal_administracio(50)
-    pacientes(400)
-    visitas(500)
-    
-    
-    
-    
-# Execs
-
-
-creacion()
-
-
+    try:
+        clean_all()
+        personal(450)
+        medicos(100)
+        enfermeros(200)
+        personal_limpieza(100)
+        personal_administracio(50)
+        pacientes(50000)
+        visitas(100000)
+        print("Cargando ==>> Completado! --> Datos insertados en la base de datos")
+    except Exception as e:
+        print(f"Error in creacion: {e}")
