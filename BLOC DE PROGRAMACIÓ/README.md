@@ -8,6 +8,9 @@
 
 ## Codi de Programació.
 ### Codi de connectivitat i login
+
+En aquest codi fa de definició del inici de sessió amb l'usuari a la base de dades. Ja que com tenim 5 codis de Python, aquest fa com definició de login.
+Depenent del rol que tinguis com usuari et sortirà un main diferent.
 ```
 import psycopg2
 import main_por_rol
@@ -32,10 +35,8 @@ def loginito(usuarito, contrasenyita):
         connexio.close()
 ```
 
-En aquest codi fa de definició del inici de sessió amb l'usuari a la base de dades. Ja que com tenim 5 codis de Python, aquest fa com definició de login.
-Depenent del rol que tinguis com usuari et sortirà un main diferent.
-
 Després d'aquest codi formem els mains que corresponen a cada rol. Però abans de això comprovem quin rol té d'aquesta forma.
+Amb aquesta definició i execució d'SQL podem veure el rol de l'usuari amb el qual hem fet login.
 ```
 def enQueRolsitoEsta(usuarito):
     
@@ -57,7 +58,6 @@ def enQueRolsitoEsta(usuarito):
     rol = str(resultadito[0][1])
     return rol
 ```
-Amb aquesta definició i execució d'SQL podem veure el rol de l'usuari amb el qual hem fet login.
 
 Ara finalment fem un print de cada main.
 ```
@@ -114,4 +114,45 @@ def menuPorRol(rol):
     return opcion
 ```
 
-##### Hola
+### Codi d'alta d'un nou usuari
+
+Amb la definició següent demanem el usuari i contrasenya. 
+```
+def registrar_usuarito():
+    nombrecito_usuarito = input("Introduce el nombre del usuario: ")
+    contrasenya_usuarito = input("Introduce la contraseña: ")
+    encriptar_datitos(nombrecito_usuarito, contrasenya_usuarito)
+    insertar_usuarito_a_la_bd(nombrecito_usuarito, contrasenya_usuarito)
+```
+
+Ara amb aquesta definició encriptarem les dades per inserir-les en un CSV.
+```
+def encriptar_datitos(nombrecito_usuarito, contrasenya_usuarito):
+    usuarito_encriptado = hashlib.sha256(nombrecito_usuarito.encode())
+    contrasenya_encriptada = hashlib.sha256(contrasenya_usuarito.encode())
+    insertar_usuarito_en_csv(usuarito_encriptado, contrasenya_encriptada)
+```
+
+Ara inserim les dades que hem encriptat anteriorment al CSV.
+```
+def insertar_usuarito_en_csv(usuarito_encriptado, contrasenya_encriptada):
+    with open("usuaritos_creados.csv", "a", newline="") as csvfile:
+        csvwriter = csv.writer(csvfile)
+        csvwriter.writerow([usuarito_encriptado, contrasenya_encriptada])
+```
+
+Finalment afegim l'usuari a la base de dades.
+```
+def insertar_usuarito_a_la_bd(nombrecito_usuarito, contrasenya_usuarito):
+    
+    connexio = psycopg2.connect(
+        dbname="hospital",
+        user="postgres",
+        password="P@ssw0rd",
+        host="10.94.255.129"
+    )
+    cur = connexio.cursor()
+    
+    cur.execute(f"CREATE ROLE {nombrecito_usuarito} LOGIN PASSWORD '{contrasenya_usuarito}';")
+    connexio.commit()
+```
