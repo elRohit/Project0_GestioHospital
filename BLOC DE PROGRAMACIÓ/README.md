@@ -156,3 +156,8 @@ def insertar_usuarito_a_la_bd(nombrecito_usuarito, contrasenya_usuarito):
     cur.execute(f"CREATE ROLE {nombrecito_usuarito} LOGIN PASSWORD '{contrasenya_usuarito}';")
     connexio.commit()
 ```
+
+### Codi del Bloc de Manteniment
+
+Ara que hem aconseguit la connectivitat amb la base de dades hem de fer "utilitzables" els mains creats en l'apartat de [Codi de Connectivitat i login](#Codi-de-connectivitat-i-login)
+```
