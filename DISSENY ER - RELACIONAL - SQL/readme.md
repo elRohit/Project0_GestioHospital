@@ -70,3 +70,49 @@ Amb aquesta taula podem veure les reserves d’habitacions que tenen els pacient
 
 Taula on es pot veure les operacions dels pacients, tant si es fa una operació com si només s’utilitza el quiròfan per altra intervenció. 
 
+## Explicació relacions
+
+**Personal**:
+
+El personal pot ser de diversos tipus, poden ser metges, infermers o d’altres tipus (recepcionistes, celadors, conductors)
+
+**Metge**:
+
+Un metge té una especialitat, fa diagnòstics i operacions, i està assignat a un infermer.
+
+**Infermers**:
+
+Els infermers tenen un metge assignat, també estan assignats a una planta i assisteixen operacions
+
+**Diagnòstic**:
+
+Un diagnòstic està fet per un metge, i tenen un pacient
+
+**Pacient**:
+
+Un pacient pot tenir diversos diagnòstics, pot tenir cap, una o diverses operacions i pot tenir cap, una o diverses reserves.
+
+**Operació**:
+
+Una operació té un pacient assignat, té lloc a un quiròfan, és realitzada per un metge i l’assisteixen infermeres.
+
+**Plantes**:
+
+Una planta pot tenir una o diferents infermeres, conté diverses habitacions, conté un o diversos quiròfans
+
+**Quiròfan**:
+
+Un quiròfan està assignat a una planta, pot tenir cap, una o diverses operacions pendents. Un quiròfan pot tenir un o més aparells mèdics.
+
+**Aparells mèdics**:
+
+Un o més aparells mèdics poden estar situats a un quiròfan.
+
+**Reserva**:
+
+Una reserva té assignada un pacient i està assignada a una habitació.
+
+**Habitació**:
+
+Una habitació es troba a una planta, i pot tenir cap, una o diverses reserves assignades.
+
