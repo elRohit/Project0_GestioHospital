@@ -1,7 +1,7 @@
 # Distribució de la base de dades
 1. [Les taules de la base de dades](#Les-taules-de-la-base-de-dades)
 2. [Explicació relacions](#Explicació-relacions)
-3. [Codi SQL](#no-hay)
+3. [Codi SQL](#no-hay-aun)
 
 
 ![Esquema-ER](model_er.png)
