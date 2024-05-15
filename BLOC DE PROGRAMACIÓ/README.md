@@ -3,11 +3,14 @@
 ## Índex de continguts
 
 1. [Codi de Programació (engloba tots els apartats de PRG)](#Codi-de-programació).
-2. Processos, Funcions i Triggers.
-3. Exportació de dades.
+   1.1 [Codi de connectivitat i login](#Codi-de-connectivitat-i-login)
+   1.2 [Codi d'alta d'un nou usuari](#Codi-d'alta-d'un-nou-usuari)
+   1.3 [Codi del Bloc de Manteniment](#Codi-del-Bloc-de-Manteniment)
+3. Processos, Funcions i Triggers.
+4. Exportació de dades.
 
-## Codi de Programació.
-### Codi de connectivitat i login
+## 1. Codi de Programació.
+### 1.1 Codi de connectivitat i login
 
 En aquest codi fa de definició del inici de sessió amb l'usuari a la base de dades. Ja que com tenim 5 codis de Python, aquest fa com definició de login.
 Depenent del rol que tinguis com usuari et sortirà un main diferent.
@@ -114,7 +117,7 @@ def menuPorRol(rol):
     return opcion
 ```
 
-### Codi d'alta d'un nou usuari
+### 1.2 Codi d'alta d'un nou usuari
 
 Amb la definició següent demanem el usuari i contrasenya. 
 ```
@@ -157,7 +160,7 @@ def insertar_usuarito_a_la_bd(nombrecito_usuarito, contrasenya_usuarito):
     connexio.commit()
 ```
 
-### Codi del Bloc de Manteniment
+### 1.3 Codi del Bloc de Manteniment
 
 Ara que hem aconseguit la connectivitat amb la base de dades hem de fer "utilitzables" els mains creats en l'apartat de [Codi de Connectivitat i login](#Codi-de-connectivitat-i-login).
 
