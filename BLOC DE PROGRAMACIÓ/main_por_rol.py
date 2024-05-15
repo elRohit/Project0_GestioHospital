@@ -658,7 +658,7 @@ def menuAdminHospital(usuarito, contrasenyita, opcion):
                             connexio.commit()
 
                         if rol == "celador" or rol == "recepcionista" or rol == "conductor_ambulancia" or rol == "administrador_hospital" or rol == "administrador_informatico":
-                            SQLita3 = f"INSERT INTO varios (p_id) VALUES ({resultadito[0][0]});"
+                            SQLita3 = f"INSERT INTO varios (p_id, tipo_de_trabajo) VALUES ({resultadito[0][0]}, '{rol}');"
                             cur.execute(SQLita3)
                             connexio.commit()
                         usuario = nombreTrabajador[0:1] + dni
@@ -671,6 +671,7 @@ def menuAdminHospital(usuarito, contrasenyita, opcion):
                         print("El trabajador ha sido dado de alta con éxito.")
                         print("El trabajador tiene el rol de: " + rol)
                         print(f"Tu usuario es: {usuario}" )
+                        print("Tu contraseña es: P@ssw0rd")
                         
                         validar_DNI = False
                         
@@ -1025,3 +1026,4 @@ def menuRecepcionista(usuarito, contrasenyita, opcion):
             except psycopg2.Error as e:
                     
                     print("No se ha podido mostrar el estado de la planta.")
+                    
