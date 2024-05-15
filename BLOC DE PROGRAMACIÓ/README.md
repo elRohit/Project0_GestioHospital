@@ -164,6 +164,8 @@ Ara que hem aconseguit la connectivitat amb la base de dades hem de fer "utilitz
 Així que farem una definició per cada rol on cadascun tingui funcions diferents.
 
 #### Rol d'administració d'hospital
+
+Amb el codi següent podem veure el personal dividit pel seu ofici, si aquest és de "Varios", sortirà també el seu tipus de treball.
 ```
 try:
                 diccionarioEnfermeros = {}
