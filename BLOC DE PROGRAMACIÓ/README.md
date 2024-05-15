@@ -162,7 +162,7 @@ def insertar_usuarito_a_la_bd(nombrecito_usuarito, contrasenya_usuarito):
 Ara que hem aconseguit la connectivitat amb la base de dades hem de fer "utilitzables" els mains creats en l'apartat de [Codi de Connectivitat i login](#Codi-de-connectivitat-i-login).
 
 Així que farem una definició per cada rol on cadascun tingui funcions diferents.
-Posaré un exemple de cada rol, ja que es pot veure el codi complet en el enllaç seguent: [Bloc de manteniment](main_por_rol.py)
+Posaré un exemple d'alguns rols, ja que es pot veure el codi complet en el enllaç seguent: [Bloc de manteniment](main_por_rol.py)
 
 #### Rol d'administració d'hospital
 
@@ -239,3 +239,70 @@ try:
                 
                 print("No se ha podido mostrar la lista de personal.")
 ```
+
+#### Rol de recepcionista
+
+Amb el codi següent ens permet inserir un nou pacient, i que aquest automàticament tingui un usuari, aquest consta de la seva targeta sanitària però sense espais. Per defecte la contrasenya és P@ssw0rd (es pot fer una variable per posar la contrasenya que vulgui el pacient però amb aquest codi no ens oblidem de la contrasenya, ja que tots tenen la mateixa.
+```
+if opcion == 1:
+            
+                id_tarjeta_sanitaria = input("Introduce el número de tarjeta sanitaria del paciente: ")
+                connexio = psycopg2.connect(
+                    dbname="hospital",
+                    user="postgres",
+                    password="P@ssw0rd",
+                    host="10.94.255.129",
+                    port="5432",
+                    sslmode="require"
+                )
+                SQLita = f"SELECT public.validar_tse('{id_tarjeta_sanitaria}');"
+                cur = connexio.cursor()
+                cur.execute(SQLita)
+                resultadito = cur.fetchall()
+                cur.close()
+                connexio.close() 
+                validar = True
+                while validar:
+                    if resultadito[0][0] == True:
+                        nombre = input("Introduce el nombre del paciente: ")
+                        apellidos = input("Introduce los apellidos del paciente: ")
+                        fecha_nacimiento = input("Introduce la fecha de nacimiento del paciente (YYYY-MM-DD HH:MM:SS): ")
+                        direccion = input("Introduce la dirección del paciente: ")
+                        telefono = input("Introduce el teléfono del paciente: ")
+                        contacto_emergencia = input("Introduce el contacto de emergencia del paciente: ")
+                        condiciones_medicas = input("Introduce las condiciones médicas del paciente: ")
+                        try:
+                            connexio = psycopg2.connect(
+                                dbname="hospital",
+                                user="postgres",
+                                password="P@ssw0rd",
+                                host="10.94.255.129",
+                                port="5432",
+                                sslmode="require"
+                            )
+                            SQLita = f"INSERT INTO pacientes (id_tarjeta_sanitaria, nombre, apellidos, fecha_nacimiento, direccion, num_telefono, contacto_emergencia, condiciones_paciente) VALUES ('{id_tarjeta_sanitaria}', '{nombre}', '{apellidos}', '{fecha_nacimiento}.000000', '{direccion}', '{telefono}', '{contacto_emergencia}', '{condiciones_medicas}');"
+                            cur = connexio.cursor()
+                            cur.execute(SQLita)
+                            connexio.commit()
+                            usuario = id_tarjeta_sanitaria[0:4] + id_tarjeta_sanitaria[5] + id_tarjeta_sanitaria[7:13] + id_tarjeta_sanitaria[14:16] + id_tarjeta_sanitaria[17]
+                            SQLita2 = f"CREATE ROLE {usuario} LOGIN PASSWORD 'P@ssw0rd' IN ROLE paciente;"
+                            cur.execute(SQLita2)
+                            connexio.commit()
+                            cur.close()
+                            connexio.close()
+                            print("El paciente ha sido dado de alta con éxito.")
+                            print(f"Tu usuario es: {usuario}")
+                            print("Tu contraseña es: P@ssw0rd")
+                            
+                            validar = False
+                        
+                        except psycopg2.Error as e: 
+                            
+                            print("El usuario no ha podido ser creado.")
+                            validar = False
+                            
+                    if resultadito[0][0] == False:
+                        print("El número de tarjeta sanitaria no es válido.")
+                        validar = False
+```
+
