@@ -2,7 +2,7 @@
 
 ## Índex de continguts
 
-1. [Codi de Programació (engloba tots els apartats de PRG)](#Codi-de-connectivitat-i-login).
+1. [Codi de Programació (engloba tots els apartats de PRG)](#Codi-de-programació).
 2. Processos, Funcions i Triggers.
 3. Exportació de dades.
 
