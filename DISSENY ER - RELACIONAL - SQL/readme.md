@@ -3,7 +3,7 @@
 2. [Explicació relacions](#Explicació-relacions)
 3. [Codi SQL](#no-hay)
 
-
+![Esquema-ER](model_er.png)
 
 
 
