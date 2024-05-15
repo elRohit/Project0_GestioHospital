@@ -159,5 +159,80 @@ def insertar_usuarito_a_la_bd(nombrecito_usuarito, contrasenya_usuarito):
 
 ### Codi del Bloc de Manteniment
 
-Ara que hem aconseguit la connectivitat amb la base de dades hem de fer "utilitzables" els mains creats en l'apartat de [Codi de Connectivitat i login](#Codi-de-connectivitat-i-login)
+Ara que hem aconseguit la connectivitat amb la base de dades hem de fer "utilitzables" els mains creats en l'apartat de [Codi de Connectivitat i login](#Codi-de-connectivitat-i-login).
+
+Així que farem una definició per cada rol on cadascun tingui funcions diferents.
+
+#### Rol d'administració d'hospital
+```
+try:
+                diccionarioEnfermeros = {}
+                diccionarioMedicos = {}
+                diccionarioVarios = {} 
+                connexio = psycopg2.connect(
+                    dbname="hospital",
+                    user="postgres",
+                    password="P@ssw0rd",
+                    host="10.94.255.129",
+                    port="5432",
+                    sslmode="require"
+                )
+                cur = connexio.cursor()
+                SQLita = f"SELECT p_id FROM personal;"
+                cur.execute(SQLita)
+                lista_id = cur.fetchall()
+                for p_id in lista_id:
+                    id_real = p_id[0]  
+                    try:
+                        cur.execute(f"SELECT p_id FROM medicos WHERE p_id = {id_real};")
+                        resultadito2 = cur.fetchall()
+                        if resultadito2:
+                            cur.execute(f"SELECT dni, nombre, apellidos FROM personal WHERE p_id = {id_real};")
+                            resultadito3 = cur.fetchall()
+                            diccionarioMedicos[id_real] = resultadito3[0]
+                    except psycopg2.Error as e:
+                        pass
+                    try:
+                        cur.execute(f"SELECT p_id FROM enfermeros WHERE p_id = {id_real};")
+                        resultadito2 = cur.fetchall()
+                        if resultadito2:
+                            cur.execute(f"SELECT dni, nombre, apellidos FROM personal WHERE p_id = {id_real};")
+                            resultadito3 = cur.fetchall()
+                            diccionarioEnfermeros[id_real] = resultadito3[0]
+                    except psycopg2.Error as e:
+                        pass
+                    try:
+                        cur.execute(f"SELECT p_id FROM varios WHERE p_id = {id_real};")
+                        resultadito2 = cur.fetchall()
+                        if resultadito2:
+                            cur.execute(f"SELECT p.dni, p.nombre, p.apellidos, v.tipo_de_trabajo FROM personal p JOIN varios v ON p.p_id = v.p_id WHERE v.p_id = {id_real};")
+                            resultadito3 = cur.fetchall()
+                            diccionarioVarios[id_real] = resultadito3[0]
+                    except psycopg2.Error as e:
+                        pass
+                    id_real = None
+                cur.close()
+                connexio.close()
+                print("+----------------------------------------+")
+                print("|           Lista de personal            |")
+                print("+----------------------------------------+")
+                print("| Enfermeros |")
+                print("+----------------------------------------+")
+                for i in diccionarioEnfermeros:
+                    print(f"| DNI: {diccionarioEnfermeros[i][0]} | Nombre: {diccionarioEnfermeros[i][1]} | Apellidos: {diccionarioEnfermeros[i][2]} |")
+                print("+----------------------------------------+")
+                print("| Médicos |")
+                print("+----------------------------------------+")
+                for i in diccionarioMedicos:
+                    print(f"| DNI: {diccionarioMedicos[i][0]} | Nombre: {diccionarioMedicos[i][1]} | Apellidos: {diccionarioMedicos[i][2]} |")
+                print("+----------------------------------------+")
+                print("| Varios |")
+                print("+----------------------------------------+")
+                for i in diccionarioVarios:
+                    print(f"| DNI: {diccionarioVarios[i][0]} | Nombre: {diccionarioVarios[i][1]} | Apellidos: {diccionarioVarios[i][2]} | Tipo de trabajo: {diccionarioVarios[i][3]} |")
+                print("+----------------------------------------+")
+       
+            except psycopg2.Error as e:
+                
+                print("No se ha podido mostrar la lista de personal.")
 ```
