@@ -6,7 +6,7 @@
 
    1.1 [Codi de connectivitat i login](#Codi-de-connectivitat-i-login)
 
-   1.2 [Codi d'alta d'un nou usuari](#Codi-d'alta-d'un-nou-usuari)
+   1.2 [Codi d'alta d'un nou usuari](#Codi-per-registrar-un-nou-usuari)
 
    1.3 [Codi del Bloc de Manteniment](#Codi-del-Bloc-de-Manteniment)
 3. Processos, Funcions i Triggers.
@@ -120,7 +120,7 @@ def menuPorRol(rol):
     return opcion
 ```
 
-### Codi d'alta d'un nou usuari
+### Codi per registrar un nou usuari
 
 Amb la definició següent demanem el usuari i contrasenya. 
 ```
