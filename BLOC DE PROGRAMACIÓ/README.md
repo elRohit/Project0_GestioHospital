@@ -2,17 +2,17 @@
 
 ## Índex de continguts
 
-1. [Codi de Programació (engloba tots els apartats de PRG)](#Codi-de-Programació.).
+1. [Codi de Programació (engloba tots els apartats de PRG)](#Codi-de-Programació)
 
-   1.1 [Codi de connectivitat i login](#Codi-de-connectivitat-i-login).
+   1.1 [Codi de connectivitat i login](#Codi-de-connectivitat-i-login)
 
-   1.2 [Codi d'alta d'un nou usuari](#Codi-d'alta-d'un-nou-usuari).
+   1.2 [Codi d'alta d'un nou usuari](#Codi-d'alta-d'un-nou-usuari)
 
-   1.3 [Codi del Bloc de Manteniment](#Codi-del-Bloc-de-Manteniment).
+   1.3 [Codi del Bloc de Manteniment](#Codi-del-Bloc-de-Manteniment)
 3. Processos, Funcions i Triggers.
 4. Exportació de dades.
 
-## Codi de Programació.
+## Codi de Programació
 ### Codi de connectivitat i login
 
 En aquest codi fa de definició del inici de sessió amb l'usuari a la base de dades. Ja que com tenim 5 codis de Python, aquest fa com definició de login.
