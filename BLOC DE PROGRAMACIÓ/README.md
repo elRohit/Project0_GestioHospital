@@ -315,7 +315,7 @@ if opcion == 1:
 ```
 ### Codi de exportació de dades
 
-Ara per poder exportar les dades de les viistes utilitzarem aquest codi (codi complet en [l'enllaç](exportacio_de_dades.py):
+Ara per poder exportar les dades de les viistes utilitzarem aquest codi (codi complet en [l'enllaç](exportacio_de_dades.py)):
 ```
 def fechitas():
     fecha_inicio = input("Introduce la fecha de inicio de la exportación (formato: YYYY-MM-DD HH:MM:SS): ")
