@@ -342,6 +342,10 @@ Seguidament executem la comanda
 A continuació, haurem d'afegir una línia al .profile de l'usuari indicant la ruta del fitxer python amb la nostra aplicació.
 ![Profile](images/PROFILE.png)
 
-Finalment, accedirem amb un client per SSH per comprovar que s'executa l'script automàticament
+Accedirem amb un client per SSH per comprovar que s'executa l'script automàticament
 ![Comprovació](images/ssh_comp.png)
+
+Finalment, volem que una vegada finalitzi l'aplicació, que es talli la connexio SSH.
+![Cerrar_Profile](images/CERRAR_PROFILE.png)
+![Cerrar_SSH](images/CERRAR_SSH.png)
 
