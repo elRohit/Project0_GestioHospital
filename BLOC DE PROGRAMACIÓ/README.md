@@ -314,3 +314,14 @@ if opcion == 1:
                         validar = False
 ```
 ### Codi de exportació de dades
+
+## Configuració de la aplicació al inici de les connexions.
+
+Primer de tot haurem de instalar python en el servidor i instal·lar les llibreries necessàries.
+Executarem la següent comanda:
+```
+pip freeze > requirements.txt
+```
+Això ens crearà un fitxer txt amb totes les llibreries que podrem importar al nostre servidor Linux.
+A continuació, amb WinSCP transferirem el fitxer txt al servidor.
+
