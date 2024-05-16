@@ -317,7 +317,7 @@ if opcion == 1:
 
 ## Configuració de la aplicació al inici de les connexions.
 
-Abans de començar, ens assegurarem de tenir el nostre servidor actualitzar, executarem les següents comandes:
+Abans de començar, ens assegurarem de tenir el nostre servidor actualitzat, executarem les següents comandes:
 
 ``` 
 apt update && apt upgrade 
