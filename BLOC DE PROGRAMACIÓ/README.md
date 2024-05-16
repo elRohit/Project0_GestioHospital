@@ -317,12 +317,24 @@ if opcion == 1:
 
 ## Configuració de la aplicació al inici de les connexions.
 
-Primer de tot haurem de instalar python en el servidor i instal·lar les llibreries necessàries.
+Abans de començar, ens assegurarem de tenir el nostre servidor actualitzar, executarem les següents comandes:
+
+``` 
+apt update && apt upgrade 
+```
+
+Seguidament haurem de instalar python en el servidor i instal·lar les llibreries necessàries.
 Executarem la següent comanda:
 ```
 pip freeze > requirements.txt
 ```
 Això ens crearà un fitxer txt amb totes les llibreries que podrem importar al nostre servidor Linux.
-A continuació, amb WinSCP transferirem el fitxer txt al servidor.
+A continuació, amb WinSCP transferirem el fitxer txt al servidor i el python de la nostra aplicació.
 
 ![WINSCP](images/WinSCP1.png)
+
+Seguidament executem la comanda 
+```pip install -r requriments.txt```
+![PIP](images/PIP_1.png)
+
+
