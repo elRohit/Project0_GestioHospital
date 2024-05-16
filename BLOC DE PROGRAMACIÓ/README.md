@@ -317,7 +317,7 @@ if opcion == 1:
 
 ## Configuració de la aplicació al inici de les connexions.
 
-Abans de començar, ens assegurarem de tenir el nostre servidor actualitzar, executarem les següents comandes:
+Abans de començar, ens assegurarem de tenir el nostre servidor actualitzat, executarem les següents comandes:
 
 ``` 
 apt update && apt upgrade 
@@ -331,7 +331,7 @@ pip freeze > requirements.txt
 Això ens crearà un fitxer txt amb totes les llibreries que podrem importar al nostre servidor Linux.
 A continuació, amb WinSCP transferirem el fitxer txt al servidor i el python de la nostra aplicació.
 
-![WINSCP](images/WinSCP1.png)
+![WINSCP](images/WINSCP.png)
 
 Seguidament executem la comanda 
 ```pip install -r requriments.txt```
