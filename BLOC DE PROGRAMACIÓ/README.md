@@ -346,6 +346,8 @@ Accedirem amb un client per SSH per comprovar que s'executa l'script automàtica
 ![Comprovació](images/ssh_comp.png)
 
 Finalment, volem que una vegada finalitzi l'aplicació, que es talli la connexio SSH.
+Per fer això, afegirem una línia amb la comanda `exit` al final del .profile
 ![Cerrar_Profile](images/CERRAR_PROFILE.png)
+Aqui tenim la comprovació de que una vegada tancada la aplicació, finalitza la sessió.
 ![Cerrar_SSH](images/CERRAR_SSH.png)
 
