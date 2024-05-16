@@ -315,7 +315,9 @@ if opcion == 1:
 ```
 ### Codi de exportació de dades
 
-Ara per poder exportar les dades de les viistes utilitzarem aquest codi (codi complet en [l'enllaç](exportacio_de_dades.py)):
+Ara per poder exportar les dades de les visites utilitzarem aquest codi: [Bloc d'exportació de dades](exportacio_de_dades.py):
+
+Ara en aquesta definició l'utilitzarem per recollir l'interval de temps on volem recollir l'informació.
 ```
 def fechitas():
     fecha_inicio = input("Introduce la fecha de inicio de la exportación (formato: YYYY-MM-DD HH:MM:SS): ")
