@@ -6,8 +6,6 @@
 
 ![Esquema-ER](model_er.png)
 
-
-
 ## Les taules de la base de dades
 
 **Personal**:
@@ -77,7 +75,6 @@ Amb aquesta taula podem veure les reserves d’habitacions que tenen els pacient
 **Operació**:
 
 Taula on es pot veure les operacions dels pacients, tant si es fa una operació com si només s’utilitza el quiròfan per altra intervenció. 
-
 
 ## Explicació relacions
 
