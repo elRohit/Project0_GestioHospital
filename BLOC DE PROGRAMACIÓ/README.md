@@ -350,5 +350,6 @@ Per fer això, afegirem una línia amb la comanda `exit` al final del .profile
 ![Cerrar_Profile](images/CERRAR_PROFILE.png)
 
 Aqui tenim la comprovació de que una vegada tancada la aplicació, finalitza la sessió.
+
 ![Cerrar_SSH](images/CERRAR_SSH.png)
 
