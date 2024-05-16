@@ -331,7 +331,7 @@ pip freeze > requirements.txt
 Això ens crearà un fitxer txt amb totes les llibreries que podrem importar al nostre servidor Linux.
 A continuació, amb WinSCP transferirem el fitxer txt al servidor i el python de la nostra aplicació.
 
-![WINSCP](images/WinSCP.png)
+![WINSCP](images/WINSCP.png)
 
 Seguidament executem la comanda 
 ```pip install -r requriments.txt```
