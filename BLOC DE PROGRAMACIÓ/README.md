@@ -325,3 +325,4 @@ pip freeze > requirements.txt
 Això ens crearà un fitxer txt amb totes les llibreries que podrem importar al nostre servidor Linux.
 A continuació, amb WinSCP transferirem el fitxer txt al servidor.
 
+![WINSCP](images/WinSCP1.png)
