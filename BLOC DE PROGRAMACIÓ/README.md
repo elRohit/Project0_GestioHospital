@@ -341,5 +341,5 @@ A continuació, haurem d'afegir una línia al .profile de l'usuari indicant la r
 ![Profile](images/PROFILE.png)
 
 Finalment, accedirem amb un client per SSH per comprovar que s'executa l'script automàticament
-![Comprovació](images/ssh_comp_feo.png)
+![Comprovació](images/ssh_comp.png)
 
