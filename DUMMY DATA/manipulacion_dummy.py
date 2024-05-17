@@ -225,12 +225,12 @@ def indexos():
         conn.autocommit = True
         cur = conn.cursor()
         drop_indexos()
-        cur.execute("CREATE INDEX idx_pacientes ON pacientes (id_tarjeta_sanitaria, nombre, apellidos, fecha_nacimiento, direccion, num_telefono, contacto_emergencia, condiciones_paciente)")
-        cur.execute("CREATE INDEX idx_diagnosticos ON diagnosticos (p_id, id_tarjeta_sanitaria,fecha_entrada,fecha_salida,tiene_receta,medicamentos)")
-        cur.execute("CREATE INDEX idx_personal ON personal (p_id,dni,nombre,apellidos,correo,num_telefono,direccion)")
-        cur.execute("CREATE INDEX idx_medicos ON medicos (p_id,curriculum)")
-        cur.execute("CREATE INDEX idx_enfermeros ON enfermeros (p_id,experiencia)")
-        cur.execute("CREATE INDEX idx_varios ON varios (p_id,tipo_de_trabajo)")
+        cur.execute("CREATE INDEX idx_pacientes ON pacientes (id_tarjeta_sanitaria)")
+        cur.execute("CREATE INDEX idx_diagnosticos ON diagnosticos (p_id, id_tarjeta_sanitaria)")
+        cur.execute("CREATE INDEX idx_personal ON personal (p_id)")
+        cur.execute("CREATE INDEX idx_medicos ON medicos (p_id)")
+        cur.execute("CREATE INDEX idx_enfermeros ON enfermeros (p_id)")
+        cur.execute("CREATE INDEX idx_varios ON varios (p_id)")
 
         print("\033[F\033[K", end="")  # Clear the previous line
         print("Cargando ==>> Completado! --> Índices creados")
