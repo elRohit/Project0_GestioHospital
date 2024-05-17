@@ -8,11 +8,11 @@
 
    1.2 [Codi per registrar un nou usuari](#Codi-per-registrar-un-nou-usuari)
 
-   1.3 [Codi del Bloc de Manteniment](#Codi-del-Bloc-de-Manteniment)
+   1.3 [Codi del Bloc de Manteniment i Consultes](#Codi-del-Bloc-de-Manteniment-i-Consultes)
 
    1.3 [Codi de exportació de dades](#Codi-de-exportació-de-dades)
    
-2. Processos, Funcions i Triggers.
+2. [Processos, Funcions i Triggers.](#Processos-Funcions-i-Triggers)
 
 3. [Configuració de la aplicació al inici de les connexions](#Configuració-de-la-aplicació-al-inici-de-les-connexions)
 
@@ -167,12 +167,12 @@ def insertar_usuarito_a_la_bd(nombrecito_usuarito, contrasenya_usuarito):
     connexio.commit()
 ```
 
-### Codi del Bloc de Manteniment
+### Codi del Bloc de Manteniment i Consultes
 
 Ara que hem aconseguit la connectivitat amb la base de dades hem de fer "utilitzables" els mains creats en l'apartat de [Codi de Connectivitat i login](#Codi-de-connectivitat-i-login).
 
 Així que farem una definició per cada rol on cadascun tingui funcions diferents.
-Posaré un exemple d'alguns rols, ja que es pot veure el codi complet en el enllaç seguent: [Bloc de manteniment](main_por_rol.py)
+Posaré un exemple d'alguns rols, ja que es pot veure el codi complet en el enllaç seguent: [Bloc de manteniment i consultes](main_por_rol.py)
 
 #### Rol d'administració d'hospital
 
@@ -428,9 +428,9 @@ def exportacion_xml(fecha_inicio, fecha_fin):
     tree.write(f"visites.xml", encoding="utf-8", xml_declaration=True)
 ```
 
-## Processos, Funcions i Triggers
+## Processos Funcions i Triggers
 
-Abans de tot pots veure tots els processos, funcions i triggers en l'enllaç següent: [Processos, Funcions i Triggers](procs,funcs-i-triggers.sql)
+Abans de tot pots veure tots els processos, funcions i triggers en l'enllaç següent: [Processos, Funcions i Triggers](procs_funcs_i_triggers.sql)
 
 ### Funcions
 
