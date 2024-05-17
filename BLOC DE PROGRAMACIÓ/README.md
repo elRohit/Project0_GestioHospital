@@ -14,7 +14,7 @@
    
 2. Processos, Funcions i Triggers.
 
-3. [Configuració de la aplicació al inici de les connexions](#Configuració-de-la-aplicació-al-inici-de-les-connexions.)
+3. [Configuració de la aplicació al inici de les connexions](#Configuració-de-la-aplicació-al-inici-de-les-connexions)
 
 ## Codi de Programació
 ### Codi de connectivitat i login
