@@ -5,7 +5,7 @@ import string
 import time
 
 # Aqui es guardaran totes les dades del fitxer csv
-host_conn = '192.168.1.50'
+host_conn = '10.94.255.135'
 pswd = 'P@ssw0rd'
 faker = Faker('ru_RU')
 
@@ -14,8 +14,11 @@ def clean_all():
         conn = psycopg2.connect(database="hospital",user="postgres",password=pswd,host=host_conn,port="5432")
         conn.autocommit = True
         cur = conn.cursor()
-        cur.execute("DELETE FROM diagnosticos")
+        cur.execute("DELETE FROM reservas")
+        cur.execute("DELETE FROM operacion")
+        cur.execute("DELETE FROM medico_enfermeria")
         cur.execute("DELETE FROM enfermeros")
+        cur.execute("DELETE FROM diagnosticos")
         cur.execute("DELETE FROM medicos")
         cur.execute("DELETE FROM varios")
         cur.execute("DELETE FROM pacientes")
