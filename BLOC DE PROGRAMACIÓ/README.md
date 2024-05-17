@@ -428,6 +428,12 @@ def exportacion_xml(fecha_inicio, fecha_fin):
     tree.write(f"visites.xml", encoding="utf-8", xml_declaration=True)
 ```
 
+## Processos, Funcions i Triggers
+
+### Processos
+
+Ara que 
+
 ## Configuració de la aplicació al inici de les connexions.
 
 Abans de començar, ens assegurarem de tenir el nostre servidor actualitzat, executarem les següents comandes:
