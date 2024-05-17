@@ -863,7 +863,7 @@ def menuRecepcionista(usuarito, contrasenyita, opcion):
                     port="5432",
                     sslmode="require"
                 )
-                SQLita = f"SELECT nombre, apellidos FROM pacientes p JOIN reservas r ON r.id_tarjeta_sanitaria = p.id_tarjeta_sanitaria;"
+                SQLita = f"SELECT DISTINCT nombre, apellidos FROM pacientes p JOIN reservas r ON r.id_tarjeta_sanitaria = p.id_tarjeta_sanitaria;"
                 cur = connexio.cursor()
                 cur.execute(SQLita)
                 resultadito = cur.fetchall()
