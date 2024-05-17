@@ -319,16 +319,14 @@ if opcion == 1:
 
 Ara per poder exportar les dades de les visites utilitzarem aquest codi: [Bloc d'exportació de dades](exportacio_de_dades.py):
 
-Ara en aquesta definició l'utilitzarem per recollir l'interval de temps on volem recollir l'informació.
+Aquesta funció servirà per establir l'interval de temps on volem recollir la informació.
 ```
 def fechitas():
     fecha_inicio = input("Introduce la fecha de inicio de la exportación (formato: YYYY-MM-DD HH:MM:SS): ")
     fecha_fin = input("Introduce la fecha final de la exportación (formato: YYYY-MM-DD HH:MM:SS): ")
     exportacion_xml(fecha_inicio, fecha_fin)
 ```
-La definició que es veu "fechitas", demana unes dates per recogir les visites
-
-Despres s'executarà la definició següent:
+Seguidament, s'executarà el següent, que serveix per recollir la informació de les visites accedint a la base de dades:
 ```
 def exportacion_datitos(fecha_inicio, fecha_fin):
     connexio = psycopg2.connect(
@@ -347,9 +345,8 @@ def exportacion_datitos(fecha_inicio, fecha_fin):
     connexio.close()
     return resultadito
 ```
-Aquesta definició serveix per recollir l'informació de les visites accedin a la base de dades.
 
-Finalment amb la definició següent posem totes les dades del resultat de la definició anterior en un XML.
+Finalment, amb la funció següent, posem totes les dades del resultat de la funció anterior en un XML.
 ```
 def exportacion_xml(fecha_inicio, fecha_fin):
     contador = 0
@@ -430,12 +427,13 @@ def exportacion_xml(fecha_inicio, fecha_fin):
 
 ## Processos Funcions i Triggers
 
-Abans de tot pots veure tots els processos, funcions i triggers en l'enllaç següent: [Processos, Funcions i Triggers](procs_funcs_i_triggers.sql)
+Abans de tot, pots veure tots els processos, funcions i triggers en l'enllaç següent: [Processos, Funcions i Triggers](procs_funcs_i_triggers.sql)
 
 ### Funcions
 
 Les funcions que hem utilitzat per facilitar la correcta inserció de dades en alguns camps. 
 El primer camp que hem afectat amb una funció es el camp DNI amb la funció següent:
+
 ```
 CREATE OR REPLACE FUNCTION public.validar_dni(
     num TEXT
@@ -461,9 +459,9 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 ```
-Amb aquesta funció comprovem si el DNI té la lletra mayúscula i els digits corresponents (8 números i 1 lletra).
+Amb aquesta funció comprovem si el DNI té la lletra majúscula i els dígits corresponents (8 números i 1 lletra).
 
-Una altra funcío que hem utilitzat per comprovar un camp es per verificar la targeta sanitària.
+Una altra funció que hem utilitzat per comprovar un camp és per verificar la targeta sanitària.
 Amb el codi següent:
 ```
 CREATE OR REPLACE FUNCTION validar_tse(numero_tse VARCHAR) RETURNS BOOLEAN AS
@@ -492,33 +490,33 @@ Abans de començar, ens assegurarem de tenir el nostre servidor actualitzat, exe
 apt update && apt upgrade 
 ```
 
-Seguidament haurem de instalar python en el servidor i instal·lar les llibreries necessàries.
+Seguidament, haurem de instal·lar Python en el servidor i instal·lar les llibreries necessàries.
 Executarem la següent comanda:
 ```
 pip freeze > requirements.txt
 ```
 
 Això ens crearà un fitxer txt amb totes les llibreries que podrem importar al nostre servidor Linux.
-A continuació, amb WinSCP transferirem el fitxer txt al servidor i el python de la nostra aplicació.
+A continuació, amb WinSCP transferirem el fitxer txt al servidor i el Python de la nostra aplicació.
 ![WINSCP](images/WINSCP.png)
 
-Seguidament executem la comanda 
+Seguidament executem aquesta comanda:
 ```
 pip install -r requriments.txt
 ```
 ![PIP](images/PIP_1.png)
 
-A continuació, haurem d'afegir una línia al .profile de l'usuari indicant la ruta del fitxer python amb la nostra aplicació.
+A continuació, haurem d'afegir una línia al .profile de l'usuari indicant la ruta del fitxer Python amb la nostra aplicació.
 ![Profile](images/PROFILE.png)
 
-Accedirem amb un client per SSH per comprovar que s'executa l'script automàticament
+Accedirem amb un client per SSH per comprovar que s'executa l'script automàticament.
 ![Comprovació](images/ssh_comp.png)
 
-Finalment, volem que una vegada finalitzi l'aplicació, que es talli la connexio SSH.
+Finalment, volem que una vegada finalitzi l'aplicació, que es talli la connexió SSH.
 Per fer això, afegirem una línia amb la comanda `exit` al final del .profile
 ![Cerrar_Profile](images/CERRAR_PROFILE.png)
 
-Aqui tenim la comprovació de que una vegada tancada la aplicació, finalitza la sessió.
+Aquí tenim la comprovació de què una vegada tancada l'aplicació, finalitza la sessió.
 
 ![Cerrar_SSH](images/CERRAR_SSH.png)
 
