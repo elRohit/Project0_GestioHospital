@@ -430,9 +430,60 @@ def exportacion_xml(fecha_inicio, fecha_fin):
 
 ## Processos, Funcions i Triggers
 
-### Processos
+Abans de tot pots veure tots els processos, funcions i triggers en l'enllaç següent: [Processos, Funcions i Triggers](procs,funcs-i-triggers.sql)
 
-Ara que 
+### Funcions
+
+Les funcions que hem utilitzat per facilitar la correcta inserció de dades en alguns camps. 
+El primer camp que hem afectat amb una funció es el camp DNI amb la funció següent:
+```
+CREATE OR REPLACE FUNCTION public.validar_dni(
+    num TEXT
+) RETURNS BOOLEAN AS
+$$
+DECLARE
+    dni_upper TEXT;
+    dni_regex TEXT;
+
+BEGIN
+    -- Convertir a mayúsculas para evitar problemas con las letras
+    dni_upper := UPPER(num);
+
+    -- Patrón para DNI
+    dni_regex := '^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$';
+
+    -- Comprobar si cumple con el patrón de DNI o NIE
+    IF dni_upper ~ dni_regex  THEN
+        RETURN TRUE;
+    ELSE
+        RETURN FALSE;
+    END IF;
+END;
+$$ LANGUAGE plpgsql;
+```
+Amb aquesta funció comprovem si el DNI té la lletra mayúscula i els digits corresponents (8 números i 1 lletra).
+
+Una altra funcío que hem utilitzat per comprovar un camp es per verificar la targeta sanitària.
+Amb el codi següent:
+```
+CREATE OR REPLACE FUNCTION validar_tse(numero_tse VARCHAR) RETURNS BOOLEAN AS
+$$
+DECLARE
+    tse_valida BOOLEAN;
+    tse_regex TEXT;
+BEGIN
+    -- Verificar si el número tiene el formato correcto (por ejemplo, 10 dígitos)
+    tse_regex := '^[A-Z]{4} [01] \d{6} \d{2} \d$';
+    IF numero_tse ~ tse_regex THEN
+        tse_valida := TRUE;
+    ELSE
+        tse_valida := FALSE;
+    END IF;
+
+    RETURN tse_valida;
+END;
+$$ LANGUAGE plpgsql;
+```
 
 ## Configuració de la aplicació al inici de les connexions.
 
