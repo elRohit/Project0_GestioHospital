@@ -1,4 +1,5 @@
 import psycopg2
+import exportacio_de_dades as ex
 
 def menuAdminInformatico(usuarito, contrasenyita, opcion):  
     
@@ -684,34 +685,11 @@ def menuAdminHospital(usuarito, contrasenyita, opcion):
                     validar_DNI = False
         
         if opcion == 3:
-            dni = input("Introduce el DNI del trabajador: ")
-            quiereBorrar = input("¿Está seguro de que quiere borrar este trabajador? (s/n): ")
-            if quiereBorrar == "s":
                 try:
-                    connexio = psycopg2.connect(
-                            dbname="hospital",
-                            user="postgres",
-                            password="P@ssw0rd",
-                            host="10.94.255.129",
-                            port="5432",
-                            sslmode="require"
-                        )
-                    SQLita = f"DELETE FROM personal WHERE dni = '{dni}';"
-                    cur = connexio.cursor()
-                    cur.execute(SQLita)
-                    connexio.commit()
-                    cur.close()
-                    connexio.close()
-
-                    print("El trabajador ha sido eliminado con éxito.")
-                          
+                    ex.fechitas()
                 except psycopg2.Error as e:
                         
                         print("No se ha podido eliminar al trabajador.")
-            
-            else:
-                    
-                    print("Intento de borrado cancelado.")
                     
         if opcion == 4:
             fechaVisitas = input("Introduce la fecha de la visita (YYYY-MM-DD): ")

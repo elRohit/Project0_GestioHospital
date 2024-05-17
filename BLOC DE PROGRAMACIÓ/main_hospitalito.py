@@ -27,5 +27,7 @@ def main():
         eleccionita = int(input("Introduce el número de la opción: "))
     if eleccionita == 3:
             print("Hasta la próxima")
-        
-main()
+try:        
+    main()
+except KeyboardInterrupt:
+    print("Hasta forzado la salida. Hasta la próxima")

@@ -1,7 +1,10 @@
 import xml.etree.ElementTree as ET
 import psycopg2
-fecha_inicio = input("Introduce la fecha de inicio de la exportación (formato: YYYY-MM-DD HH:MM:SS): ")
-fecha_fin = input("Introduce la fecha final de la exportación (formato: YYYY-MM-DD HH:MM:SS): ")
+
+def fechitas():
+    fecha_inicio = input("Introduce la fecha de inicio de la exportación (formato: YYYY-MM-DD HH:MM:SS): ")
+    fecha_fin = input("Introduce la fecha final de la exportación (formato: YYYY-MM-DD HH:MM:SS): ")
+    exportacion_xml(fecha_inicio, fecha_fin)
 
 def exportacion_datitos(fecha_inicio, fecha_fin):
     connexio = psycopg2.connect(
@@ -95,6 +98,3 @@ def exportacion_xml(fecha_inicio, fecha_fin):
     tree = ET.ElementTree(root)
     
     tree.write(f"visites.xml", encoding="utf-8", xml_declaration=True)
-    
-
-exportacion_xml(fecha_inicio, fecha_fin)

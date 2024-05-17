@@ -61,7 +61,7 @@ DECLARE
     tse_regex TEXT;
 BEGIN
     -- Verificar si el número tiene el formato correcto (por ejemplo, 10 dígitos)
-    tse_regex := '^[A-Z]{2} [01] \d{6} \d{2} \d$';
+    tse_regex := '^[A-Z]{4} [01] \d{6} \d{2} \d$';
     IF numero_tse ~ tse_regex THEN
         tse_valida := TRUE;
     ELSE
