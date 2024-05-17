@@ -75,7 +75,7 @@ def menuPorRol(rol):
     if rol == "administrador_hospital":
         print("| 1. Consultar el personal del hospital  |")
         print("| 2. Dar de alta a un nuevo trabajador   |")
-        print("| 3. Dar de baja a un trabajador         |")
+        print("| 3. Exportar datos de las visitas       |")
         print("| 4. Consultar nombre de visites per dia |")
         print("| 5. Consultar medico más activo         |")
         print("| 6. Consultar enfermedades más comunes  |")

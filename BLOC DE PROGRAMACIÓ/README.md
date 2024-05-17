@@ -8,13 +8,13 @@
 
    1.2 [Codi per registrar un nou usuari](#Codi-per-registrar-un-nou-usuari)
 
-   1.3 [Codi del Bloc de Manteniment](#Codi-del-Bloc-de-Manteniment)
+   1.3 [Codi del Bloc de Manteniment i Consultes](#Codi-del-Bloc-de-Manteniment-i-Consultes)
 
    1.3 [Codi de exportació de dades](#Codi-de-exportació-de-dades)
    
-3. Processos, Funcions i Triggers.
-   
-5. [Exportació de dades](#Codi-de-exportació-de-dades)
+2. [Processos, Funcions i Triggers.](#Processos-Funcions-i-Triggers)
+
+3. [Configuració de la aplicació al inici de les connexions](#Configuració-de-la-aplicació-al-inici-de-les-connexions)
 
 ## Codi de Programació
 ### Codi de connectivitat i login
@@ -167,12 +167,12 @@ def insertar_usuarito_a_la_bd(nombrecito_usuarito, contrasenya_usuarito):
     connexio.commit()
 ```
 
-### Codi del Bloc de Manteniment
+### Codi del Bloc de Manteniment i Consultes
 
 Ara que hem aconseguit la connectivitat amb la base de dades hem de fer "utilitzables" els mains creats en l'apartat de [Codi de Connectivitat i login](#Codi-de-connectivitat-i-login).
 
 Així que farem una definició per cada rol on cadascun tingui funcions diferents.
-Posaré un exemple d'alguns rols, ja que es pot veure el codi complet en el enllaç seguent: [Bloc de manteniment](main_por_rol.py)
+Posaré un exemple d'alguns rols, ja que es pot veure el codi complet en el enllaç seguent: [Bloc de manteniment i consultes](main_por_rol.py)
 
 #### Rol d'administració d'hospital
 
@@ -428,7 +428,64 @@ def exportacion_xml(fecha_inicio, fecha_fin):
     tree.write(f"visites.xml", encoding="utf-8", xml_declaration=True)
 ```
 
-### Configuració de la aplicació al inici de les connexions.
+## Processos Funcions i Triggers
+
+Abans de tot pots veure tots els processos, funcions i triggers en l'enllaç següent: [Processos, Funcions i Triggers](procs_funcs_i_triggers.sql)
+
+### Funcions
+
+Les funcions que hem utilitzat per facilitar la correcta inserció de dades en alguns camps. 
+El primer camp que hem afectat amb una funció es el camp DNI amb la funció següent:
+```
+CREATE OR REPLACE FUNCTION public.validar_dni(
+    num TEXT
+) RETURNS BOOLEAN AS
+$$
+DECLARE
+    dni_upper TEXT;
+    dni_regex TEXT;
+
+BEGIN
+    -- Convertir a mayúsculas para evitar problemas con las letras
+    dni_upper := UPPER(num);
+
+    -- Patrón para DNI
+    dni_regex := '^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$';
+
+    -- Comprobar si cumple con el patrón de DNI o NIE
+    IF dni_upper ~ dni_regex  THEN
+        RETURN TRUE;
+    ELSE
+        RETURN FALSE;
+    END IF;
+END;
+$$ LANGUAGE plpgsql;
+```
+Amb aquesta funció comprovem si el DNI té la lletra mayúscula i els digits corresponents (8 números i 1 lletra).
+
+Una altra funcío que hem utilitzat per comprovar un camp es per verificar la targeta sanitària.
+Amb el codi següent:
+```
+CREATE OR REPLACE FUNCTION validar_tse(numero_tse VARCHAR) RETURNS BOOLEAN AS
+$$
+DECLARE
+    tse_valida BOOLEAN;
+    tse_regex TEXT;
+BEGIN
+    -- Verificar si el número tiene el formato correcto (por ejemplo, 10 dígitos)
+    tse_regex := '^[A-Z]{4} [01] \d{6} \d{2} \d$';
+    IF numero_tse ~ tse_regex THEN
+        tse_valida := TRUE;
+    ELSE
+        tse_valida := FALSE;
+    END IF;
+
+    RETURN tse_valida;
+END;
+$$ LANGUAGE plpgsql;
+```
+
+## Configuració de la aplicació al inici de les connexions.
 
 Abans de començar, ens assegurarem de tenir el nostre servidor actualitzat, executarem les següents comandes:
 ``` 
