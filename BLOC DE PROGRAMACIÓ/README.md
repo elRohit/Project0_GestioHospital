@@ -12,9 +12,9 @@
 
    1.3 [Codi de exportació de dades](#Codi-de-exportació-de-dades)
    
-3. Processos, Funcions i Triggers.
-   
-5. [Exportació de dades](#Codi-de-exportació-de-dades)
+2. Processos, Funcions i Triggers.
+
+3. [Configuració de la aplicació al inici de les connexions](#Configuració-de-la-aplicació-al-inici-de-les-connexions.)
 
 ## Codi de Programació
 ### Codi de connectivitat i login
@@ -428,7 +428,7 @@ def exportacion_xml(fecha_inicio, fecha_fin):
     tree.write(f"visites.xml", encoding="utf-8", xml_declaration=True)
 ```
 
-### Configuració de la aplicació al inici de les connexions.
+## Configuració de la aplicació al inici de les connexions.
 
 Abans de començar, ens assegurarem de tenir el nostre servidor actualitzat, executarem les següents comandes:
 ``` 
