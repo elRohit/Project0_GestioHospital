@@ -12,7 +12,7 @@
 
    1.3 [Codi de exportació de dades](#Codi-de-exportació-de-dades)
    
-2. Processos, Funcions i Triggers.
+2. [Processos, Funcions i Triggers.](#Processos,-Funcions-i-Triggers)
 
 3. [Configuració de la aplicació al inici de les connexions](#Configuració-de-la-aplicació-al-inici-de-les-connexions)
 
@@ -430,7 +430,7 @@ def exportacion_xml(fecha_inicio, fecha_fin):
 
 ## Processos, Funcions i Triggers
 
-Abans de tot pots veure tots els processos, funcions i triggers en l'enllaç següent: [Processos, Funcions i Triggers](procs,funcs-i-triggers.sql)
+Abans de tot pots veure tots els processos, funcions i triggers en l'enllaç següent: [Processos, Funcions i Triggers](procs_funcs_i_triggers.sql)
 
 ### Funcions
 
