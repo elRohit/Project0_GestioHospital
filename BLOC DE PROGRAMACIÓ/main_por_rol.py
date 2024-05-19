@@ -1,6 +1,8 @@
 import psycopg2
 import exportacio_de_dades as ex
 
+ip_server = "10.94.255.129"
+
 def menuAdminInformatico(usuarito, contrasenyita, opcion):  
     
     if opcion == 1:
@@ -12,7 +14,7 @@ def menuAdminInformatico(usuarito, contrasenyita, opcion):
                     dbname="hospital",
                     user="postgres",
                     password="P@ssw0rd",
-                    host="10.94.255.129",
+                    host=ip_server,
                     port="5432",
                     sslmode="require"
                 )
@@ -41,7 +43,7 @@ def menuAdminInformatico(usuarito, contrasenyita, opcion):
                     dbname="hospital",
                     user=usuarito,
                     password=contrasenyita,
-                    host="10.94.255.129",
+                    host=ip_server,
                     port="5432",
                     sslmode="require"
                 )
@@ -73,7 +75,7 @@ def menuMedico(usuarito, contrasenyita, opcion):
                 dbname="hospital",
                 user=usuarito,
                 password=contrasenyita,
-                host="10.94.255.129",
+                host=ip_server,
                 port="5432",
                 sslmode="require"
             )
@@ -101,7 +103,7 @@ def menuMedico(usuarito, contrasenyita, opcion):
                 dbname="hospital",
                 user=usuarito,
                 password=contrasenyita,
-                host="10.94.255.129",
+                host=ip_server,
                 port="5432",
                 sslmode="require"
             )
@@ -129,7 +131,7 @@ def menuMedico(usuarito, contrasenyita, opcion):
                 dbname="hospital",
                 user="postgres",
                 password="P@ssw0rd",
-                host="10.94.255.129",
+                host=ip_server,
                 port="5432",
                 sslmode="require"
             )
@@ -157,7 +159,7 @@ def menuMedico(usuarito, contrasenyita, opcion):
                 dbname="hospital",
                 user=usuarito,
                 password=contrasenyita,
-                host="10.94.255.129",
+                host=ip_server,
                 port="5432",
                 sslmode="require"
             )
@@ -201,7 +203,7 @@ def menuMedico(usuarito, contrasenyita, opcion):
                     dbname="hospital",
                     user=usuarito,
                     password=contrasenyita,
-                    host="10.94.255.129",
+                    host=ip_server,
                     port="5432",
                     sslmode="require"
                 )
@@ -237,7 +239,7 @@ def menuMedico(usuarito, contrasenyita, opcion):
                     dbname="hospital",
                     user=usuarito,
                     password=contrasenyita,
-                    host="10.94.255.129",
+                    host=ip_server,
                     port="5432",
                     sslmode="require"
                 )
@@ -269,7 +271,7 @@ def menuMedico(usuarito, contrasenyita, opcion):
                     dbname="hospital",
                     user="postgres",
                     password="P@ssw0rd",
-                    host="10.94.255.129",
+                    host=ip_server,
                     port="5432",
                     sslmode="require"
                 )
@@ -301,7 +303,7 @@ def menuEnfermero(usuarito, contrasenyita, opcion):
                 dbname="hospital",
                 user="postgres",
                 password="P@ssw0rd",
-                host="10.94.255.129",
+                host=ip_server,
                 port="5432",
                 sslmode="require"
             )
@@ -330,7 +332,7 @@ def menuEnfermero(usuarito, contrasenyita, opcion):
                 dbname="hospital",
                 user=usuarito,
                 password=contrasenyita,
-                host="10.94.255.129",
+                host=ip_server,
                 port="5432",
                 sslmode="require"
             )
@@ -358,7 +360,7 @@ def menuEnfermero(usuarito, contrasenyita, opcion):
                 dbname="hospital",
                 user=usuarito,
                 password=contrasenyita,
-                host="10.94.255.129",
+                host=ip_server,
                 port="5432",
                 sslmode="require"
             )
@@ -386,7 +388,7 @@ def menuEnfermero(usuarito, contrasenyita, opcion):
                 dbname="hospital",
                 user="postgres",
                 password="P@ssw0rd",
-                host="10.94.255.129",
+                host=ip_server,
                 port="5432",
                 sslmode="require"
             )
@@ -425,7 +427,7 @@ def menuEnfermero(usuarito, contrasenyita, opcion):
                 dbname="hospital",
                 user="postgres",
                 password="P@ssw0rd",
-                host="10.94.255.129",
+                host=ip_server,
                 port="5432",
                 sslmode="require"
             )
@@ -460,7 +462,7 @@ def menuCelador(usuarito, contrasenyita, opcion):
                 dbname="hospital",
                 user=usuarito,
                 password=contrasenyita,
-                host="10.94.255.129",
+                host=ip_server,
                 port="5432",
                 sslmode="require"
             )
@@ -489,7 +491,7 @@ def menuConductorAmbulancia(usuarito, contrasenyita, opcion):
                 dbname="hospital",
                 user=usuarito,
                 password=contrasenyita,
-                host="10.94.255.129",
+                host=ip_server,
                 port="5432",
                 sslmode="require"
             )
@@ -513,7 +515,7 @@ def menuConductorAmbulancia(usuarito, contrasenyita, opcion):
                     dbname="hospital",
                     user="postgres",
                     password="P@ssw0rd",
-                    host="10.94.255.129",
+                    host=ip_server,
                     port="5432",
                     sslmode="require"
                 )
@@ -541,7 +543,7 @@ def menuAdminHospital(usuarito, contrasenyita, opcion):
                     dbname="hospital",
                     user="postgres",
                     password="P@ssw0rd",
-                    host="10.94.255.129",
+                    host=ip_server,
                     port="5432",
                     sslmode="require"
                 )
@@ -612,7 +614,7 @@ def menuAdminHospital(usuarito, contrasenyita, opcion):
                     dbname="hospital",
                     user="postgres",
                     password="P@ssw0rd",
-                    host="10.94.255.129",
+                    host=ip_server,
                     port="5432",
                     sslmode="require"
                 )
@@ -633,7 +635,7 @@ def menuAdminHospital(usuarito, contrasenyita, opcion):
                                 dbname="hospital",
                                 user="postgres",
                                 password="P@ssw0rd",
-                                host="10.94.255.129",
+                                host=ip_server,
                                 port="5432",
                                 sslmode="require"
                             )
@@ -698,7 +700,7 @@ def menuAdminHospital(usuarito, contrasenyita, opcion):
                     dbname="hospital",
                     user=usuarito,
                     password=contrasenyita,
-                    host="10.94.255.129",
+                    host=ip_server,
                     port="5432",
                     sslmode="require"
                 )
@@ -737,7 +739,7 @@ def menuAdminHospital(usuarito, contrasenyita, opcion):
                     dbname="hospital",
                     user=usuarito,
                     password=contrasenyita,
-                    host="10.94.255.129",
+                    host=ip_server,
                     port="5432",
                     sslmode="require"
                 )
@@ -766,7 +768,7 @@ def menuAdminHospital(usuarito, contrasenyita, opcion):
                     dbname="hospital",
                     user="postgres",
                     password="P@ssw0rd",
-                    host="10.94.255.129",
+                    host=ip_server,
                     port="5432",
                     sslmode="require"
                 )
@@ -798,7 +800,7 @@ def menuRecepcionista(usuarito, contrasenyita, opcion):
                     dbname="hospital",
                     user="postgres",
                     password="P@ssw0rd",
-                    host="10.94.255.129",
+                    host=ip_server,
                     port="5432",
                     sslmode="require"
                 )
@@ -823,7 +825,7 @@ def menuRecepcionista(usuarito, contrasenyita, opcion):
                                 dbname="hospital",
                                 user="postgres",
                                 password="P@ssw0rd",
-                                host="10.94.255.129",
+                                host=ip_server,
                                 port="5432",
                                 sslmode="require"
                             )
@@ -859,7 +861,7 @@ def menuRecepcionista(usuarito, contrasenyita, opcion):
                     dbname="hospital",
                     user=usuarito,
                     password=contrasenyita,
-                    host="10.94.255.129",
+                    host=ip_server,
                     port="5432",
                     sslmode="require"
                 )
@@ -888,7 +890,7 @@ def menuRecepcionista(usuarito, contrasenyita, opcion):
                     dbname="hospital",
                     user=usuarito,
                     password=contrasenyita,
-                    host="10.94.255.129",
+                    host=ip_server,
                     port="5432",
                     sslmode="require"
                 )
@@ -917,7 +919,7 @@ def menuRecepcionista(usuarito, contrasenyita, opcion):
                     dbname="hospital",
                     user=usuarito,
                     password=contrasenyita,
-                    host="10.94.255.129",
+                    host=ip_server,
                     port="5432",
                     sslmode="require"
                 )
@@ -947,7 +949,7 @@ def menuRecepcionista(usuarito, contrasenyita, opcion):
                     dbname="hospital",
                     user=usuarito,
                     password=contrasenyita,
-                    host="10.94.255.129",
+                    host=ip_server,
                     port="5432",
                     sslmode="require"
                 )
@@ -977,7 +979,7 @@ def menuRecepcionista(usuarito, contrasenyita, opcion):
                     dbname="hospital",
                     user="postgres",
                     password="P@ssw0rd",
-                    host="10.94.255.129",
+                    host=ip_server,
                     port="5432",
                     sslmode="require"
                 )
