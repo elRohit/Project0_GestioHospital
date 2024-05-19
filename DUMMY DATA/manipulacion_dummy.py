@@ -5,7 +5,7 @@ import string
 import time
 
 # Aqui es guardaran totes les dades del fitxer csv
-host_conn = '192.168.1.50'
+host_conn = '10.94.255.135'
 pswd = 'P@ssw0rd'
 faker = Faker('ru_RU')
 
@@ -14,8 +14,11 @@ def clean_all():
         conn = psycopg2.connect(database="hospital",user="postgres",password=pswd,host=host_conn,port="5432")
         conn.autocommit = True
         cur = conn.cursor()
-        cur.execute("DELETE FROM diagnosticos")
+        cur.execute("DELETE FROM reservas")
+        cur.execute("DELETE FROM operacion")
+        cur.execute("DELETE FROM medico_enfermeria")
         cur.execute("DELETE FROM enfermeros")
+        cur.execute("DELETE FROM diagnosticos")
         cur.execute("DELETE FROM medicos")
         cur.execute("DELETE FROM varios")
         cur.execute("DELETE FROM pacientes")
@@ -225,12 +228,12 @@ def indexos():
         conn.autocommit = True
         cur = conn.cursor()
         drop_indexos()
-        cur.execute("CREATE INDEX idx_pacientes ON pacientes (id_tarjeta_sanitaria, nombre, apellidos, fecha_nacimiento, direccion, num_telefono, contacto_emergencia, condiciones_paciente)")
-        cur.execute("CREATE INDEX idx_diagnosticos ON diagnosticos (p_id, id_tarjeta_sanitaria,fecha_entrada,fecha_salida,tiene_receta,medicamentos)")
-        cur.execute("CREATE INDEX idx_personal ON personal (p_id,dni,nombre,apellidos,correo,num_telefono,direccion)")
-        cur.execute("CREATE INDEX idx_medicos ON medicos (p_id,curriculum)")
-        cur.execute("CREATE INDEX idx_enfermeros ON enfermeros (p_id,experiencia)")
-        cur.execute("CREATE INDEX idx_varios ON varios (p_id,tipo_de_trabajo)")
+        cur.execute("CREATE INDEX idx_pacientes ON pacientes (id_tarjeta_sanitaria)")
+        cur.execute("CREATE INDEX idx_diagnosticos ON diagnosticos (p_id, id_tarjeta_sanitaria)")
+        cur.execute("CREATE INDEX idx_personal ON personal (p_id)")
+        cur.execute("CREATE INDEX idx_medicos ON medicos (p_id)")
+        cur.execute("CREATE INDEX idx_enfermeros ON enfermeros (p_id)")
+        cur.execute("CREATE INDEX idx_varios ON varios (p_id)")
 
         print("\033[F\033[K", end="")  # Clear the previous line
         print("Cargando ==>> Completado! --> Índices creados")
