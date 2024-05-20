@@ -9,7 +9,7 @@
 ## Document necessari per registrar la informació a l’AGPD.
 ### Els següents nivells fan refèrencia als nivells de mesures de seguretat que haurem d'aplicar a les següents dades:
 
-## Nivel bàsic
+## Nivell bàsic
 **Taula pacientes:**
 + nombre
 + apellidos
@@ -45,7 +45,7 @@
 +	diaentrada
 +	diaprevistosalida
 
-## Nivel alt
+## Nivell alt
 **Taula pacientes:**
 +	id_tarjeta_sanitaria
 +	contacto_emergencia
