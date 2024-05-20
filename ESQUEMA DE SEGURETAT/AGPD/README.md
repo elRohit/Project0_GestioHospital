@@ -102,6 +102,6 @@
 **Anonimització i Pseudonimització:**
 + Ús de tècniques d'anonimització i pseudonimització per protegir les dades sensibles.
 
-** Avaluacions d'Impacte:**
+**Avaluacions d'Impacte:**
 + Realització d'avaluacions d'impacte en la protecció de dades (EIPD) periòdiques.
 
