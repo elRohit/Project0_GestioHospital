@@ -7,7 +7,7 @@
 - L'Agència Espanyola de Protecció de Dades ofereix assessorament i resolució de consultes relacionades amb la protecció de dades, així com la tramitació de denúncies i reclamacions.
 
 ## Document necessari per registrar la informació a l’AGPD.
-### Els següents nivells fan refèrencia als nivells de mesures de seguretat que haurem d'aplicar a les següents dades:
+##### Els següents nivells fan refèrencia als nivells de mesures de seguretat que haurem d'aplicar a les següents dades:
 
 ## Nivell bàsic
 **Taula pacientes:**
