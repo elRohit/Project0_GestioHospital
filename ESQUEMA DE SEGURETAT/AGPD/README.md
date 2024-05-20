@@ -15,8 +15,8 @@
 + apellidos
 
 **Taula personal**
-•	nombre
-•	apellidos
++	nombre
++	apellidos
 
 ## Nivell intermig
 **Taula pacientes:**
