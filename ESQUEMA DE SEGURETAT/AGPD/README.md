@@ -18,7 +18,7 @@
 +	nombre
 +	apellidos
 
-## Nivell intermig
+## Nivell mitjà
 **Taula pacientes:**
 +	fecha_nacimiento
 +	direccion
@@ -70,7 +70,7 @@
 
 # Mesures de seguretat:
 
-## Mesures de Nivell Bàsic
+## Mesures de nivell bàsic
 **Control d'Accés:**
 + Contrasenyes segures i canvi periòdic de contrasenyes.
 + Assignació de permisos d'accés basats en rols.
@@ -83,7 +83,7 @@
 + Monitorització i registre d'accés i activitats en el sistema.
 + Mesures de Nivell Mitjà (a més de les bàsiques)
 
-## Mesures de nivell Mitjà (a més de les bàsiques)
+## Mesures de nivell mitjà (a més de les bàsiques)
 **Xifratge:**
 + Xifratge de dades tant en trànsit com en repòs.
 
@@ -96,7 +96,7 @@
 **Data Masking:**
 + Aplicació de tècniques de data masking per protegir les dades sensibles en entorns de prova o desenvolupament.
 
-## Mesures de Nivell Alt (a més de les bàsiques i mitjanes)
+## Mesures de nivell alt (a més de les bàsiques i mitjanes)
 **Seguretat Física:**
 + Controls estrictes d'accés físic a les instal·lacions on s'emmagatzemen les dades.
 
