@@ -11,7 +11,7 @@ def exportacion_datitos(fecha_inicio, fecha_fin):
         dbname="hospital",
         user="postgres",
         password="P@ssw0rd",
-        host="10.94.255.129",
+        host="10.94.255.136",
         port="5432",
         sslmode="require"
     )
