@@ -56,16 +56,16 @@
 + DNI
 
 **Taula diagnósticos:**
-•	p_id
-•	id_tarjeta_sanitaria
-•	tiene_receta
-•	medicamentos
++	p_id
++	id_tarjeta_sanitaria
++	tiene_receta
++	medicamentos
 
 **Taula operaciones:**
-•	Id_tarjeta_sanitaria
-•	p_id
++	Id_tarjeta_sanitaria
++	p_id
 
 **Taula reservas:**
-•	id_tarjeta_sanitaria
++	id_tarjeta_sanitaria
 
 
