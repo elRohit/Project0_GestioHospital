@@ -83,6 +83,7 @@
 + Monitorització i registre d'accés i activitats en el sistema.
 + Mesures de Nivell Mitjà (a més de les bàsiques)
 
+## Mesures de nivell Mitjà (a més de les bàsiques)
 **Xifratge:**
 + Xifratge de dades tant en trànsit com en repòs.
 
