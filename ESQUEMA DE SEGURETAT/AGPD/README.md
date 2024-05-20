@@ -11,8 +11,8 @@
 
 ## Nivel bàsic
 **Taula pacientes:**
-•	nombre
-•	apellidos
++ nombre
++ apellidos
 
 **Taula personal**
 •	nombre
