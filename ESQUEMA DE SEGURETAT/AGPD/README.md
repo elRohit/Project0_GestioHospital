@@ -86,7 +86,7 @@
 **Xifratge:**
 + Xifratge de dades tant en trànsit com en repòs.
 
-## Control d'Accés Avançat:**
+**Control d'Accés Avançat:**
 + Autenticació multifactor per accedir als sistemes i dades.
 
 **Auditories:**
