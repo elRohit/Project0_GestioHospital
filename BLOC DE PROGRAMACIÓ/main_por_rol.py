@@ -1,7 +1,7 @@
 import psycopg2
 import exportacio_de_dades as ex
 
-ip_server = "10.94.255.129"
+ip_server = "192.168.1.140"
 
 def menuAdminInformatico(usuarito, contrasenyita, opcion):  
     
