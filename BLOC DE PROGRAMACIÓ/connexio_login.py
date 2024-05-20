@@ -3,7 +3,7 @@
 import psycopg2
 import main_por_rol
 
-host = '192.168.1.140'
+host = '10.94.255.136'
 
 
 
