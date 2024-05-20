@@ -20,40 +20,40 @@
 
 ## Nivell intermig
 **Taula pacientes:**
-•	fecha_nacimiento
-•	direccion
-•	num_telefono
++	fecha_nacimiento
++	direccion
++	num_telefono
 
 **Taula personal:**
-•	correo
-• num_telefono
-• direccion
++	correo
++ num_telefono
++ direccion
 
 **Taula diagnósticos:**
-•	fecha_entrada
-•	fecha_salida
++	fecha_entrada
++	fecha_salida
 
 **Taula operaciones:**
-•	en_id
-•	fecha_entrada
-•	fecha_salida
-•	ha_sido_operado
-•	q_id
++	en_id
++	fecha_entrada
++	fecha_salida
++	ha_sido_operado
++	q_id
 
 **Taula reservas:**
-•	h_id
-•	diaentrada
-•	diaprevistosalida
++	h_id
++	diaentrada
++	diaprevistosalida
 
 ## Nivel alt
 **Taula pacientes:**
-•	id_tarjeta_sanitaria
-•	contacto_emergencia
-•	condiciones_paciente
++	id_tarjeta_sanitaria
++	contacto_emergencia
++	condiciones_paciente
 
 **Taula personal:**
-• p_id
-• DNI
++ p_id
++ DNI
 
 **Taula diagnósticos:**
 •	p_id
