@@ -6,8 +6,66 @@
 - El compliment de la normativa de protecció de dades és obligatori per a totes les entitats, tant públiques com privades. <br>
 - L'Agència Espanyola de Protecció de Dades ofereix assessorament i resolució de consultes relacionades amb la protecció de dades, així com la tramitació de denúncies i reclamacions.
 
-## Documents necessaris per registrar la informació a l’AGPD. 
+## Document necessari per registrar la informació a l’AGPD.
+### Els següents nivells fan refèrencia als nivells de mesures de seguretat que haurem d'aplicar a les següents dades:
 
-[Polítiques i Privacitat de les dades](politicaPrivacidadDatos.pdf)
+## Nivel bàsic
+**Taula pacientes:**
+•	nombre
+•	apellidos
+
+**Taula personal**
+•	nombre
+•	apellidos
+
+## Nivell intermig
+**Taula pacientes:**
+•	fecha_nacimiento
+•	direccion
+•	num_telefono
+
+**Taula personal:**
+•	correo
+• num_telefono
+• direccion
+
+**Taula diagnósticos:**
+•	fecha_entrada
+•	fecha_salida
+
+**Taula operaciones:**
+•	en_id
+•	fecha_entrada
+•	fecha_salida
+•	ha_sido_operado
+•	q_id
+
+**Taula reservas:**
+•	h_id
+•	diaentrada
+•	diaprevistosalida
+
+## Nivel alt
+**Taula pacientes:**
+•	id_tarjeta_sanitaria
+•	contacto_emergencia
+•	condiciones_paciente
+
+**Taula personal:**
+• p_id
+• DNI
+
+**Taula diagnósticos:**
+•	p_id
+•	id_tarjeta_sanitaria
+•	tiene_receta
+•	medicamentos
+
+**Taula operaciones:**
+•	Id_tarjeta_sanitaria
+•	p_id
+
+**Taula reservas:**
+•	id_tarjeta_sanitaria
 
 
