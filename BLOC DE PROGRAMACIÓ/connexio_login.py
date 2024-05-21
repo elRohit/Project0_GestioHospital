@@ -3,6 +3,11 @@
 import psycopg2
 import main_por_rol
 
+host = '10.94.255.136'
+
+
+
+
 def loginito(usuarito, contrasenyita):
     
     try:
@@ -10,7 +15,7 @@ def loginito(usuarito, contrasenyita):
             dbname="hospital",
             user=usuarito,
             password=contrasenyita,
-            host="10.94.255.129",
+            host=host,
             port="5432",
             sslmode="require"
         )
@@ -28,7 +33,7 @@ def enQueRolsitoEsta(usuarito):
         dbname="hospital",
         user="postgres",
         password="P@ssw0rd",
-        host="10.94.255.129",
+        host=host,
         port="5432",
         sslmode="require"
         )
