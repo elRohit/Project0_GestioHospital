@@ -5,10 +5,11 @@ import string
 import time
 
 # Aqui es guardaran totes les dades del fitxer csv
+#Host de connexio,passord i funcio faker
 host_conn = '10.94.255.135'
 pswd = 'P@ssw0rd'
 faker = Faker('ru_RU')
-
+# Netejar la base de dades
 def clean_all():
     try:
         conn = psycopg2.connect(database="hospital",user="postgres",password=pswd,host=host_conn,port="5432")
@@ -28,32 +29,32 @@ def clean_all():
         conn.close()
     except psycopg2.Error as e:
         print(f"Error cleaning data: {e}")
-
+# Crear dades fake per a personals
 def personal(personal):
     try:
         #Postgres conn
         conn = psycopg2.connect(database="hospital",user="postgres",password=pswd,host=host_conn,port="5432")
         conn.autocommit = True
         cur = conn.cursor()
-        count = 0
+        count = 0 # Contador de registres
         for i in range(personal):
             count += 1
             random.seed()
-            #dni
+            #Random amb 8 numeros i una lletra i enviar a una llista equivalent a un DNI
             num_jn = list()
             ll = random.choice('ABCDEFGHIJKLMNOPQRSTUVWXYZ')
             for i in range(8):
                 i = random.randint(1, 9)
                 num_jn.append(i)
             dni_final = ''.join(map(str, num_jn)) + ll 
-            #num_tel
+            #Random amb 9 numeros i enviar a una llista
             num_tel = list()
             for i in range(9):
                 i = random.randint(1, 9)
                 num_tel.append(i)
             num_tel_final = ''.join(map(str, num_tel))
             cur.execute(f"INSERT INTO personal VALUES ({count},'{dni_final}','{faker.first_name()[:20]}','{faker.last_name()[:20]}','{faker.email()[:50]}',{num_tel_final[:20]},'{faker.address()[:20]}')")
-        print("\033[F\033[K", end="")  # Clear the previous line
+        print("\033[F\033[K", end="")  
         print(f"Cargando ==>> Completado! --> {count} registros insertados en la tabla personal")
         cur.close()
         conn.close()
