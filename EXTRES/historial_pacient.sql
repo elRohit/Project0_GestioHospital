@@ -1,4 +1,4 @@
-CREATE TABLE historial_pacient (
+CREATE TABLE audit.historial_pacient (
     id INT PRIMARY KEY,
     pacient_id INT,
     visita_date DATE,
@@ -12,7 +12,7 @@ CREATE TABLE historial_pacient (
 CREATE OR REPLACE FUNCTION insert_historial_pacient()
 RETURNS TRIGGER AS $$
 BEGIN
-    INSERT INTO historial_pacient (id, pacient_id, visita_date, diagnostic, intervencio, pla_medicacio)
+    INSERT INTO audit.historial_pacient (id, pacient_id, visita_date, diagnostic, intervencio, pla_medicacio)
     VALUES (NEW.p_id, NEW.id_tarjeta_sanitaria, NEW.fecha_entrada, NEW.diagnostic, NEW.-, NEW.medicamentos);
     RETURN NEW;
 END;
