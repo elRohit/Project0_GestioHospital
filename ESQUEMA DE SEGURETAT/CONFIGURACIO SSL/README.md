@@ -1,5 +1,5 @@
 # Configuració de SSL
-Més info a : 
+
 ## Introducció
 
 El SSL (Secure Sockets Layer) en PostgreSQL és un protocol de seguretat que permet establir connexions segures i encriptades entre un client i un servidor de base de dades. En habilitar el SSL, s'utilitza un certificat digital per a autenticar i protegir la comunicació contra escoltes i manipulacions no autoritzades. Això s'especialment important quan es manegen dades sensibles. Per a habilitar el SSL, s'han de generar i configurar els certificats adequats en el servidor i en el client. Existeixen diversos tipus de certificats i alguns d'ells o la gran mayoria somni de pagament pel fet que s'usa per a protejer el sistema i que ningú més pugui accedir a ells o sigui des d'un sniffer o un altre atac.
