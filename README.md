@@ -8,7 +8,7 @@
 5. [Esquema d'Alta Disponibilitat](<ESQUEMA ALTA DISPONIBILITAT/README.md>)
 6. [Bloc de Programació](<BLOC DE PROGRAMACIÓ/README.md>)
 7. [Dades Fake de prova](<DUMMY DATA/README.md>)
-8. [Documentació Final](#Guia-d'Usuari-i-documentació-final)
+8. [Documentació Final](#Guia-d'Usuari-i-Documentació-Final)
 
 
 
