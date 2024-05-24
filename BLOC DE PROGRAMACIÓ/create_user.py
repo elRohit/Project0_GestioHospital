@@ -24,7 +24,7 @@ def insertar_usuarito_a_la_bd(nombrecito_usuarito, contrasenya_usuarito):
         dbname="hospital",
         user="postgres",
         password="P@ssw0rd",
-        host="192.168.56.104"
+        host="10.94.255.252"
     )
     cur = connexio.cursor()
     
