@@ -54,6 +54,7 @@ def menuPorRol(rol):
     if rol == "administrador_informatico":
         print("| 1. Dar de baja un usuario existente    |")
         print("| 2. Consultar usuarios existentes       |")
+        print("| 3. Crear Datos Dummy                   |")
     
     if rol == "medico":
         print("| 1. Consultar historial de un paciente  |")

@@ -1,5 +1,6 @@
 import psycopg2
 import exportacio_de_dades as ex
+import main_dummy as dummy
 
 ip_server = "192.168.56.104"
 
@@ -65,6 +66,13 @@ def menuAdminInformatico(usuarito, contrasenyita, opcion):
         except psycopg2.Error as e:
             
             print("No se ha podido mostrar la lista de usuarios.")
+            
+    if opcion == 3:
+        try:
+            dummy.main()
+        except psycopg2.Error as e:
+            
+            print("No se ha podido crear los datos dummy.")
             
 def menuMedico(usuarito, contrasenyita, opcion):
     if opcion == 1:
