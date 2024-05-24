@@ -2,6 +2,7 @@
 - [Distribució de la base de dades](#distribució-de-la-base-de-dades)
   - [Les taules de la base de dades](#les-taules-de-la-base-de-dades)
   - [Explicació relacions](#explicació-relacions)
+- [SQL](<script_creacion.sql>)
 
 ![Esquema-ER](model_er.png)
 
