@@ -6,13 +6,13 @@ import time
 
 # Aqui es guardaran totes les dades del fitxer csv
 #Host de connexio,passord i funcio faker
-host_conn = '10.94.255.135'
+host_conn = '192.168.56.104'
 pswd = 'P@ssw0rd'
 faker = Faker('ru_RU')
 # Netejar la base de dades
 def clean_all():
     try:
-        conn = psycopg2.connect(database="hospital",user="postgres",password=pswd,host=host_conn,port="5432")
+        conn = psycopg2.connect(database="dummy",user="postgres",password=pswd,host=host_conn,port="5432")
         conn.autocommit = True
         cur = conn.cursor()
         cur.execute("DELETE FROM reservas")
@@ -33,7 +33,7 @@ def clean_all():
 def personal(personal):
     try:
         #Postgres conn
-        conn = psycopg2.connect(database="hospital",user="postgres",password=pswd,host=host_conn,port="5432")
+        conn = psycopg2.connect(database="dummy",user="postgres",password=pswd,host=host_conn,port="5432")
         conn.autocommit = True
         cur = conn.cursor()
         count = 0 # Contador de registres
@@ -63,7 +63,7 @@ def personal(personal):
 
 def medicos(metges):
     try:
-        conn = psycopg2.connect(database="hospital",user="postgres", password=pswd,host=host_conn,port="5432")
+        conn = psycopg2.connect(database="dummy",user="postgres", password=pswd,host=host_conn,port="5432")
         conn.autocommit = True
         cur = conn.cursor()
         count = 0
@@ -79,7 +79,7 @@ def medicos(metges):
 
 def enfermeros(qty):
     try:
-        conn = psycopg2.connect(database="hospital",user="postgres", password=pswd,host=host_conn,port="5432")
+        conn = psycopg2.connect(database="dummy",user="postgres", password=pswd,host=host_conn,port="5432")
         conn.autocommit = True
         cur = conn.cursor()
         count = 0
@@ -96,7 +96,7 @@ def enfermeros(qty):
 
 def personal_limpieza(netejadors):
     try:
-        conn = psycopg2.connect(database="hospital",user="postgres", password=pswd,host=host_conn,port="5432")
+        conn = psycopg2.connect(database="dummy",user="postgres", password=pswd,host=host_conn,port="5432")
         conn.autocommit = True
         cur = conn.cursor()
         count = 0
@@ -114,7 +114,7 @@ def personal_limpieza(netejadors):
 
 def personal_administracio(administracio):
     try:
-        conn = psycopg2.connect(database="hospital",user="postgres", password=pswd,host=host_conn,port="5432")
+        conn = psycopg2.connect(database="dummy",user="postgres", password=pswd,host=host_conn,port="5432")
         conn.autocommit = True
         cur = conn.cursor()
         count = 0
@@ -157,7 +157,7 @@ def pacientes(pacients):
                 num_tel.append(i)
             num_tel_final = ''.join(map(str, num_tel))
 
-            conn = psycopg2.connect(database="hospital",user="postgres", password=pswd,host=host_conn,port="5432")
+            conn = psycopg2.connect(database="dummy",user="postgres", password=pswd,host=host_conn,port="5432")
             conn.autocommit = True
             cur = conn.cursor()
 
@@ -173,7 +173,7 @@ def pacientes(pacients):
 def visitas(visites):
     try:
         count = 0
-        conn = psycopg2.connect(database="hospital",user="postgres", password=pswd,host=host_conn,port="5432")
+        conn = psycopg2.connect(database="dummy",user="postgres", password=pswd,host=host_conn,port="5432")
         conn.autocommit = True
         cur = conn.cursor()
         cur.execute(f"SELECT p_id FROM medicos")
@@ -209,7 +209,7 @@ def visitas(visites):
 
 def drop_indexos():
     try:
-        conn = psycopg2.connect(database="hospital",user="postgres", password=pswd,host=host_conn,port="5432")
+        conn = psycopg2.connect(database="dummy",user="postgres", password=pswd,host=host_conn,port="5432")
         conn.autocommit = True
         cur = conn.cursor()
         cur.execute("DROP INDEX idx_pacientes")
@@ -225,7 +225,7 @@ def drop_indexos():
         print(f"Error dropping indexes: {e}")
 def indexos():
     try:
-        conn = psycopg2.connect(database="hospital",user="postgres", password=pswd,host=host_conn,port="5432")
+        conn = psycopg2.connect(database="dummy",user="postgres", password=pswd,host=host_conn,port="5432")
         conn.autocommit = True
         cur = conn.cursor()
         drop_indexos()
