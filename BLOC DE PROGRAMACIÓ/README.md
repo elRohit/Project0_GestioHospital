@@ -429,21 +429,21 @@ def exportacion_xml(fecha_inicio, fecha_fin):
 
 Per connectar-me he exposat el port de Postgres al router:
 
-![alt text](image.png)
+![alt text](<images/image.png>)
 
 Obrim el powerBI
 
-![alt text](image-1.png)
+![alt text](<images/image-1.png>)
 
 Posem el host i base de dades a administrar:
 
-![alt text](image-2.png)
+![alt text](<images/image-2.png>)
 
 Ara posem les credencials del usuari de base de dades:
 
-![alt text](image-3.png)
+![alt text](<images/image-3.png>)
 
-![alt text](image-4.png)
+![alt text](<images/image-4.png>)
 
 
 ## Processos Funcions i Triggers

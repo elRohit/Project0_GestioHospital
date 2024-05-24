@@ -1,8 +1,8 @@
 # Distribució de la base de dades
-1. [Les taules de la base de dades](#Les-taules-de-la-base-de-dades)
-2. [Explicació relacions](#Explicació-relacions)
-3. [Codi SQL](<DISSENY ER - RELACIONAL - SQL/script_creacion.sql>)
-
+- [Distribució de la base de dades](#distribució-de-la-base-de-dades)
+  - [Les taules de la base de dades](#les-taules-de-la-base-de-dades)
+  - [Explicació relacions](#explicació-relacions)
+- [SQL](<script_creacion.sql>)
 
 ![Esquema-ER](model_er.png)
 

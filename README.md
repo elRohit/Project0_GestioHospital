@@ -8,7 +8,7 @@
 5. [Esquema d'Alta Disponibilitat](<ESQUEMA ALTA DISPONIBILITAT/README.md>)
 6. [Bloc de Programació](<BLOC DE PROGRAMACIÓ/README.md>)
 7. [Dades Fake de prova](<DUMMY DATA/README.md>)
-8. [Documentació Final](#documentació-final)
+8. [Documentació Final](#Guia-de-Usuari-i-Documentació-Final)
 
 
 
@@ -43,7 +43,7 @@ Bloc d’exportació de dades. Veure més informació a l’annex 5.
 
 Volem algun sistema per poder instal·lar l’aplicació en els ordinadors de manera desatesa o evitar haver d’instal·lar res al client. Ideal si fos tot pel navegador web.
 
-### Documentació Final
+### Guia de Usuari i Documentació Final
 
 Exemples de com utilitzar l'aplicació [HOSPITALITO IRA](<docs/Guia Usuari - Hospitalito IRA.pdf>)
 
