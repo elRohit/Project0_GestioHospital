@@ -182,15 +182,16 @@ def menuMedico(usuarito, contrasenyita, opcion):
             print("+----------------------------------------+")
             contador = 0
             for i in resultadito:
-                print(f"El quirofano asignado es: {resultadito[contador][6]}    |")
-                print(f"+----------------------------------------+")
+                print(f"Quirofano: {resultadito[contador][6]}            |")
                 print(f"| Fecha Entrada | Fecha Salida | Nombre paciente | Apellido Paciente | Nombre Medico | Apellido Medico |")
-                print(f"+----------------------------------------+")
-                for i in resultadito:
+                if resultadito[contador][6] == resultadito[contador][6]:
                     print(f"| {resultadito[contador][7]} | {resultadito[contador][8]} | {resultadito[contador][0]} | {resultadito[contador][1]} | {resultadito[contador][2]} | {resultadito[contador][3]} |")
-                    print(f"+----------------------------------------+")
-                    contador += 1
                 contador += 1
+            contador = 0
+            
+            
+            
+
             
         except psycopg2.Error as e:
                 
