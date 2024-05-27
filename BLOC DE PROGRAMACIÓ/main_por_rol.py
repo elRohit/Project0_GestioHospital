@@ -86,7 +86,7 @@ def menuMedico(usuarito, contrasenyita, opcion):
                 port="5432",
                 sslmode="require"
             )
-            SQLita = f"SELECT d.fecha_entrada, d.fecha_salida, d.tiene_receta, d.medicamentos, m.nombre_malaltia FROM diagnostico d JOIN malalties m ON m.m_id = d.m_id WHERE d.id_tarjeta_sanitaria = '{tse_paciente}' ORDER BY fecha_entrada DESC;"
+            SQLita = f"SELECT d.fecha_entrada, d.fecha_salida, d.tiene_receta, d.medicamentos, m.nombre_malaltia FROM diagnostico d JOIN malalties m ON m.id_m = d.id_m WHERE d.id_tarjeta_sanitaria = '{tse_paciente}' ORDER BY fecha_entrada DESC;"
             cur = connexio.cursor()
             cur.execute(SQLita)
             resultadito = cur.fetchall()
