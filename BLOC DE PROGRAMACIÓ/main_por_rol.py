@@ -80,13 +80,13 @@ def menuMedico(usuarito, contrasenyita, opcion):
         try:
             connexio = psycopg2.connect(
                 dbname="hospital",
-                user=usuarito,
-                password=contrasenyita,
+                user="postgres",
+                password="P@ssw0rd",
                 host=ip_server,
                 port="5432",
                 sslmode="require"
             )
-            SQLita = f"SELECT d.fecha_entrada, d.fecha_salida, d.tiene_receta, d.medicamentos, m.nombre_malaltia FROM diagnosticos d JOIN malalties m ON m.id_m = d.id_m WHERE d.id_tarjeta_sanitaria = '{tse_paciente}' ORDER BY fecha_entrada DESC;"
+            SQLita = f"SELECT d.fecha_entrada, d.fecha_salida, d.tiene_receta, d.medicamentos, m.nombre_malaltia, p.nombre, p.apellidos FROM diagnosticos d JOIN malalties m ON m.id_m = d.id_m JOIN personal p ON p.p_id = d.p_id WHERE d.id_tarjeta_sanitaria = '{tse_paciente}' ORDER BY d.fecha_entrada DESC;"
             cur = connexio.cursor()
             cur.execute(SQLita)
             resultadito = cur.fetchall()
@@ -99,7 +99,7 @@ def menuMedico(usuarito, contrasenyita, opcion):
             contador2 = 0
             for i in resultadito:
                 print(f"Visita numero: {contador}            ")
-                print(f"Fecha de entrada: {resultadito[contador2][0]}, Fecha de salida: {resultadito[contador2][1]}, Tiene receta: {resultadito[contador2][2]}, Medicamentos: {resultadito[contador2][3]}, Enfermedad: {resultadito[contador2][4]}")
+                print(f"Fecha de entrada: {resultadito[contador2][0]}, Fecha de salida: {resultadito[contador2][1]}, Tiene receta: {resultadito[contador2][2]}, Medicamentos: {resultadito[contador2][3]}, Enfermedad: {resultadito[contador2][4]}, Nombre del médico: {resultadito[contador2][5]} {resultadito[contador2][6]}")
                 contador += 1
                 contador2 += 1
             print("+----------------------------------------+")
