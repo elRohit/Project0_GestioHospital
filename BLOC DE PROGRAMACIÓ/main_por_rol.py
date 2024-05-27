@@ -117,28 +117,43 @@ def menuMedico(usuarito, contrasenyita, opcion):
             print("No se ha podido mostrar el historial del paciente.")
             
     if opcion == 2:
-        pacienteID = input("Introce el número de tarjeta sanitaria del paciente: ")
+        dni_medico = input("Introduce el DNI de un medico: ")
         try:
             connexio = psycopg2.connect(
                 dbname="hospital",
-                user=usuarito,
-                password=contrasenyita,
+                user="postgres",
+                password="P@ssw0rd",
                 host=ip_server,
                 port="5432",
                 sslmode="require"
             )
-            SQLita = f"SELECT medicamentos FROM diagnosticos WHERE id_tarjeta_sanitaria = '{pacienteID}' ORDER BY id_tarjeta_sanitaria DESC LIMIT 1;"
+            SQLita = f"SELECT fecha_entrada, fecha_salida FROM diagnosticos WHERE p_id = (SELECT p_id FROM personal WHERE dni = '{dni_medico}')"
+            SQLita2 = f"SELECT fecha_entrada, fecha_salida FROM operacion WHERE p_id = (SELECT p_id FROM personal WHERE dni = '{dni_medico}')"
             cur = connexio.cursor()
             cur.execute(SQLita)
             resultadito = cur.fetchall()
             cur.close()
             connexio.close()
             print("+----------------------------------------+")
-            print("|           Medicación del paciente      |")
+            print("|              Horario Medico            |")
             print("+----------------------------------------+")
-            print("El paciente tiene esta medicación:       |")
-            print(resultadito[0][0])
-            print("+----------------------------------------+")
+            print(f"El médico ha tenido estas visitas:      |")
+            contador = 0
+            for i in resultadito:
+                print(f"Fecha de entrada: {resultadito[contador][0]}, Fecha de salida: {resultadito[contador][1]}")
+                contador += 1
+            contador = 0
+            print("+--------------------------------------- +")
+            print(f"El médico ha tenido estas operaciones:  |")
+            for i in resultadito:
+                print(f"Fecha de entrada: {resultadito[contador][0]}, Fecha de salida: {resultadito[contador][1]}")
+                contador += 1
+            contador = 0
+            print("+--------------------------------------- +")
+            print(f" Hoy tiene estas horas disponibles:     |")
+            print("+--------------------------------------- +")
+            print("Tiene todas las horas disponibles de hoy.")
+            print("+--------------------------------------- +")
             
         except psycopg2.Error as e:
             
