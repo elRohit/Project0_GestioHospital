@@ -87,9 +87,15 @@ def menuMedico(usuarito, contrasenyita, opcion):
                 sslmode="require"
             )
             SQLita = f"SELECT d.fecha_entrada, d.fecha_salida, d.tiene_receta, d.medicamentos, m.nombre_malaltia, p.nombre, p.apellidos FROM diagnosticos d JOIN malalties m ON m.id_m = d.id_m JOIN personal p ON p.p_id = d.p_id WHERE d.id_tarjeta_sanitaria = '{tse_paciente}' ORDER BY d.fecha_entrada DESC;"
+            SQLita2 = f"SELECT COUNT(*) FROM reservas WHERE id_tarjeta_sanitaria = '{tse_paciente}';"
+            SQLita3 = f"SELECT COUNT(*) FROM operacion WHERE id_tarjeta_sanitaria = '{tse_paciente}';"
             cur = connexio.cursor()
             cur.execute(SQLita)
             resultadito = cur.fetchall()
+            cur.execute(SQLita2)
+            resultadito2 = cur.fetchall()
+            cur.execute(SQLita3)
+            resultadito3 = cur.fetchall()
             cur.close()
             connexio.close()
             print("+----------------------------------------+")
@@ -103,6 +109,8 @@ def menuMedico(usuarito, contrasenyita, opcion):
                 contador += 1
                 contador2 += 1
             print("+----------------------------------------+")
+            print(f"El paciente ha estado ingresado {resultadito2[0][0]} veces.")
+            print(f"El paciente ha sido operado {resultadito3[0][0]} veces.")
                  
         except psycopg2.Error as e:
             
