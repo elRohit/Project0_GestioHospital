@@ -171,23 +171,27 @@ def menuMedico(usuarito, contrasenyita, opcion):
                 port="5432",
                 sslmode="require"
             )
-            SQLita = f"SELECT pa.nombre, pa.apellidos, p.nombre, p.apellidos, pe.nombre, pe.apellidos, o.q_id, o.fecha_entrada FROM operacion o JOIN pacientes pa ON o.id_tarjeta_sanitaria = pa.id_tarjeta_sanitaria JOIN medicos m ON o.p_id = m.p_id JOIN personal p ON p.p_id = m.p_id JOIN enfermeros en ON en.p_id = o.en_id JOIN personal pe ON pe.p_id = en.p_id WHERE o.fecha_entrada >= '{fecha} 00:00:00.000000';"
+            SQLita = f"SELECT o.q_id, o.fecha_entrada, o.fecha_salida, pa.nombre, pa.apellidos, p.nombre, p.apellidos FROM operacion o JOIN personal p ON p.p_id = o.p_id JOIN pacientes pa ON pa.id_tarjeta_sanitaria = o.id_tarjeta_sanitaria WHERE o.fecha_entrada >= '{fecha} 00:00:00.000000';"
+            SQLita2 = f"SELECT MAx(q_id) FROM operacion;"
             cur = connexio.cursor()
             cur.execute(SQLita)
             resultadito = cur.fetchall()
+            cur.execute(SQLita2)
+            resultadito2 = cur.fetchall()
             cur.close()
             connexio.close()
             print("+----------------------------------------+")
             print("|           Operaciones previstas        |")
             print("+----------------------------------------+")
             contador = 0
-            for i in resultadito:
-                print(f"Quirofano: {resultadito[contador][6]}            |")
-                print(f"| Fecha Entrada | Fecha Salida | Nombre paciente | Apellido Paciente | Nombre Medico | Apellido Medico |")
-                if resultadito[contador][6] == resultadito[contador][6]:
-                    print(f"| {resultadito[contador][7]} | {resultadito[contador][8]} | {resultadito[contador][0]} | {resultadito[contador][1]} | {resultadito[contador][2]} | {resultadito[contador][3]} |")
-                contador += 1
-            contador = 0
+            contador2 = 1
+            while contador2 <= resultadito2[0][0]:
+                if resultadito[contador][contador] == contador2:
+                    print(f"Quirofano numero: {resultadito[contador][0]}            ")
+                    for i in resultadito:
+                        print(f"Fecha de entrada: {resultadito[contador][1]}, Fecha de salida: {resultadito[contador][2]}, Nombre del paciente: {resultadito[contador][3]} {resultadito[contador][4]}, Nombre del médico: {resultadito[contador][5]} {resultadito[contador][6]}")
+                        contador += 1
+                contador2 += 1
             
             
             
