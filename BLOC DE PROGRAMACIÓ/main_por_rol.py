@@ -76,8 +76,7 @@ def menuAdminInformatico(usuarito, contrasenyita, opcion):
             
 def menuMedico(usuarito, contrasenyita, opcion):
     if opcion == 1:
-        paciente = input("Introduce el nombre del paciente: ")
-        pacienteApellido = input("Introduce el apellido del paciente: ")
+        tse_paciente = input("Introduce el número de tarjeta sanitaria del paciente: ")
         try:
             connexio = psycopg2.connect(
                 dbname="hospital",
@@ -87,7 +86,7 @@ def menuMedico(usuarito, contrasenyita, opcion):
                 port="5432",
                 sslmode="require"
             )
-            SQLita = f"SELECT condiciones_paciente FROM pacientes WHERE nombre = '{paciente}' AND apellidos = '{pacienteApellido}';"
+            SQLita = f"SELECT fecha_entrada, fecha_salida, tiene_receta, medicamentos, nombre_malaltia FROM diagnostico d JOIN malalties m ON m.m_id = d.m_id WHERE id_tarjeta_sanitaria = '{tse_paciente}' ORDER BY fecha_entrada DESC;"
             cur = connexio.cursor()
             cur.execute(SQLita)
             resultadito = cur.fetchall()
@@ -96,10 +95,15 @@ def menuMedico(usuarito, contrasenyita, opcion):
             print("+----------------------------------------+")
             print("|           Historial del paciente       |")
             print("+----------------------------------------+")
-            print("El paciente tiene esta condiciones:      |")
-            print(resultadito[0][0])
+            contador = 1
+            contador2 = 0
+            for i in resultadito:
+                print(f"Visita numero: {contador}            ")
+                print(f"Fecha de entrada: {resultadito[contador2][0]}, Fecha de salida: {resultadito[contador2][1]}, Tiene receta: {resultadito[contador2][2]}, Medicamentos: {resultadito[contador2][3]}, Enfermedad: {resultadito[contador2][4]}")
+                contador += 1
+                contador2 += 1
             print("+----------------------------------------+")
-            
+                 
         except psycopg2.Error as e:
             
             print("No se ha podido mostrar el historial del paciente.")
