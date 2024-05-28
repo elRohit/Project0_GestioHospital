@@ -224,8 +224,8 @@ def menuMedico(usuarito, contrasenyita, opcion):
                     for j in resultadito:
                         if j[0] == i:
                             print(f"Fecha de entrada: {resultadito[contador][1]}, Fecha de salida: {resultadito[contador][2]}")
-                            print(f"Nombre del paciente: {resultadito[contador][3]} {resultadito[contador][4]}")
-                            print(f"Nombre del médico: {resultadito[contador][5]} {resultadito[contador][6]}")
+                            print(f"Nombre del paciente: {resultadito[contador][3]} {resultadito[contador][4]}, Nombre del médico: {resultadito[contador][5]} {resultadito[contador][6]}")
+                            print("+--------------------------------------- +")
                             contador += 1
                     print("+--------------------------------------- +")
                     
