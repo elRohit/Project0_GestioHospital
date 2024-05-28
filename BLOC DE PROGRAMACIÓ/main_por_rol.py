@@ -205,7 +205,7 @@ def menuMedico(usuarito, contrasenyita, opcion):
                 sslmode="require"
             )
             SQLita = f"SELECT o.q_id, o.fecha_entrada, o.fecha_salida, pa.nombre, pa.apellidos, p.nombre, p.apellidos FROM operacion o JOIN personal p ON p.p_id = o.p_id JOIN pacientes pa ON pa.id_tarjeta_sanitaria = o.id_tarjeta_sanitaria WHERE o.fecha_entrada >= '{fecha} 00:00:00.000000';"
-            SQLita2 = f"SELECT MAX(q_id) FROM operacion WHERE fecha_entrada >= '{fecha} 00:00:00.000000';"
+            SQLita2 = f"SELECT COUNT(q_id) FROM operacion WHERE fecha_entrada >= '{fecha} 00:00:00.000000';"
             cur = connexio.cursor()
             cur.execute(SQLita)
             resultadito = cur.fetchall()
@@ -218,18 +218,17 @@ def menuMedico(usuarito, contrasenyita, opcion):
             print("+----------------------------------------+")
             contador = 0
             contador2 = 1
-            while contador2 <= resultadito2[0][0]:
-                if resultadito[contador][contador] == contador2:
-                    print(f"Quirofano numero: {resultadito[contador][0]}            ")
-                    for i in resultadito:
-                        print(f"Fecha de entrada: {resultadito[contador][1]}, Fecha de salida: {resultadito[contador][2]}, Nombre del paciente: {resultadito[contador][3]} {resultadito[contador][4]}, Nombre del médico: {resultadito[contador][5]} {resultadito[contador][6]}")
-                        contador += 1
-                contador2 += 1
-            
-            
-            
-
-            
+            for i in range(1, resultadito2[0][0] + 1):
+                    print(f"Quirofano {i}")
+                    print("+--------------------------------------- +")
+                    for j in resultadito:
+                        if j[0] == i:
+                            print(f"Fecha de entrada: {resultadito[contador][1]}, Fecha de salida: {resultadito[contador][2]}")
+                            print(f"Nombre del paciente: {resultadito[contador][3]} {resultadito[contador][4]}")
+                            print(f"Nombre del médico: {resultadito[contador][5]} {resultadito[contador][6]}")
+                            contador += 1
+                    print("+--------------------------------------- +")
+                    
         except psycopg2.Error as e:
                 
                 print("No hay operaciones previstas.")
