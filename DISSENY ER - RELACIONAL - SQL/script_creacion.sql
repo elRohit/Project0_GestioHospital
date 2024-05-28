@@ -92,6 +92,8 @@ CREATE TABLE aparatos_medicos (
 CREATE TABLE quirofano_aparatos_medicos (
     am_id INTEGER REFERENCES aparatos_medicos(am_id) PRIMARY KEY,
     q_id INTEGER REFERENCES quirofano(q_id)
+    cantidad INTEGER,
+    PRIMARY KEY (am_id,q_id)
 );
 
 CREATE TABLE reservas (
