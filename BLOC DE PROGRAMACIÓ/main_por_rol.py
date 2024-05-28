@@ -289,11 +289,11 @@ def menuMedico(usuarito, contrasenyita, opcion):
                 print("+----------------------------------------+")
                 for i in range(1, resultadito2[0][0] + 1):
                     print(f"Quirofano {i}")
+                    print("+--------------------------------------- +")
                     for j in resultadito:
                         if j[0] == i:
                             print(f"Nombre: {j[1]}, Cantidad: {j[2]}")
-                            print("+--------------------------------------- +")
-                    print()
+                    print("+--------------------------------------- +")
             except psycopg2.Error as e:
                 print("No hay aparatos medicos en los quirofanos.")
     
