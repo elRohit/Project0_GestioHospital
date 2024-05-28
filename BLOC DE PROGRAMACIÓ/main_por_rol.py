@@ -290,11 +290,10 @@ def menuMedico(usuarito, contrasenyita, opcion):
             contador = 0
             contador2 = 1
             while contador2 <= resultadito2[0][0]:
-                if resultadito[contador][contador] == contador2:
+                if resultadito[contador][0] == contador2:
                     print(f"Quirofano numero: {resultadito[contador][0]}            ")
                     for i in resultadito:
-                        print(f"Nombre del aparato: {resultadito[contador][1]}         ")
-                        print(f"Cantidad: {resultadito[contador][2]}         ")
+                        print(f"Nombre del aparato: {resultadito[contador][1]}, Cantidad: {resultadito[contador][2]}        ")
                         contador += 1
                 contador2 += 1
             contador = 0
