@@ -133,6 +133,10 @@ def menuMedico(usuarito, contrasenyita, opcion):
             cur = connexio.cursor()
             cur.execute(SQLita)
             resultadito = cur.fetchall()
+            cur.execute(SQLita2)
+            resultadito2 = cur.fetchall()
+            cur.execute(SQLita3)
+            resultadito3 = cur.fetchall()
             cur.close()
             connexio.close()
             print("+----------------------------------------+")
@@ -147,14 +151,14 @@ def menuMedico(usuarito, contrasenyita, opcion):
             print("+--------------------------------------- +")
             print(f"Y estas operaciones:                    |")
             for i in resultadito:
-                print(f"Fecha de entrada: {resultadito[contador][0]}, Fecha de salida: {resultadito[contador][1]}")
+                print(f"Fecha de entrada: {resultadito2[contador][0]}, Fecha de salida: {resultadito2[contador][1]}")
                 contador += 1
             contador = 0
             print("+--------------------------------------- +")
             print(f"            Horario laboral             |")
             print("+--------------------------------------- +")
-            print ("Hora de entrada: ", resultadito3[0][0])
-            print ("Hora de salida: ", resultadito3[0][1])
+            print (f"Hora de entrada: {resultadito3[0][0]}")
+            print (f"Hora de salida: {resultadito3[0][1]}")
             print("+--------------------------------------- +")
             
         except psycopg2.Error as e:
