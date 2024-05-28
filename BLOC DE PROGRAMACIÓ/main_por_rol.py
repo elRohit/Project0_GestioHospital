@@ -227,7 +227,6 @@ def menuMedico(usuarito, contrasenyita, opcion):
                             print(f"Nombre del paciente: {resultadito[contador][3]} {resultadito[contador][4]}, Nombre del médico: {resultadito[contador][5]} {resultadito[contador][6]}")
                             print("+--------------------------------------- +")
                             contador += 1
-                    print("+--------------------------------------- +")
                     
         except psycopg2.Error as e:
                 
