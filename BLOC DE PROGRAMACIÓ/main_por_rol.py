@@ -205,7 +205,7 @@ def menuMedico(usuarito, contrasenyita, opcion):
                 sslmode="require"
             )
             SQLita = f"SELECT o.q_id, o.fecha_entrada, o.fecha_salida, pa.nombre, pa.apellidos, p.nombre, p.apellidos FROM operacion o JOIN personal p ON p.p_id = o.p_id JOIN pacientes pa ON pa.id_tarjeta_sanitaria = o.id_tarjeta_sanitaria WHERE o.fecha_entrada >= '{fecha} 00:00:00.000000';"
-            SQLita2 = f"SELECT MAx(q_id) FROM operacion;"
+            SQLita2 = f"SELECT MAx(q_id) FROM operacion WHERE o.fecha_entrada >= '{fecha} 00:00:00.000000';"
             cur = connexio.cursor()
             cur.execute(SQLita)
             resultadito = cur.fetchall()
