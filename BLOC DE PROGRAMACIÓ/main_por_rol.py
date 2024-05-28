@@ -269,8 +269,8 @@ def menuMedico(usuarito, contrasenyita, opcion):
         try:
             connexio = psycopg2.connect(
                     dbname="hospital",
-                    user=usuarito,
-                    password=contrasenyita,
+                    user="postgres",
+                    password="P@ssw0rd",
                     host=ip_server,
                     port="5432",
                     sslmode="require"
