@@ -275,7 +275,7 @@ def menuMedico(usuarito, contrasenyita, opcion):
                     port="5432",
                     sslmode="require"
                 )
-            SQLita = f"SELECT qam.q_id, am.nombre, qam.cantidad FROM quirofano_aparatos_medicos qam JOIN aparatos_medicos am ON qam.am_id = am.am_id;"
+            SQLita = f"SELECT qam.q_id, am.nombre, qam.cantidad FROM quirofano_aparatos_medicos qam JOIN aparatos_medicos am ON qam.am_id = am.am_id ORDER BY qam.q_id DESC;"
             SQlita2 = f"SELECT COUNT(q_id) FROM quirofano_aparatos_medicos;"
             cur = connexio.cursor()
             cur.execute(SQLita)
@@ -287,17 +287,17 @@ def menuMedico(usuarito, contrasenyita, opcion):
             print("+----------------------------------------+")
             print("|    Aparatos medicos por quirofano      |")
             print("+----------------------------------------+")
-            contador = 1
-            contador2 = 0
-            while contador <= resultadito2[0][0]:
-                if resultadito[contador][contador] == contador:
-                    print(f"Quirofano numero: {resultadito[contador][0]}            ")
-                    for i in resultadito:
-                        print(f"Nombre del aparato: {resultadito[contador][1]}, Cantidad: {resultadito[contador][2]}")
-                        contador += 1
-                contador2 += 1
             contador = 0
-            print("+--------------------------------------- +")
+            for i in resultadito:
+                print(f"ID del quirofano: {resultadito[contador][0]}            ")
+                print(f"Nombre del aparato: {resultadito[contador][1]}         ")
+                print(f"Cantidad: {resultadito[contador][2]}         ")
+                print("+--------------------------------------- +")
+                contador += 1
+            contador = 0
+            
+            
+            
             
         except psycopg2.Error as e:
                 
