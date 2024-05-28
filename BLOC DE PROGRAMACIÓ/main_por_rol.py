@@ -275,7 +275,7 @@ def menuMedico(usuarito, contrasenyita, opcion):
                     port="5432",
                     sslmode="require"
                 )
-            SQLita = f"SELECT q.q_id, am.am_id, qam.cantidad FROM quirofano q JOIN quirofano_aparatos_medicos qam ON qam.q_id = q.q_id JOIN aparatos_medicos am ON am.am_id = qam.am_id WHERE qam.cantidad < am.cantidad;"
+            SQLita = f"SELECT qam.q_id, am.nombre, qam.cantidad FROM quirofano_aparatos_medicos qam JOIN aparatos_medicos am ON qam.am_id = am.am_id;"
             cur = connexio.cursor()
             cur.execute(SQLita)
             resultadito = cur.fetchall()
@@ -285,10 +285,11 @@ def menuMedico(usuarito, contrasenyita, opcion):
             print("|    Aparatos medicos por quirofano      |")
             print("+----------------------------------------+")
             contador = 0
-            for i in resultadito:
-                print(f"ID del aparato: {resultadito[contador][1]}            ")
-                print(f"ID del quirofano: {resultadito[contador][0]}         ")
-                print(f"Cantidad: {resultadito[contador][2]}         ")
+            while contador < len(resultadito):
+                print(f"ID del quirofano: {resultadito[contador][0]}            ")
+                for i in resultadito:
+                    print(f"Nombre del aparato: {resultadito[contador][1]}         ")
+                    print(f"Cantidad: {resultadito[contador][2]}         ")
                 print("+--------------------------------------- +")
                 contador += 1
             contador = 0
