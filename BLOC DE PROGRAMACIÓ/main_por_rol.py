@@ -266,8 +266,8 @@ def menuMedico(usuarito, contrasenyita, opcion):
             print("No hay visitas planificadas.")
             
     if opcion == 6:
-        try:
-            connexio = psycopg2.connect(
+            try:
+                connexio = psycopg2.connect(
                     dbname="hospital",
                     user="postgres",
                     password="P@ssw0rd",
@@ -275,32 +275,25 @@ def menuMedico(usuarito, contrasenyita, opcion):
                     port="5432",
                     sslmode="require"
                 )
-            SQLita = f"SELECT qam.q_id, am.nombre, qam.cantidad FROM quirofano_aparatos_medicos qam JOIN aparatos_medicos am ON qam.am_id = am.am_id ORDER BY qam.q_id ASC;"
-            SQlita2 = f"SELECT COUNT(q_id) FROM quirofano;"
-            cur = connexio.cursor()
-            cur.execute(SQLita)
-            resultadito = cur.fetchall()
-            cur.execute(SQlita2)
-            resultadito2 = cur.fetchall()
-            cur.close()
-            connexio.close()
-            print("+----------------------------------------+")
-            print("|    Aparatos medicos por quirofano      |")
-            print("+----------------------------------------+")
-            contador = 0
-            contador2 = 1
-            while contador2 <= resultadito2[0][0]:
-                if resultadito[contador][0] == contador2:
-                    print(f"Quirofano numero: {resultadito[contador][0]}            ")
-                    for i in resultadito:
-                        print(f"Nombre del aparato: {resultadito[contador][1]}, Cantidad: {resultadito[contador][2]}        ")
-                        contador += 1
-                contador2 += 1
-            contador = 0
-            print("+--------------------------------------- +")   
-               
-        except psycopg2.Error as e:
-                
+                SQLita = f"SELECT qam.q_id, am.nombre, qam.cantidad FROM quirofano_aparatos_medicos qam JOIN aparatos_medicos am ON qam.am_id = am.am_id ORDER BY qam.q_id ASC;"
+                SQlita2 = f"SELECT COUNT(q_id) FROM quirofano;"
+                cur = connexio.cursor()
+                cur.execute(SQLita)
+                resultadito = cur.fetchall()
+                cur.execute(SQlita2)
+                resultadito2 = cur.fetchall()
+                cur.close()
+                connexio.close()
+                print("+----------------------------------------+")
+                print("|    Quirofano y sus aparatos medicos    |")
+                print("+----------------------------------------+")
+                for i in range(1, resultadito2[0][0] + 1):
+                    print(f"Quirofano {i}")
+                    for j in resultadito:
+                        if j[0] == i:
+                            print(f"{j[1]}, {j[2]}")
+                    print()
+            except psycopg2.Error as e:
                 print("No hay aparatos medicos en los quirofanos.")
     
     if opcion == 7:
