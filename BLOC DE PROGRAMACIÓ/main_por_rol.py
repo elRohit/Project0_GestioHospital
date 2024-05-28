@@ -127,8 +127,8 @@ def menuMedico(usuarito, contrasenyita, opcion):
                 port="5432",
                 sslmode="require"
             )
-            SQLita = f"SELECT fecha_entrada, fecha_salida FROM diagnosticos WHERE p_id = (SELECT p_id FROM personal WHERE dni = '{dni_medico}') AND fecha_entrada >= current_timestamp"
-            SQLita2 = f"SELECT fecha_entrada, fecha_salida FROM operacion WHERE p_id = (SELECT p_id FROM personal WHERE dni = '{dni_medico}') AND fecha_entrada >= current_timestamp"
+            SQLita = f"SELECT fecha_entrada, fecha_salida FROM diagnosticos WHERE p_id = (SELECT p_id FROM personal WHERE dni = '{dni_medico}') AND fecha_entrada >= current_timestamp;"
+            SQLita2 = f"SELECT fecha_entrada, fecha_salida FROM operacion WHERE p_id = (SELECT p_id FROM personal WHERE dni = '{dni_medico}') AND fecha_entrada >= current_timestamp;"
             SQLita3 = f"SELECT hora_entrada, hora_salida FROM horario_medico hm JOIN personal p ON p.p_id = hm.p_id WHERE p.dni = '{dni_medico}';"
             cur = connexio.cursor()
             cur.execute(SQLita)
