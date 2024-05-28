@@ -127,8 +127,9 @@ def menuMedico(usuarito, contrasenyita, opcion):
                 port="5432",
                 sslmode="require"
             )
-            SQLita = f"SELECT fecha_entrada, fecha_salida FROM diagnosticos WHERE p_id = (SELECT p_id FROM personal WHERE dni = '{dni_medico}')"
-            SQLita2 = f"SELECT fecha_entrada, fecha_salida FROM operacion WHERE p_id = (SELECT p_id FROM personal WHERE dni = '{dni_medico}')"
+            SQLita = f"SELECT fecha_entrada, fecha_salida FROM diagnosticos WHERE p_id = (SELECT p_id FROM personal WHERE dni = '{dni_medico}' AND fecha_entrada >= current_timestamp)"
+            SQLita2 = f"SELECT fecha_entrada, fecha_salida FROM operacion WHERE p_id = (SELECT p_id FROM personal WHERE dni = '{dni_medico}' AND fecha_entrada >= current_timestamp)"
+            SQLita3 = f"SELECT hora_entrada, hora_salida FROM horario_medico hm JOIN personal p ON p.p_id = hm.p_id WHERE p.dni = {dni_medico};"
             cur = connexio.cursor()
             cur.execute(SQLita)
             resultadito = cur.fetchall()
@@ -137,22 +138,23 @@ def menuMedico(usuarito, contrasenyita, opcion):
             print("+----------------------------------------+")
             print("|              Horario Medico            |")
             print("+----------------------------------------+")
-            print(f"El médico ha tenido estas visitas:      |")
+            print(f"El médico ha efectuara estas visitas:   |")
             contador = 0
             for i in resultadito:
                 print(f"Fecha de entrada: {resultadito[contador][0]}, Fecha de salida: {resultadito[contador][1]}")
                 contador += 1
             contador = 0
             print("+--------------------------------------- +")
-            print(f"El médico ha tenido estas operaciones:  |")
+            print(f"Y estas operaciones:                    |")
             for i in resultadito:
                 print(f"Fecha de entrada: {resultadito[contador][0]}, Fecha de salida: {resultadito[contador][1]}")
                 contador += 1
             contador = 0
             print("+--------------------------------------- +")
-            print(f" Hoy tiene estas horas disponibles:     |")
+            print(f"            Horario laboral             |")
             print("+--------------------------------------- +")
-            print("Tiene todas las horas disponibles de hoy.")
+            print ("Hora de entrada: ", resultadito3[0][0])
+            print ("Hora de salida: ", resultadito3[0][1])
             print("+--------------------------------------- +")
             
         except psycopg2.Error as e:
