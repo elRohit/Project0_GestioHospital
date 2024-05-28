@@ -150,7 +150,7 @@ def menuMedico(usuarito, contrasenyita, opcion):
             contador = 0
             print("+--------------------------------------- +")
             print(f"Y estas operaciones:                    |")
-            for i in resultadito:
+            for i in resultadito2:
                 print(f"Fecha de entrada: {resultadito2[contador][0]}, Fecha de salida: {resultadito2[contador][1]}")
                 contador += 1
             contador = 0
