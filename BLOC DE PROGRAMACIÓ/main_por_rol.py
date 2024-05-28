@@ -276,7 +276,7 @@ def menuMedico(usuarito, contrasenyita, opcion):
                     sslmode="require"
                 )
             SQLita = f"SELECT qam.q_id, am.nombre, qam.cantidad FROM quirofano_aparatos_medicos qam JOIN aparatos_medicos am ON qam.am_id = am.am_id ORDER BY qam.q_id ASC;"
-            SQlita2 = f"SELECT COUNT(q_id) FROM quirofano_aparatos_medicos;"
+            SQlita2 = f"SELECT COUNT(q_id) FROM quirofano;"
             cur = connexio.cursor()
             cur.execute(SQLita)
             resultadito = cur.fetchall()
@@ -289,21 +289,17 @@ def menuMedico(usuarito, contrasenyita, opcion):
             print("+----------------------------------------+")
             contador = 0
             contador2 = 1
-            while contador < resultadito2[0][0]:
-                print(f"Quirofano numero: {resultadito[contador][0]}            ")
-                if resultadito[contador][0] == contador2:
-                    print(f"ID del aparato: {resultadito[contador][1]}            ")
-                    print(f"Cantidad: {resultadito[contador][2]}            ")
-                    contador += 1
+            while contador2 <= resultadito2[0][0]:
+                if resultadito[contador][contador] == contador2:
+                    print(f"Quirofano numero: {resultadito[contador][0]}            ")
+                    for i in resultadito:
+                        print(f"Nombre del aparato: {resultadito[contador][1]}         ")
+                        print(f"Cantidad: {resultadito[contador][2]}         ")
+                        contador += 1
                 contador2 += 1
-                
-                
             contador = 0
-            
-            
-            
-            
-            
+            print("+--------------------------------------- +")   
+               
         except psycopg2.Error as e:
                 
                 print("No hay aparatos medicos en los quirofanos.")
