@@ -291,11 +291,11 @@ def menuMedico(usuarito, contrasenyita, opcion):
             while contador <= resultadito2[0][0]:
                 print(f"ID del quirofano: {resultadito[contador][0]}            ")
                 for i in resultadito:
-                    print(f"Nombre del aparato: {resultadito[contador][1]}         ")
-                    print(f"Cantidad: {resultadito[contador][2]}         ")
+                    if resultadito[contador][0] == contador:
+                        print(f"Nombre del aparato: {resultadito[contador][1]}         ")
+                        print(f"Cantidad: {resultadito[contador][2]}         ")
+                        contador += 1
                 print("+--------------------------------------- +")
-                contador += 1
-            contador = 0
             
         except psycopg2.Error as e:
                 
