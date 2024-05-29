@@ -75,7 +75,6 @@ Creació de base de dades exemple:
 
 Utilitzarem un script per ablacejar el servidor i que continui funcionant la aplicació des d'on va deixa de funcionar.
 
-
 ```
 if ping -c 1 192.168.1.50 &>/dev/null; then
     echo "Ping exitoso"
@@ -85,6 +84,7 @@ else
     sudo cat /etc/network/interfaces2 > /etc/network/interfaces
 fi
 ```
+
 Els fitxers, a dins tenen la ip canvaida, i el script , si no va el ping, sobrescriu i reinicia el adaptador de xarxa:
 
 ![1715285534400](image/node_replication/1715285534400.png)
@@ -94,3 +94,9 @@ Quan el servidor principal no esta actiu, executaem el script per simular:
 ![1715285753951](image/node_replication/1715285753951.png)
 
 La següent vegada si que funciona ja que pot fer ping a si mateix.
+
+# Si no funciona
+
+Prova de instal·lar totes les extensions que s'han instal·lat al mester en el slave
+
+Els idiomes tant de master com de slave han de ser iguals
